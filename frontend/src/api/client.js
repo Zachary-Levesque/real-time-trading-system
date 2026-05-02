@@ -25,6 +25,10 @@ export function getRecommendation(ticker) {
   return readJson(`/recommendation/${ticker}`);
 }
 
+export function getRecommendationHistory(ticker, limit = 6) {
+  return readJson(`/recommendation/${ticker}/history?limit=${limit}`);
+}
+
 export function getSystemStatus() {
   return readJson("/system/status");
 }
