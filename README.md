@@ -2,7 +2,7 @@
 
 A production-style real-time trading platform that ingests live market data, processes streaming signals, and serves low-latency, risk-aware trade recommendations.
 
-## Phase 8 Scope
+## Phase 9 Scope
 
 This repository now includes:
 
@@ -11,13 +11,14 @@ This repository now includes:
 - `backend/recommendation`: explainable recommendation scoring from processed signals
 - `backend/api`: FastAPI endpoints for price, signals, and recommendation reads
 - `backend/storage`: PostgreSQL persistence, Redis caching, and storage sync tooling
+- `backend/runtime`: background update worker for scheduled pipeline refreshes
 - `frontend/`: React + Vite application with a refined welcome page and an API-backed dashboard
 - `docker-compose.yml`: local multi-service orchestration for frontend and backend
 
 Still intentionally out of scope:
 
-- real-time background updates
-- automatic background persistence updates
+- WebSocket push updates
+- advanced event streaming infrastructure
 
 ## Project Structure
 
@@ -198,6 +199,26 @@ The storage sync command:
 - caches the latest price snapshot and recommendation in Redis
 - prepares the API to read from storage in `hybrid` mode
 
+## Background Updates
+
+Phase 9 adds a background worker that can automatically refresh a configured ticker set.
+
+Default worker environment variables:
+
+- `ENABLE_BACKGROUND_WORKER=true`
+- `BACKGROUND_WORKER_INTERVAL_SECONDS=300`
+- `BACKGROUND_WORKER_TICKERS=AAPL,MSFT,NVDA,SPY`
+- `BACKGROUND_WORKER_RUN_IMMEDIATELY=true`
+
+When enabled, the worker runs:
+
+1. market ingestion
+2. signal processing
+3. recommendation generation
+4. storage sync
+
+This gives the system real-time-style behavior without requiring manual commands for every refresh.
+
 ## Storage Layer
 
 Phase 8 introduces:
@@ -341,4 +362,4 @@ Recommendations are stored as:
 
 ## Next Phase
 
-Phase 9 should add automated background updates and real-time-style processing.
+Phase 10 should harden deployment and operational setup around the now-automated system.
