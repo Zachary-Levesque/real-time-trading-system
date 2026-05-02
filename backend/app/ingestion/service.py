@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
+from app.core.config import get_settings
 from app.ingestion.providers import MarketDataProvider, YFinanceMarketDataProvider
 from app.ingestion.storage import LocalMarketDataStorage
 from app.models.market_data import NormalizedMarketData
@@ -20,8 +21,9 @@ class MarketDataIngestionService:
         provider: MarketDataProvider | None = None,
         storage: LocalMarketDataStorage | None = None,
     ) -> None:
+        settings = get_settings()
         self.provider = provider or YFinanceMarketDataProvider()
-        self.storage = storage or LocalMarketDataStorage(Path("./data/market"))
+        self.storage = storage or LocalMarketDataStorage(Path(settings.market_data_dir))
 
     def ingest(self, ticker: str, period: str, interval: str) -> IngestionRunResult:
         provider_result = self.provider.fetch(ticker=ticker, period=period, interval=interval)
