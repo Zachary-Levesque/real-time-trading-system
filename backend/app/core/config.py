@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     recommendation_data_dir: Path = Path("./data/recommendations")
     default_market_period: str = "5d"
     default_market_interval: str = "1h"
+    database_url: str = "postgresql+psycopg://postgres:postgres@postgres:5432/trading_system"
+    redis_url: str = "redis://redis:6379/0"
+    storage_mode: str = "hybrid"
 
     model_config = SettingsConfigDict(
         env_file=".env",
