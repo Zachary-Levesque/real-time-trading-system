@@ -23,12 +23,6 @@ const proofPoints = [
   "Modular pipeline structure ready for storage and real-time updates",
 ];
 
-const outcomes = [
-  "Demonstrates backend, data, and systems design depth",
-  "Produces a product someone can actually interact with",
-  "Builds a stronger portfolio story than a notebook-based trading model",
-];
-
 export function WelcomePage() {
   return (
     <div className="relative overflow-hidden">
@@ -44,11 +38,11 @@ export function WelcomePage() {
                 Systems-first trading product
               </p>
               <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
-                Market signals, shaped into a product that proves engineering depth.
+                See recent market moves translated into clear, explainable trade signals.
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-slate-300">
-                Real-Time Trading System turns recent market activity into explainable recommendations through modular
-                services, file-backed data contracts, and APIs that are built to grow into a production-style stack.
+                Real-Time Trading System helps you explore recent stock activity, understand the signals behind it,
+                and view a simple buy, hold, or sell recommendation with supporting context.
               </p>
             </div>
 
@@ -65,14 +59,6 @@ export function WelcomePage() {
               >
                 Inspect API docs
               </a>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-3">
-              {outcomes.map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-sm leading-6 text-slate-200">
-                  {item}
-                </div>
-              ))}
             </div>
           </div>
 
@@ -123,16 +109,8 @@ export function WelcomePage() {
 
         <div className="grid gap-8 rounded-[2rem] border border-white/10 bg-white/[0.04] p-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">Call to action</p>
-            <h2 className="text-3xl font-semibold text-white sm:text-4xl">
-              Move from the architecture story into the working product surface.
-            </h2>
-            <p className="max-w-2xl text-base leading-8 text-slate-300">
-              The backend pipeline now produces market snapshots, signals, and recommendations. The next step for a
-              user is the dashboard, where those outputs become a usable product experience.
-            </p>
+            <h2 className="text-3xl font-semibold text-white sm:text-4xl">Ready to explore the dashboard?</h2>
           </div>
-
           <Link
             to="/dashboard"
             className="inline-flex items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-300/10 px-6 py-3 text-sm font-semibold text-cyan-100 transition hover:border-cyan-200/50 hover:bg-cyan-300/15"

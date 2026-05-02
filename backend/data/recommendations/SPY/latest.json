@@ -1,0 +1,14 @@
+{
+  "ticker": "SPY",
+  "timestamp": "2026-05-02T17:55:03.862139Z",
+  "recommendation": "HOLD",
+  "confidence": 0.0,
+  "risk": "low",
+  "signals": {
+    "momentum": "neutral",
+    "trend": "neutral",
+    "volatility": "stable",
+    "volume": "average"
+  },
+  "reason": "Neutral momentum with a neutral trend, stable volatility, and average volume suggests waiting for clearer confirmation."
+}

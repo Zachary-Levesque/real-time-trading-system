@@ -1,15 +1,15 @@
 {
-  "ticker": "AAPL",
-  "timestamp": "2026-05-02T17:55:02.168167Z",
+  "ticker": "MSFT",
+  "timestamp": "2026-05-02T17:55:02.768514Z",
   "data": {
     "source": "signal_processor_v1",
     "lookback_points": 20,
     "data_points_used": 35,
     "values": {
-      "momentum": "positive",
+      "momentum": "negative",
       "trend": "bullish",
       "volatility": "stable",
-      "volume": "average"
+      "volume": "low"
     }
   }
 }

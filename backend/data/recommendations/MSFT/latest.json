@@ -1,0 +1,14 @@
+{
+  "ticker": "MSFT",
+  "timestamp": "2026-05-02T17:55:02.770496Z",
+  "recommendation": "HOLD",
+  "confidence": 0.12,
+  "risk": "low",
+  "signals": {
+    "momentum": "negative",
+    "trend": "bullish",
+    "volatility": "stable",
+    "volume": "low"
+  },
+  "reason": "Negative momentum with a bullish trend, stable volatility, and low volume suggests waiting for clearer confirmation."
+}

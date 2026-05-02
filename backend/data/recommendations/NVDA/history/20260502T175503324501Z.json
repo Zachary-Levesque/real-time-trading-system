@@ -1,0 +1,14 @@
+{
+  "ticker": "NVDA",
+  "timestamp": "2026-05-02T17:55:03.324501Z",
+  "recommendation": "SELL",
+  "confidence": 0.5,
+  "risk": "medium",
+  "signals": {
+    "momentum": "negative",
+    "trend": "neutral",
+    "volatility": "low",
+    "volume": "low"
+  },
+  "reason": "Negative momentum with a neutral trend, low volatility, and low volume supports a sell bias."
+}

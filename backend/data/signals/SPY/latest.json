@@ -1,13 +1,13 @@
 {
-  "ticker": "AAPL",
-  "timestamp": "2026-05-02T17:55:02.168167Z",
+  "ticker": "SPY",
+  "timestamp": "2026-05-02T17:55:03.860590Z",
   "data": {
     "source": "signal_processor_v1",
     "lookback_points": 20,
     "data_points_used": 35,
     "values": {
-      "momentum": "positive",
-      "trend": "bullish",
+      "momentum": "neutral",
+      "trend": "neutral",
       "volatility": "stable",
       "volume": "average"
     }
