@@ -14,9 +14,10 @@ def get_price_snapshot_service() -> PriceSnapshotService:
 
 
 def get_signal_reader() -> LocalSignalReader:
-    return LocalSignalReader(Path("./data/signals"))
+    settings = get_settings()
+    return LocalSignalReader(Path(settings.signal_data_dir))
 
 
 def get_recommendation_reader() -> LocalRecommendationReader:
-    return LocalRecommendationReader(Path("./data/recommendations"))
-
+    settings = get_settings()
+    return LocalRecommendationReader(Path(settings.recommendation_data_dir))
