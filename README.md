@@ -11,6 +11,7 @@ This repository now includes:
 - `backend/recommendation`: explainable recommendation scoring from processed signals
 - `backend/api`: FastAPI endpoints for price, signals, and recommendation reads
 - `backend/storage`: PostgreSQL persistence, Redis caching, and storage sync tooling
+- `backend/alembic`: migration environment and schema history baseline
 - `backend/runtime`: background update worker for scheduled pipeline refreshes
 - `frontend/`: React + Vite application with a refined welcome page and an API-backed dashboard
 - `docker-compose.yml`: health-checked multi-service orchestration for frontend and backend
@@ -94,6 +95,22 @@ The compose stack now includes:
 - service health checks for PostgreSQL, Redis, backend, and frontend
 - startup ordering based on healthy dependencies
 - Docker-specific overrides for database, Redis, and CORS environment values
+
+## Database Migrations
+
+The backend now includes an Alembic migration baseline instead of relying only on opportunistic table creation.
+
+Run migrations locally from `backend/`:
+
+```bash
+alembic upgrade head
+```
+
+Create a new migration after schema changes:
+
+```bash
+alembic revision -m "describe change"
+```
 
 ## Basic Validation
 
@@ -241,6 +258,8 @@ Phase 10 adds:
 - non-reloader backend container startup for cleaner container behavior
 - compose-level health checks and dependency gating
 - CI coverage for backend tests and frontend builds
+- request-scoped observability through `X-Request-ID` propagation and structured request logging
+- stricter settings validation for storage mode, app environment, and worker interval values
 
 Recommended developer workflow:
 
@@ -263,6 +282,12 @@ Default storage environment variables:
 - local shell default: `REDIS_URL=redis://localhost:6379/0`
 - `STORAGE_MODE=hybrid`
 
+`STORAGE_MODE` now accepts only:
+
+- `file`
+- `hybrid`
+- `storage`
+
 When running through Docker Compose, the backend service uses:
 
 - `DATABASE_URL=postgresql+psycopg://postgres:postgres@postgres:5432/trading_system`
@@ -276,6 +301,8 @@ With the backend running, the current API now exposes:
 - `GET /api/v1/price/{ticker}`
 - `GET /api/v1/signals/{ticker}`
 - `GET /api/v1/recommendation/{ticker}`
+- `GET /api/v1/recommendation/{ticker}/history`
+- `GET /api/v1/system/status`
 
 Examples:
 
@@ -290,7 +317,10 @@ The API behavior now prefers storage when available:
 - `/price/{ticker}` checks Redis, then PostgreSQL, then local market files in `hybrid` mode
 - `/signals/{ticker}` reads PostgreSQL first, then local signal files in `hybrid` mode
 - `/recommendation/{ticker}` checks Redis, then PostgreSQL, then local recommendation files in `hybrid` mode
+- `/recommendation/{ticker}/history` reads PostgreSQL first, then local recommendation history in `hybrid` mode
+- `/system/status` reports worker cadence, last run metadata, and error state
 - missing tickers return `404`
+- request responses include `X-Request-ID` for traceability
 
 ## Frontend Welcome Page
 
@@ -313,7 +343,7 @@ The dashboard now:
 - supports ticker search
 - displays loading and error states
 - renders a price chart using Recharts
-- shows recommendation, confidence, risk, signal breakdown, and explanation
+- shows recommendation, confidence, risk, signal breakdown, explanation, worker status, and recommendation history
 
 ### Manual check
 
@@ -389,6 +419,8 @@ Recommendations are stored as:
   "reason": "Positive momentum with a bullish trend, stable volatility, and average volume supports a buy bias."
 }
 ```
+
+Recommendation history is now deduplicated on semantic content, so repeated background refreshes do not create noisy history entries when recommendation state has not materially changed.
 
 ## Next Phase
 
