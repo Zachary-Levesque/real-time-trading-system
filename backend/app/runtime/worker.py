@@ -11,7 +11,11 @@ from app.ingestion.service import MarketDataIngestionService
 from app.processing.service import SignalProcessingService
 from app.processing.storage import LocalMarketDataReader, LocalSignalStorage
 from app.recommendation.service import RecommendationService
-from app.recommendation.storage import LocalRecommendationStorage, LocalSignalReader
+from app.recommendation.storage import (
+    LocalRecommendationReader,
+    LocalRecommendationStorage,
+    LocalSignalReader,
+)
 from app.runtime.state import worker_state
 from app.storage.cache import RedisCache
 from app.storage.db import create_session_factory
