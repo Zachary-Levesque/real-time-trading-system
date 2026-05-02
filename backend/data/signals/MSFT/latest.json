@@ -1,6 +1,6 @@
 {
   "ticker": "MSFT",
-  "timestamp": "2026-05-02T18:10:59.751933Z",
+  "timestamp": "2026-05-02T18:16:01.997015Z",
   "data": {
     "source": "signal_processor_v1",
     "lookback_points": 20,

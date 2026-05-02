@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import logging
+
 from app.models.api import RecommendationHistoryEntry, RecommendationHistoryResponse, PriceSnapshotResponse
 from app.models.recommendation import RecommendationResult
 from app.models.signal import SignalResult
@@ -10,6 +12,9 @@ from app.recommendation.storage import LocalRecommendationReader, LocalSignalRea
 from app.storage.cache import RedisCache
 from app.storage.local_queries import PriceSnapshotService
 from app.storage.repository import PostgresStorageRepository
+
+
+logger = logging.getLogger(__name__)
 
 
 class StorageBackedReadService:
@@ -47,6 +52,7 @@ class StorageBackedReadService:
             except Exception:
                 if self.storage_mode != "hybrid":
                     raise
+                logger.warning("Falling back to file-backed price data for %s after storage read failure.", ticker.upper())
 
         if self.storage_mode in {"file", "hybrid"}:
             return self.file_price_service.get_snapshot(ticker)
@@ -62,6 +68,7 @@ class StorageBackedReadService:
             except Exception:
                 if self.storage_mode != "hybrid":
                     raise
+                logger.warning("Falling back to file-backed signals for %s after storage read failure.", ticker.upper())
 
         if self.storage_mode in {"file", "hybrid"}:
             return self.file_signal_reader.read(ticker)
@@ -84,6 +91,10 @@ class StorageBackedReadService:
             except Exception:
                 if self.storage_mode != "hybrid":
                     raise
+                logger.warning(
+                    "Falling back to file-backed recommendation for %s after storage read failure.",
+                    ticker.upper(),
+                )
 
         if self.storage_mode in {"file", "hybrid"}:
             return self.file_recommendation_reader.read(ticker)
@@ -103,6 +114,10 @@ class StorageBackedReadService:
             except Exception:
                 if self.storage_mode != "hybrid":
                     raise
+                logger.warning(
+                    "Falling back to file-backed recommendation history for %s after storage read failure.",
+                    ticker.upper(),
+                )
 
         if self.storage_mode in {"file", "hybrid"}:
             history_results = self.file_recommendation_reader.list_history(ticker, limit)
