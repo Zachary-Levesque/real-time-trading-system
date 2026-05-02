@@ -1,6 +1,7 @@
 import json
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -8,7 +9,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     app_name: str = "Real-Time Trading System API"
-    app_env: str = "development"
+    app_env: Literal["development", "test", "production"] = "development"
     api_v1_prefix: str = "/api/v1"
     host: str = "0.0.0.0"
     port: int = 8000
@@ -19,7 +20,7 @@ class Settings(BaseSettings):
     default_market_interval: str = "1h"
     database_url: str = "postgresql+psycopg://postgres:postgres@localhost:5432/trading_system"
     redis_url: str = "redis://localhost:6379/0"
-    storage_mode: str = "hybrid"
+    storage_mode: Literal["file", "hybrid", "storage"] = "hybrid"
     cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
     enable_background_worker: bool = False
     background_worker_interval_seconds: int = 300
@@ -53,6 +54,13 @@ class Settings(BaseSettings):
                 return [ticker.strip().upper() for ticker in json.loads(value) if ticker.strip()]
             return [ticker.strip().upper() for ticker in value.split(",") if ticker.strip()]
         return [ticker.upper() for ticker in value]
+
+    @field_validator("background_worker_interval_seconds")
+    @classmethod
+    def validate_background_worker_interval_seconds(cls, value: int) -> int:
+        if value <= 0:
+            raise ValueError("background_worker_interval_seconds must be greater than 0")
+        return value
 
 
 @lru_cache
