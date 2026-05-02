@@ -47,6 +47,7 @@ class StorageSyncService:
         self.repository.upsert_market_data(market_data)
         self.repository.upsert_signal(signal_result)
         self.repository.upsert_recommendation(recommendation)
+        self.repository.append_recommendation_history(recommendation)
 
         if self.cache is not None:
             self.cache.set_price_snapshot(PriceSnapshotService.build_snapshot(market_data))
