@@ -99,10 +99,37 @@ class LocalRecommendationStorage:
 
         try:
             output_path.write_text(payload, encoding="utf-8")
-            history_path.write_text(payload, encoding="utf-8")
+            if not self._matches_latest_history(history_dir, recommendation):
+                history_path.write_text(payload, encoding="utf-8")
         except OSError as exc:
             raise RecommendationError(
                 f"Failed to write recommendation for ticker '{recommendation.ticker}'."
             ) from exc
 
         return output_path
+
+    def _matches_latest_history(self, history_dir: Path, recommendation: RecommendationResult) -> bool:
+        latest_history = next(iter(sorted(history_dir.glob("*.json"), reverse=True)), None)
+        if latest_history is None:
+            return False
+
+        try:
+            payload = json.loads(latest_history.read_text(encoding="utf-8"))
+            latest_recommendation = RecommendationResult.model_validate(payload)
+        except (OSError, json.JSONDecodeError, ValueError):
+            return False
+
+        return self._history_signature(latest_recommendation) == self._history_signature(recommendation)
+
+    @staticmethod
+    def _history_signature(recommendation: RecommendationResult) -> tuple:
+        return (
+            recommendation.recommendation,
+            recommendation.confidence,
+            recommendation.risk,
+            recommendation.reason,
+            recommendation.signals.momentum,
+            recommendation.signals.trend,
+            recommendation.signals.volatility,
+            recommendation.signals.volume,
+        )
