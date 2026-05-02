@@ -2,12 +2,13 @@
 
 A production-style real-time trading platform that ingests live market data, processes streaming signals, and serves low-latency, risk-aware trade recommendations.
 
-## Phase 3 Scope
+## Phase 4 Scope
 
 This repository now includes:
 
 - `backend/`: FastAPI application shell with configuration, API router, health endpoint, and a first-pass market data ingestion module
 - `backend/processing`: deterministic signal calculation from normalized market data
+- `backend/recommendation`: explainable recommendation scoring from processed signals
 - `frontend/`: React + Vite application shell with a welcome page and dashboard route
 - `docker-compose.yml`: local multi-service orchestration for frontend and backend
 
@@ -150,6 +151,39 @@ The processing command:
 - stores the latest signal object at `backend/data/signals/<TICKER>/latest.json`
 - returns a non-zero exit code if the market data is missing or insufficient
 
+### Recommendation generation
+
+```bash
+cd backend
+python -m app.recommendation --ticker AAPL
+```
+
+Example output:
+
+```json
+{
+  "ticker": "AAPL",
+  "timestamp": "2026-05-02T17:30:00+00:00",
+  "recommendation": "BUY",
+  "confidence": 0.6,
+  "risk": "low",
+  "signals": {
+    "momentum": "positive",
+    "trend": "bullish",
+    "volatility": "stable",
+    "volume": "average"
+  },
+  "reason": "Positive momentum with a bullish trend, stable volatility, and average volume supports a buy bias."
+}
+```
+
+The recommendation command:
+
+- reads processed signals from `backend/data/signals/<TICKER>/latest.json`
+- scores them into `BUY`, `HOLD`, or `SELL`
+- adds confidence, risk, and reasoning
+- stores the latest output at `backend/data/recommendations/<TICKER>/latest.json`
+
 ### Manual check
 
 1. Start the backend and frontend.
@@ -206,6 +240,25 @@ Processed signals are stored as:
 }
 ```
 
+Recommendations are stored as:
+
+```json
+{
+  "ticker": "AAPL",
+  "timestamp": "ISO-8601",
+  "recommendation": "BUY",
+  "confidence": 0.6,
+  "risk": "low",
+  "signals": {
+    "momentum": "positive",
+    "trend": "bullish",
+    "volatility": "stable",
+    "volume": "average"
+  },
+  "reason": "Positive momentum with a bullish trend, stable volatility, and average volume supports a buy bias."
+}
+```
+
 ## Next Phase
 
-Phase 4 should convert these signals into a recommendation, confidence score, risk level, and explanation.
+Phase 5 should expose health, price, signal, and recommendation data through FastAPI endpoints.
