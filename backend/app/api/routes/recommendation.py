@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 
 from app.api.dependencies import get_storage_read_service
-from app.models.api import ErrorResponse
+from app.models.api import ErrorResponse, RecommendationHistoryResponse
 from app.models.recommendation import RecommendationResult
 from app.recommendation.exceptions import SignalReadError
 from app.storage.service import StorageBackedReadService
@@ -21,6 +21,25 @@ def get_recommendation(
 ) -> RecommendationResult:
     try:
         return service.get_recommendation(ticker)
+    except SignalReadError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=str(exc),
+        ) from exc
+
+
+@router.get(
+    "/recommendation/{ticker}/history",
+    response_model=RecommendationHistoryResponse,
+    responses={404: {"model": ErrorResponse}},
+)
+def get_recommendation_history(
+    ticker: str,
+    limit: int = 10,
+    service: StorageBackedReadService = Depends(get_storage_read_service),
+) -> RecommendationHistoryResponse:
+    try:
+        return service.get_recommendation_history(ticker, limit)
     except SignalReadError as exc:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
