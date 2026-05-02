@@ -11,11 +11,15 @@ class PriceSnapshotService:
 
     def get_snapshot(self, ticker: str) -> PriceSnapshotResponse:
         market_data = self.market_data_reader.read(ticker)
+        return self.build_snapshot(market_data)
+
+    @staticmethod
+    def build_snapshot(market_data) -> PriceSnapshotResponse:
         points = market_data.data.points
 
         if not points:
             raise MarketDataReadError(
-                f"Normalized market data for ticker '{ticker.upper()}' does not contain any price points."
+                f"Normalized market data for ticker '{market_data.ticker.upper()}' does not contain any price points."
             )
 
         latest_point = points[-1]
