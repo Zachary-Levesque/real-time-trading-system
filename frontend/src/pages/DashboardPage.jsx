@@ -9,7 +9,14 @@ import {
   YAxis,
 } from "recharts";
 
-import { apiBaseUrl, getPriceSnapshot, getRecommendation, getSignals, getSystemStatus } from "../api/client";
+import {
+  apiBaseUrl,
+  getPriceSnapshot,
+  getRecommendation,
+  getRecommendationHistory,
+  getSignals,
+  getSystemStatus,
+} from "../api/client";
 import { SectionHeading } from "../components/SectionHeading";
 
 const defaultTicker = "AAPL";
@@ -96,6 +103,7 @@ export function DashboardPage() {
   const [priceSnapshot, setPriceSnapshot] = useState(null);
   const [signalResult, setSignalResult] = useState(null);
   const [recommendationResult, setRecommendationResult] = useState(null);
+  const [recommendationHistory, setRecommendationHistory] = useState(null);
   const [systemStatus, setSystemStatus] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -106,10 +114,17 @@ export function DashboardPage() {
     setError("");
     setWarning("");
 
-    const [priceResult, signalResultResponse, recommendationResultResponse, systemStatusResponse] = await Promise.allSettled([
+    const [
+      priceResult,
+      signalResultResponse,
+      recommendationResultResponse,
+      recommendationHistoryResponse,
+      systemStatusResponse,
+    ] = await Promise.allSettled([
       getPriceSnapshot(normalizedTicker),
       getSignals(normalizedTicker),
       getRecommendation(normalizedTicker),
+      getRecommendationHistory(normalizedTicker),
       getSystemStatus(),
     ]);
 
@@ -134,6 +149,12 @@ export function DashboardPage() {
     } else {
       setRecommendationResult(null);
       failures.push("recommendation");
+    }
+
+    if (recommendationHistoryResponse.status === "fulfilled") {
+      setRecommendationHistory(recommendationHistoryResponse.value);
+    } else {
+      setRecommendationHistory(null);
     }
 
     if (systemStatusResponse.status === "fulfilled") {
@@ -167,6 +188,7 @@ export function DashboardPage() {
         setPriceSnapshot(null);
         setSignalResult(null);
         setRecommendationResult(null);
+        setRecommendationHistory(null);
         setError(loadError.message);
         setLoading(false);
       }
@@ -193,6 +215,15 @@ export function DashboardPage() {
   const priceFreshness = freshnessStatus(priceSnapshot?.timestamp);
   const signalFreshness = freshnessStatus(signalResult?.timestamp);
   const recommendationFreshness = freshnessStatus(recommendationResult?.timestamp);
+  const recommendationHistoryItems = recommendationHistory?.data ?? [];
+  const latestHistoryEntry = recommendationHistoryItems[0] ?? null;
+  const previousHistoryEntry = recommendationHistoryItems[1] ?? null;
+  const recommendationShift =
+    latestHistoryEntry && previousHistoryEntry
+      ? latestHistoryEntry.recommendation === previousHistoryEntry.recommendation
+        ? `Holding the same ${latestHistoryEntry.recommendation} posture as the previous run.`
+        : `Shifted from ${previousHistoryEntry.recommendation} to ${latestHistoryEntry.recommendation} on the most recent run.`
+      : "Recommendation history will appear as more background cycles complete.";
   const summaryCards = [
     { label: "Ticker", value: activeTicker },
     {
@@ -430,6 +461,42 @@ export function DashboardPage() {
             <p className="mt-2 text-xs text-slate-400">
               Last completed: {formatTimestamp(systemStatus?.worker?.last_completed_at)}
             </p>
+          </div>
+
+          <div className="mt-8 rounded-[1.3rem] border border-white/10 bg-white/[0.04] p-4">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Recommendation history</p>
+                <p className="mt-2 text-sm text-slate-300">{recommendationShift}</p>
+              </div>
+              <p className="text-xs text-slate-400">Updated {formatTimestamp(recommendationHistory?.timestamp)}</p>
+            </div>
+
+            <div className="mt-5 space-y-3">
+              {recommendationHistoryItems.length > 0 ? (
+                recommendationHistoryItems.map((entry) => (
+                  <div
+                    key={entry.timestamp}
+                    className="flex flex-wrap items-center justify-between gap-3 rounded-[1rem] border border-white/10 bg-slate-950/50 px-4 py-3"
+                  >
+                    <div>
+                      <p className={`text-sm font-semibold ${recommendationTone(entry.recommendation)}`}>
+                        {entry.recommendation}
+                      </p>
+                      <p className="mt-1 text-xs text-slate-400">{formatTimestamp(entry.timestamp)}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm text-white">{Math.round(entry.confidence * 100)}% confidence</p>
+                      <p className={`mt-1 text-xs ${riskTone(entry.risk)}`}>Risk: {entry.risk}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-sm text-slate-500">
+                  {loading ? "Loading recommendation history..." : "Recommendation history is unavailable."}
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </div>
