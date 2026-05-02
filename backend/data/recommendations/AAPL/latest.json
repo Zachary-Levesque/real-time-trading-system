@@ -1,0 +1,14 @@
+{
+  "ticker": "AAPL",
+  "timestamp": "2026-05-02T16:57:33.068743Z",
+  "recommendation": "BUY",
+  "confidence": 0.6,
+  "risk": "low",
+  "signals": {
+    "momentum": "positive",
+    "trend": "bullish",
+    "volatility": "stable",
+    "volume": "average"
+  },
+  "reason": "Positive momentum with a bullish trend, stable volatility, and average volume supports a buy bias."
+}
