@@ -92,3 +92,6 @@ def test_recommendation_service_writes_output(tmp_path: Path) -> None:
     contents = run.output_path.read_text(encoding="utf-8")
     assert '"recommendation": "BUY"' in contents
     assert '"signals"' in contents
+    history_dir = recommendation_dir / "AAPL" / "history"
+    assert history_dir.exists()
+    assert len(list(history_dir.glob("*.json"))) == 1
