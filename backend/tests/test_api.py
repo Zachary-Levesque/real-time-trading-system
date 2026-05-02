@@ -154,3 +154,18 @@ def test_api_returns_404_for_missing_ticker(tmp_path: Path) -> None:
     app.dependency_overrides.clear()
 
     assert all(response.status_code == 404 for response in responses)
+
+
+def test_api_allows_cors_preflight() -> None:
+    client = TestClient(app)
+
+    response = client.options(
+        "/api/v1/price/AAPL",
+        headers={
+            "Origin": "http://localhost:5173",
+            "Access-Control-Request-Method": "GET",
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-origin"] == "http://localhost:5173"
