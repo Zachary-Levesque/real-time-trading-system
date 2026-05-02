@@ -3,7 +3,7 @@ from pathlib import Path
 
 from fastapi.testclient import TestClient
 
-from app.api.dependencies import get_price_snapshot_service, get_recommendation_reader, get_signal_reader
+from app.api.dependencies import get_storage_read_service
 from app.main import app
 from app.models.market_data import MarketDataPayload, MarketDataPoint, NormalizedMarketData
 from app.models.recommendation import RecommendationResult, RecommendationSignals
@@ -11,6 +11,8 @@ from app.models.signal import SignalData, SignalPayload, SignalResult
 from app.processing.storage import LocalMarketDataReader
 from app.recommendation.storage import LocalRecommendationReader, LocalSignalReader
 from app.storage.local_queries import PriceSnapshotService
+from app.storage.repository import PostgresStorageRepository
+from app.storage.service import StorageBackedReadService
 
 
 def build_market_data() -> NormalizedMarketData:
@@ -97,12 +99,13 @@ def seed_local_data(tmp_path: Path) -> None:
 def test_api_price_signals_and_recommendation_endpoints(tmp_path: Path) -> None:
     seed_local_data(tmp_path)
 
-    app.dependency_overrides[get_price_snapshot_service] = lambda: PriceSnapshotService(
-        LocalMarketDataReader(tmp_path / "market")
-    )
-    app.dependency_overrides[get_signal_reader] = lambda: LocalSignalReader(tmp_path / "signals")
-    app.dependency_overrides[get_recommendation_reader] = lambda: LocalRecommendationReader(
-        tmp_path / "recommendations"
+    app.dependency_overrides[get_storage_read_service] = lambda: StorageBackedReadService(
+        repository=PostgresStorageRepository.__new__(PostgresStorageRepository),
+        cache=None,
+        file_price_service=PriceSnapshotService(LocalMarketDataReader(tmp_path / "market")),
+        file_signal_reader=LocalSignalReader(tmp_path / "signals"),
+        file_recommendation_reader=LocalRecommendationReader(tmp_path / "recommendations"),
+        storage_mode="file",
     )
 
     client = TestClient(app)
@@ -131,12 +134,13 @@ def test_api_price_signals_and_recommendation_endpoints(tmp_path: Path) -> None:
 
 
 def test_api_returns_404_for_missing_ticker(tmp_path: Path) -> None:
-    app.dependency_overrides[get_price_snapshot_service] = lambda: PriceSnapshotService(
-        LocalMarketDataReader(tmp_path / "market")
-    )
-    app.dependency_overrides[get_signal_reader] = lambda: LocalSignalReader(tmp_path / "signals")
-    app.dependency_overrides[get_recommendation_reader] = lambda: LocalRecommendationReader(
-        tmp_path / "recommendations"
+    app.dependency_overrides[get_storage_read_service] = lambda: StorageBackedReadService(
+        repository=PostgresStorageRepository.__new__(PostgresStorageRepository),
+        cache=None,
+        file_price_service=PriceSnapshotService(LocalMarketDataReader(tmp_path / "market")),
+        file_signal_reader=LocalSignalReader(tmp_path / "signals"),
+        file_recommendation_reader=LocalRecommendationReader(tmp_path / "recommendations"),
+        storage_mode="file",
     )
 
     client = TestClient(app)
