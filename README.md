@@ -2,13 +2,14 @@
 
 A production-style real-time trading platform that ingests live market data, processes streaming signals, and serves low-latency, risk-aware trade recommendations.
 
-## Phase 4 Scope
+## Phase 5 Scope
 
 This repository now includes:
 
 - `backend/`: FastAPI application shell with configuration, API router, health endpoint, and a first-pass market data ingestion module
 - `backend/processing`: deterministic signal calculation from normalized market data
 - `backend/recommendation`: explainable recommendation scoring from processed signals
+- `backend/api`: FastAPI endpoints for price, signals, and recommendation reads
 - `frontend/`: React + Vite application shell with a welcome page and dashboard route
 - `docker-compose.yml`: local multi-service orchestration for frontend and backend
 
@@ -184,6 +185,30 @@ The recommendation command:
 - adds confidence, risk, and reasoning
 - stores the latest output at `backend/data/recommendations/<TICKER>/latest.json`
 
+## API Endpoints
+
+With the backend running, the current API now exposes:
+
+- `GET /api/v1/health`
+- `GET /api/v1/price/{ticker}`
+- `GET /api/v1/signals/{ticker}`
+- `GET /api/v1/recommendation/{ticker}`
+
+Examples:
+
+```bash
+curl http://localhost:8000/api/v1/price/AAPL
+curl http://localhost:8000/api/v1/signals/AAPL
+curl http://localhost:8000/api/v1/recommendation/AAPL
+```
+
+The API behavior in Phase 5 is intentionally file-backed:
+
+- `/price/{ticker}` reads normalized market data from `data/market`
+- `/signals/{ticker}` reads processed signal output from `data/signals`
+- `/recommendation/{ticker}` reads recommendation output from `data/recommendations`
+- missing tickers return `404`
+
 ### Manual check
 
 1. Start the backend and frontend.
@@ -261,4 +286,4 @@ Recommendations are stored as:
 
 ## Next Phase
 
-Phase 5 should expose health, price, signal, and recommendation data through FastAPI endpoints.
+Phase 6 should create the first user-facing welcome page experience on the frontend.
