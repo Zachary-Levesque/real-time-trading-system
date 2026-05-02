@@ -2,7 +2,7 @@
 
 A production-style real-time trading platform that ingests live market data, processes streaming signals, and serves low-latency, risk-aware trade recommendations.
 
-## Phase 9 Scope
+## Phase 10 Scope
 
 This repository now includes:
 
@@ -13,7 +13,8 @@ This repository now includes:
 - `backend/storage`: PostgreSQL persistence, Redis caching, and storage sync tooling
 - `backend/runtime`: background update worker for scheduled pipeline refreshes
 - `frontend/`: React + Vite application with a refined welcome page and an API-backed dashboard
-- `docker-compose.yml`: local multi-service orchestration for frontend and backend
+- `docker-compose.yml`: health-checked multi-service orchestration for frontend and backend
+- `.github/workflows/ci.yml`: automated backend and frontend validation in CI
 
 Still intentionally out of scope:
 
@@ -88,6 +89,12 @@ Frontend URL:
 docker compose up --build
 ```
 
+The compose stack now includes:
+
+- service health checks for PostgreSQL, Redis, backend, and frontend
+- startup ordering based on healthy dependencies
+- Docker-specific overrides for database, Redis, and CORS environment values
+
 ## Basic Validation
 
 ### Backend test
@@ -95,6 +102,13 @@ docker compose up --build
 ```bash
 cd backend
 pytest
+```
+
+### Frontend build
+
+```bash
+cd frontend
+npm run build
 ```
 
 ### Market ingestion
@@ -218,6 +232,22 @@ When enabled, the worker runs:
 4. storage sync
 
 This gives the system real-time-style behavior without requiring manual commands for every refresh.
+
+## Deployment Hardening
+
+Phase 10 adds:
+
+- smaller Docker build contexts through per-service `.dockerignore` files
+- non-reloader backend container startup for cleaner container behavior
+- compose-level health checks and dependency gating
+- CI coverage for backend tests and frontend builds
+
+Recommended developer workflow:
+
+1. `docker compose up --build`
+2. confirm `http://localhost:8000/docs` and `http://localhost:5173/` load
+3. use the dashboard or CLI tools
+4. stop the stack with `Ctrl+C`
 
 ## Storage Layer
 
@@ -362,4 +392,4 @@ Recommendations are stored as:
 
 ## Next Phase
 
-Phase 10 should harden deployment and operational setup around the now-automated system.
+The system is now through the planned implementation phases in the current roadmap. The next sensible work would be polish, observability, or new product capabilities rather than another required core phase.
