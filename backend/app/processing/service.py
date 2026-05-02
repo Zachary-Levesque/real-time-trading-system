@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 
+from app.core.config import get_settings
 from app.models.signal import SignalPayload, SignalResult
 from app.processing.calculations import SignalCalculator
 from app.processing.storage import LocalMarketDataReader, LocalSignalStorage
@@ -23,8 +24,9 @@ class SignalProcessingService:
         signal_storage: LocalSignalStorage | None = None,
         signal_calculator: SignalCalculator | None = None,
     ) -> None:
-        self.market_data_reader = market_data_reader or LocalMarketDataReader(Path("./data/market"))
-        self.signal_storage = signal_storage or LocalSignalStorage(Path("./data/signals"))
+        settings = get_settings()
+        self.market_data_reader = market_data_reader or LocalMarketDataReader(Path(settings.market_data_dir))
+        self.signal_storage = signal_storage or LocalSignalStorage(Path(settings.signal_data_dir))
         self.signal_calculator = signal_calculator or SignalCalculator()
 
     def process(self, ticker: str) -> SignalRunResult:
@@ -44,4 +46,3 @@ class SignalProcessingService:
         output_path = self.signal_storage.write(signal_result)
 
         return SignalRunResult(signal_result=signal_result, output_path=output_path)
-
