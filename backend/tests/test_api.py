@@ -113,12 +113,14 @@ def test_api_price_signals_and_recommendation_endpoints(tmp_path: Path) -> None:
     price_response = client.get("/api/v1/price/AAPL")
     signal_response = client.get("/api/v1/signals/AAPL")
     recommendation_response = client.get("/api/v1/recommendation/AAPL")
+    recommendation_history_response = client.get("/api/v1/recommendation/AAPL/history")
 
     app.dependency_overrides.clear()
 
     assert price_response.status_code == 200
     assert signal_response.status_code == 200
     assert recommendation_response.status_code == 200
+    assert recommendation_history_response.status_code == 200
 
     price_payload = price_response.json()
     assert price_payload["ticker"] == "AAPL"
@@ -131,6 +133,10 @@ def test_api_price_signals_and_recommendation_endpoints(tmp_path: Path) -> None:
     recommendation_payload = recommendation_response.json()
     assert recommendation_payload["recommendation"] == "BUY"
     assert recommendation_payload["risk"] == "low"
+
+    recommendation_history_payload = recommendation_history_response.json()
+    assert recommendation_history_payload["ticker"] == "AAPL"
+    assert recommendation_history_payload["data"][0]["recommendation"] == "BUY"
 
 
 def test_api_returns_404_for_missing_ticker(tmp_path: Path) -> None:
@@ -149,6 +155,7 @@ def test_api_returns_404_for_missing_ticker(tmp_path: Path) -> None:
         client.get("/api/v1/price/MSFT"),
         client.get("/api/v1/signals/MSFT"),
         client.get("/api/v1/recommendation/MSFT"),
+        client.get("/api/v1/recommendation/MSFT/history"),
     ]
 
     app.dependency_overrides.clear()
