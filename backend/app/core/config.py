@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     host: str = "0.0.0.0"
     port: int = 8000
     market_data_dir: Path = Path("./data/market")
+    signal_data_dir: Path = Path("./data/signals")
+    recommendation_data_dir: Path = Path("./data/recommendations")
     default_market_period: str = "5d"
     default_market_interval: str = "1h"
 
