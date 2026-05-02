@@ -20,6 +20,10 @@ class Settings(BaseSettings):
     redis_url: str = "redis://localhost:6379/0"
     storage_mode: str = "hybrid"
     cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
+    enable_background_worker: bool = False
+    background_worker_interval_seconds: int = 300
+    background_worker_tickers: list[str] = ["AAPL", "MSFT", "NVDA", "SPY"]
+    background_worker_run_immediately: bool = True
 
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -34,6 +38,13 @@ class Settings(BaseSettings):
         if isinstance(value, str):
             return [origin.strip() for origin in value.split(",") if origin.strip()]
         return value
+
+    @field_validator("background_worker_tickers", mode="before")
+    @classmethod
+    def parse_background_worker_tickers(cls, value: str | list[str]) -> list[str]:
+        if isinstance(value, str):
+            return [ticker.strip().upper() for ticker in value.split(",") if ticker.strip()]
+        return [ticker.upper() for ticker in value]
 
 
 @lru_cache
