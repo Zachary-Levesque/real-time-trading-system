@@ -2,11 +2,12 @@
 
 A production-style real-time trading platform that ingests live market data, processes streaming signals, and serves low-latency, risk-aware trade recommendations.
 
-## Phase 2 Scope
+## Phase 3 Scope
 
 This repository now includes:
 
 - `backend/`: FastAPI application shell with configuration, API router, health endpoint, and a first-pass market data ingestion module
+- `backend/processing`: deterministic signal calculation from normalized market data
 - `frontend/`: React + Vite application shell with a welcome page and dashboard route
 - `docker-compose.yml`: local multi-service orchestration for frontend and backend
 
@@ -119,6 +120,36 @@ The ingestion command:
 - stores the latest result at `backend/data/market/<TICKER>/latest.json`
 - returns a non-zero exit code on fetch or persistence failures
 
+### Signal processing
+
+```bash
+cd backend
+python -m app.processing --ticker AAPL
+```
+
+Example output:
+
+```json
+{
+  "ticker": "AAPL",
+  "timestamp": "2026-05-02T17:15:00+00:00",
+  "signals": {
+    "momentum": "positive",
+    "trend": "bullish",
+    "volatility": "stable",
+    "volume": "above_average"
+  },
+  "output_path": "data/signals/AAPL/latest.json"
+}
+```
+
+The processing command:
+
+- reads normalized market data from `backend/data/market/<TICKER>/latest.json`
+- computes momentum, trend, volatility, and volume labels
+- stores the latest signal object at `backend/data/signals/<TICKER>/latest.json`
+- returns a non-zero exit code if the market data is missing or insufficient
+
 ### Manual check
 
 1. Start the backend and frontend.
@@ -155,6 +186,26 @@ Normalized market data is stored as:
 }
 ```
 
+Processed signals are stored as:
+
+```json
+{
+  "ticker": "AAPL",
+  "timestamp": "ISO-8601",
+  "data": {
+    "source": "signal_processor_v1",
+    "lookback_points": 20,
+    "data_points_used": 35,
+    "values": {
+      "momentum": "positive",
+      "trend": "bullish",
+      "volatility": "stable",
+      "volume": "above_average"
+    }
+  }
+}
+```
+
 ## Next Phase
 
-Phase 3 should take this normalized market data and derive deterministic signals for momentum, trend, volatility, and volume.
+Phase 4 should convert these signals into a recommendation, confidence score, risk level, and explanation.
