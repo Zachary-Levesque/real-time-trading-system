@@ -128,6 +128,7 @@ export function DashboardPage() {
     ]);
 
     const failures = [];
+    const auxiliaryFailures = [];
 
     if (priceResult.status === "fulfilled") {
       setPriceSnapshot(priceResult.value);
@@ -154,12 +155,14 @@ export function DashboardPage() {
       setRecommendationHistory(recommendationHistoryResponse.value);
     } else {
       setRecommendationHistory(null);
+      auxiliaryFailures.push("recommendation history");
     }
 
     if (systemStatusResponse.status === "fulfilled") {
       setSystemStatus(systemStatusResponse.value);
     } else {
       setSystemStatus(null);
+      auxiliaryFailures.push("system status");
     }
 
     if (failures.length === 3) {
@@ -178,8 +181,9 @@ export function DashboardPage() {
       );
     }
 
-    if (failures.length > 0) {
-      setWarning(`Some data is unavailable right now: ${failures.join(", ")}.`);
+    const unavailableSections = [...failures, ...auxiliaryFailures];
+    if (unavailableSections.length > 0) {
+      setWarning(`Some data is unavailable right now: ${unavailableSections.join(", ")}.`);
     }
 
     setLoading(false);
@@ -465,7 +469,9 @@ export function DashboardPage() {
           <div className="mt-8 rounded-[1.3rem] border border-white/10 bg-white/[0.04] p-4">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Worker status</p>
             <p className="mt-3 text-sm text-white">
-              {systemStatus?.worker?.enabled
+              {systemStatus === null
+                ? "System status is unavailable right now"
+                : systemStatus.worker.enabled
                 ? `Background refresh every ${systemStatus.worker.interval_seconds}s for ${systemStatus.worker.tickers.join(", ")}`
                 : "Automatic refresh is currently turned off"}
             </p>

@@ -1,6 +1,6 @@
 {
   "ticker": "SPY",
-  "timestamp": "2026-05-02T18:07:03.144962Z",
+  "timestamp": "2026-05-02T18:11:01.110526Z",
   "data": {
     "source": "signal_processor_v1",
     "lookback_points": 20,
