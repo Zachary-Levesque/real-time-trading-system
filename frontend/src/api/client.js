@@ -24,3 +24,7 @@ export function getSignals(ticker) {
 export function getRecommendation(ticker) {
   return readJson(`/recommendation/${ticker}`);
 }
+
+export function getSystemStatus() {
+  return readJson("/system/status");
+}
