@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
 
 from app.core.config import get_settings
@@ -11,6 +12,7 @@ from app.processing.service import SignalProcessingService
 from app.processing.storage import LocalMarketDataReader, LocalSignalStorage
 from app.recommendation.service import RecommendationService
 from app.recommendation.storage import LocalRecommendationStorage, LocalSignalReader
+from app.runtime.state import worker_state
 from app.storage.cache import RedisCache
 from app.storage.db import create_session_factory
 from app.storage.repository import PostgresStorageRepository
@@ -99,6 +101,9 @@ class BackgroundUpdateWorker:
         self.run_immediately = run_immediately
         self._task: asyncio.Task | None = None
         self._stop_event = asyncio.Event()
+        worker_state.enabled = True
+        worker_state.interval_seconds = interval_seconds
+        worker_state.tickers = tickers
 
     async def start(self) -> None:
         if self._task is None:
@@ -121,11 +126,18 @@ class BackgroundUpdateWorker:
                 await self._execute_cycle()
 
     async def _execute_cycle(self) -> None:
+        worker_state.last_started_at = datetime.now(UTC)
+        worker_state.last_error = None
         logger.info("Background update cycle started for tickers: %s", ", ".join(self.tickers))
         try:
             results = await asyncio.to_thread(self.pipeline_service.run_once, self.tickers)
             synced = [result.ticker for result in results if result.storage_synced]
             unsynced = [result.ticker for result in results if not result.storage_synced]
+            worker_state.last_completed_at = datetime.now(UTC)
+            worker_state.last_synced_tickers = synced
+            worker_state.last_unsynced_tickers = unsynced
             logger.info("Background update cycle completed. storage_synced=%s storage_unsynced=%s", synced, unsynced)
         except Exception as exc:  # pragma: no cover - defensive loop protection
+            worker_state.last_completed_at = datetime.now(UTC)
+            worker_state.last_error = str(exc)
             logger.exception("Background update cycle failed: %s", exc)
