@@ -47,7 +47,9 @@ class StorageSyncService:
         self.repository.upsert_market_data(market_data)
         self.repository.upsert_signal(signal_result)
         self.repository.upsert_recommendation(recommendation)
-        self.repository.append_recommendation_history(recommendation)
+        latest_history = self.repository.get_latest_recommendation_history(ticker)
+        if not self._matches_history_signature(latest_history, recommendation):
+            self.repository.append_recommendation_history(recommendation)
 
         if self.cache is not None:
             self.cache.set_price_snapshot(PriceSnapshotService.build_snapshot(market_data))
@@ -58,4 +60,20 @@ class StorageSyncService:
             persisted_market_data=True,
             persisted_signal=True,
             persisted_recommendation=True,
+        )
+
+    @staticmethod
+    def _matches_history_signature(
+        existing: RecommendationResult | None,
+        recommendation: RecommendationResult,
+    ) -> bool:
+        if existing is None:
+            return False
+
+        return (
+            existing.recommendation == recommendation.recommendation
+            and existing.confidence == recommendation.confidence
+            and existing.risk == recommendation.risk
+            and existing.reason == recommendation.reason
+            and existing.signals == recommendation.signals
         )
