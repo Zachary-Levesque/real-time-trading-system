@@ -84,6 +84,16 @@ class PostgresStorageRepository:
             )
             session.commit()
 
+    def get_latest_recommendation_history(self, ticker: str) -> RecommendationResult | None:
+        with self.session_factory() as session:
+            record = (
+                session.query(RecommendationHistoryRecord)
+                .filter(RecommendationHistoryRecord.ticker == ticker.upper())
+                .order_by(desc(RecommendationHistoryRecord.timestamp), desc(RecommendationHistoryRecord.id))
+                .first()
+            )
+            return RecommendationResult.model_validate(record.payload) if record else None
+
     def get_market_data(self, ticker: str) -> NormalizedMarketData | None:
         with self.session_factory() as session:
             record = session.get(MarketDataRecord, ticker.upper())
