@@ -176,3 +176,12 @@ def test_api_allows_cors_preflight() -> None:
 
     assert response.status_code == 200
     assert response.headers["access-control-allow-origin"] == "http://localhost:5173"
+
+
+def test_api_echoes_request_id_header() -> None:
+    client = TestClient(app)
+
+    response = client.get("/api/v1/health", headers={"x-request-id": "req-123"})
+
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] == "req-123"
