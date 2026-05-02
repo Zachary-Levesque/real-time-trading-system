@@ -10,7 +10,6 @@ from app.processing.storage import LocalMarketDataReader
 from app.recommendation.storage import LocalRecommendationReader, LocalSignalReader
 from app.storage.cache import RedisCache
 from app.storage.db import create_session_factory
-from app.storage.exceptions import StorageError
 from app.storage.repository import PostgresStorageRepository
 from app.storage.sync import StorageSyncService
 
@@ -41,6 +40,19 @@ def main() -> int:
         result = service.sync_ticker(args.ticker)
     except Exception as exc:
         print(f"[storage-sync-error] {exc}", file=sys.stderr)
+        print(
+            (
+                "Storage sync requires reachable PostgreSQL and Redis services. "
+                "For local terminal runs, use localhost-based values such as "
+                "'postgresql+psycopg://postgres:postgres@localhost:5432/trading_system' "
+                f"and '{settings.redis_url}'."
+            ),
+            file=sys.stderr,
+        )
+        print(
+            "If you want to use Docker networking instead, install/start Docker and run 'docker compose up --build' first.",
+            file=sys.stderr,
+        )
         return 1
 
     print(json.dumps(result.__dict__, indent=2))
