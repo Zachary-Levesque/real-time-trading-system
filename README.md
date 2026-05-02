@@ -2,7 +2,7 @@
 
 A production-style real-time trading platform that ingests live market data, processes streaming signals, and serves low-latency, risk-aware trade recommendations.
 
-## Phase 7 Scope
+## Phase 8 Scope
 
 This repository now includes:
 
@@ -10,14 +10,14 @@ This repository now includes:
 - `backend/processing`: deterministic signal calculation from normalized market data
 - `backend/recommendation`: explainable recommendation scoring from processed signals
 - `backend/api`: FastAPI endpoints for price, signals, and recommendation reads
+- `backend/storage`: PostgreSQL persistence, Redis caching, and storage sync tooling
 - `frontend/`: React + Vite application with a refined welcome page and an API-backed dashboard
 - `docker-compose.yml`: local multi-service orchestration for frontend and backend
 
 Still intentionally out of scope:
 
-- database integration
 - real-time background updates
-- PostgreSQL and Redis persistence
+- automatic background persistence updates
 
 ## Project Structure
 
@@ -184,6 +184,34 @@ The recommendation command:
 - adds confidence, risk, and reasoning
 - stores the latest output at `backend/data/recommendations/<TICKER>/latest.json`
 
+### Storage sync
+
+```bash
+cd backend
+python -m app.storage --ticker AAPL
+```
+
+The storage sync command:
+
+- creates the PostgreSQL tables if they do not exist
+- persists the latest market data, signals, and recommendation for a ticker
+- caches the latest price snapshot and recommendation in Redis
+- prepares the API to read from storage in `hybrid` mode
+
+## Storage Layer
+
+Phase 8 introduces:
+
+- PostgreSQL as the persistent system of record for market data, signals, and recommendations
+- Redis as a cache for latest price snapshots and recommendations
+- a `hybrid` storage mode where the API prefers storage but can fall back to local files
+
+Default storage environment variables:
+
+- `DATABASE_URL=postgresql+psycopg://postgres:postgres@postgres:5432/trading_system`
+- `REDIS_URL=redis://redis:6379/0`
+- `STORAGE_MODE=hybrid`
+
 ## API Endpoints
 
 With the backend running, the current API now exposes:
@@ -201,11 +229,11 @@ curl http://localhost:8000/api/v1/signals/AAPL
 curl http://localhost:8000/api/v1/recommendation/AAPL
 ```
 
-The API behavior in Phase 5 is intentionally file-backed:
+The API behavior now prefers storage when available:
 
-- `/price/{ticker}` reads normalized market data from `data/market`
-- `/signals/{ticker}` reads processed signal output from `data/signals`
-- `/recommendation/{ticker}` reads recommendation output from `data/recommendations`
+- `/price/{ticker}` checks Redis, then PostgreSQL, then local market files in `hybrid` mode
+- `/signals/{ticker}` reads PostgreSQL first, then local signal files in `hybrid` mode
+- `/recommendation/{ticker}` checks Redis, then PostgreSQL, then local recommendation files in `hybrid` mode
 - missing tickers return `404`
 
 ## Frontend Welcome Page
@@ -308,4 +336,4 @@ Recommendations are stored as:
 
 ## Next Phase
 
-Phase 8 should add the first persistent storage layer with PostgreSQL and Redis.
+Phase 9 should add automated background updates and real-time-style processing.
