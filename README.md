@@ -208,9 +208,14 @@ Phase 8 introduces:
 
 Default storage environment variables:
 
+- local shell default: `DATABASE_URL=postgresql+psycopg://postgres:postgres@localhost:5432/trading_system`
+- local shell default: `REDIS_URL=redis://localhost:6379/0`
+- `STORAGE_MODE=hybrid`
+
+When running through Docker Compose, the backend service uses:
+
 - `DATABASE_URL=postgresql+psycopg://postgres:postgres@postgres:5432/trading_system`
 - `REDIS_URL=redis://redis:6379/0`
-- `STORAGE_MODE=hybrid`
 
 ## API Endpoints
 
