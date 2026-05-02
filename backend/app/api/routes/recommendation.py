@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from app.api.dependencies import get_recommendation_reader
+from app.api.dependencies import get_storage_read_service
 from app.models.api import ErrorResponse
 from app.models.recommendation import RecommendationResult
 from app.recommendation.exceptions import SignalReadError
-from app.recommendation.storage import LocalRecommendationReader
+from app.storage.service import StorageBackedReadService
 
 
 router = APIRouter()
@@ -17,13 +17,12 @@ router = APIRouter()
 )
 def get_recommendation(
     ticker: str,
-    recommendation_reader: LocalRecommendationReader = Depends(get_recommendation_reader),
+    service: StorageBackedReadService = Depends(get_storage_read_service),
 ) -> RecommendationResult:
     try:
-        return recommendation_reader.read(ticker)
+        return service.get_recommendation(ticker)
     except SignalReadError as exc:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=str(exc),
         ) from exc
-

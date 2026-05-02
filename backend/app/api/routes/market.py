@@ -1,12 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from app.api.dependencies import get_price_snapshot_service, get_signal_reader
+from app.api.dependencies import get_storage_read_service
 from app.models.api import ErrorResponse, PriceSnapshotResponse
 from app.models.signal import SignalResult
 from app.processing.exceptions import MarketDataReadError
 from app.recommendation.exceptions import SignalReadError
-from app.recommendation.storage import LocalSignalReader
-from app.storage.local_queries import PriceSnapshotService
+from app.storage.service import StorageBackedReadService
 
 
 router = APIRouter()
@@ -19,10 +18,10 @@ router = APIRouter()
 )
 def get_price(
     ticker: str,
-    service: PriceSnapshotService = Depends(get_price_snapshot_service),
+    service: StorageBackedReadService = Depends(get_storage_read_service),
 ) -> PriceSnapshotResponse:
     try:
-        return service.get_snapshot(ticker)
+        return service.get_price_snapshot(ticker)
     except MarketDataReadError as exc:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -37,13 +36,12 @@ def get_price(
 )
 def get_signals(
     ticker: str,
-    signal_reader: LocalSignalReader = Depends(get_signal_reader),
+    service: StorageBackedReadService = Depends(get_storage_read_service),
 ) -> SignalResult:
     try:
-        return signal_reader.read(ticker)
+        return service.get_signal(ticker)
     except SignalReadError as exc:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=str(exc),
         ) from exc
-
