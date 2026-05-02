@@ -10,7 +10,6 @@ import {
 } from "recharts";
 
 import {
-  apiBaseUrl,
   getPriceSnapshot,
   getRecommendation,
   getRecommendationHistory,
@@ -164,7 +163,19 @@ export function DashboardPage() {
     }
 
     if (failures.length === 3) {
-      throw new Error("All dashboard data requests failed.");
+      const firstFailure =
+        priceResult.status === "rejected"
+          ? priceResult.reason
+          : signalResultResponse.status === "rejected"
+            ? signalResultResponse.reason
+            : recommendationResultResponse.status === "rejected"
+              ? recommendationResultResponse.reason
+              : null;
+
+      throw new Error(
+        firstFailure?.message ??
+          `No saved analysis is available for ${normalizedTicker} yet. Try AAPL, MSFT, NVDA, or SPY after refreshing data.`,
+      );
     }
 
     if (failures.length > 0) {
@@ -257,21 +268,21 @@ export function DashboardPage() {
   return (
     <section className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-16">
       <SectionHeading
-        eyebrow="Product dashboard"
-        title="Search a ticker and inspect the system output end to end."
-        description="This view reads the current API for price history, signal breakdown, and recommendation logic. It now auto-refreshes, surfaces data freshness, and stays usable even when part of the stack is degraded."
+        eyebrow="Dashboard"
+        title="Search a ticker to see recent price action, market signals, and a recommendation."
+        description="Use the dashboard to review the latest saved analysis for supported tickers and see how the recommendation has changed over time."
       />
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">
         <div className="rounded-[2rem] border border-white/10 bg-slate-900/70 p-6">
           <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">API boundary</p>
-              <p className="mt-2 text-sm text-slate-300">Frontend expects backend routes under:</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">Saved market analysis</p>
+              <p className="mt-2 text-sm text-slate-300">Quick picks currently work best for tickers with refreshed data.</p>
             </div>
-            <code className="rounded-full border border-white/10 bg-slate-950 px-4 py-2 text-xs text-emerald-200">
-              {apiBaseUrl}
-            </code>
+            <p className="rounded-full border border-white/10 bg-slate-950 px-4 py-2 text-xs text-emerald-200">
+              Auto-refreshes every minute
+            </p>
           </div>
 
           <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/60 p-6">
@@ -373,7 +384,7 @@ export function DashboardPage() {
                   </ResponsiveContainer>
                 ) : (
                   <div className="flex h-full items-center justify-center text-sm text-slate-500">
-                    {loading ? "Loading chart data..." : "Price history unavailable."}
+                    {loading ? "Loading chart data..." : `No saved price history is available for ${activeTicker}.`}
                   </div>
                 )}
               </div>
@@ -431,10 +442,10 @@ export function DashboardPage() {
             </div>
           </div>
 
-          <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300">
-            {recommendationResult?.reason ??
-              "Run an analysis to see how current market signals translate into an explainable recommendation."}
-          </p>
+              <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300">
+                {recommendationResult?.reason ??
+              `No saved recommendation is available for ${activeTicker} yet.`}
+              </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             <div className="rounded-[1.3rem] border border-white/10 bg-white/[0.04] p-4">
@@ -456,7 +467,7 @@ export function DashboardPage() {
             <p className="mt-3 text-sm text-white">
               {systemStatus?.worker?.enabled
                 ? `Background refresh every ${systemStatus.worker.interval_seconds}s for ${systemStatus.worker.tickers.join(", ")}`
-                : "Background worker disabled"}
+                : "Automatic refresh is currently turned off"}
             </p>
             <p className="mt-2 text-xs text-slate-400">
               Last completed: {formatTimestamp(systemStatus?.worker?.last_completed_at)}
@@ -493,7 +504,7 @@ export function DashboardPage() {
                 ))
               ) : (
                 <p className="text-sm text-slate-500">
-                  {loading ? "Loading recommendation history..." : "Recommendation history is unavailable."}
+                  {loading ? "Loading recommendation history..." : `No saved recommendation history is available for ${activeTicker} yet.`}
                 </p>
               )}
             </div>
