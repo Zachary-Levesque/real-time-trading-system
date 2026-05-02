@@ -29,6 +29,27 @@ class LocalSignalReader:
         return SignalResult.model_validate(payload)
 
 
+class LocalRecommendationReader:
+    def __init__(self, base_dir: Path) -> None:
+        self.base_dir = base_dir
+
+    def read(self, ticker: str) -> RecommendationResult:
+        input_path = self.base_dir / ticker.upper() / "latest.json"
+
+        try:
+            payload = json.loads(input_path.read_text(encoding="utf-8"))
+        except OSError as exc:
+            raise SignalReadError(
+                f"Failed to read recommendation for ticker '{ticker.upper()}'."
+            ) from exc
+        except json.JSONDecodeError as exc:
+            raise SignalReadError(
+                f"Recommendation for ticker '{ticker.upper()}' is not valid JSON."
+            ) from exc
+
+        return RecommendationResult.model_validate(payload)
+
+
 class LocalRecommendationStorage:
     def __init__(self, base_dir: Path) -> None:
         self.base_dir = base_dir
@@ -50,4 +71,3 @@ class LocalRecommendationStorage:
             ) from exc
 
         return output_path
-
