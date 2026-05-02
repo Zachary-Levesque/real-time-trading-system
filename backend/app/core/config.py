@@ -1,3 +1,4 @@
+import json
 from functools import lru_cache
 from pathlib import Path
 
@@ -37,6 +38,9 @@ class Settings(BaseSettings):
     @classmethod
     def parse_cors_origins(cls, value: str | list[str]) -> list[str]:
         if isinstance(value, str):
+            value = value.strip()
+            if value.startswith("["):
+                return [origin.strip() for origin in json.loads(value) if origin.strip()]
             return [origin.strip() for origin in value.split(",") if origin.strip()]
         return value
 
@@ -44,6 +48,9 @@ class Settings(BaseSettings):
     @classmethod
     def parse_background_worker_tickers(cls, value: str | list[str]) -> list[str]:
         if isinstance(value, str):
+            value = value.strip()
+            if value.startswith("["):
+                return [ticker.strip().upper() for ticker in json.loads(value) if ticker.strip()]
             return [ticker.strip().upper() for ticker in value.split(",") if ticker.strip()]
         return [ticker.upper() for ticker in value]
 
