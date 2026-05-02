@@ -9,6 +9,7 @@ from starlette.requests import Request
 from app.api.router import api_router
 from app.core.config import get_settings
 from app.core.logging import configure_logging
+from app.runtime.state import worker_state
 from app.runtime.worker import BackgroundUpdateWorker, UpdatePipelineService
 
 
@@ -23,13 +24,19 @@ async def lifespan(_: FastAPI):
     global worker
 
     if settings.enable_background_worker:
-        worker = BackgroundUpdateWorker(
-            pipeline_service=UpdatePipelineService(),
-            tickers=settings.background_worker_tickers,
-            interval_seconds=settings.background_worker_interval_seconds,
-            run_immediately=settings.background_worker_run_immediately,
-        )
-        await worker.start()
+        try:
+            worker = BackgroundUpdateWorker(
+                pipeline_service=UpdatePipelineService(),
+                tickers=settings.background_worker_tickers,
+                interval_seconds=settings.background_worker_interval_seconds,
+                run_immediately=settings.background_worker_run_immediately,
+            )
+            await worker.start()
+        except Exception as exc:
+            worker = None
+            worker_state.enabled = False
+            worker_state.last_error = str(exc)
+            logger.exception("Background worker failed to start; continuing without it: %s", exc)
 
     try:
         yield

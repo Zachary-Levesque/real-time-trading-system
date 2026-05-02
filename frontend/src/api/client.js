@@ -3,11 +3,24 @@ const fallbackBaseUrl = "http://localhost:8000/api/v1";
 export const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? fallbackBaseUrl;
 
 async function readJson(path) {
-  const response = await fetch(`${apiBaseUrl}${path}`);
-  const payload = await response.json();
+  let response;
+
+  try {
+    response = await fetch(`${apiBaseUrl}${path}`);
+  } catch {
+    throw new Error(
+      `Cannot reach the backend API at ${apiBaseUrl}. Make sure the backend service is running on port 8000.`,
+    );
+  }
+
+  const contentType = response.headers.get("content-type") ?? "";
+  const payload = contentType.includes("application/json") ? await response.json() : await response.text();
 
   if (!response.ok) {
-    throw new Error(payload.detail ?? `Request failed for ${path}`);
+    if (typeof payload === "object" && payload !== null && "detail" in payload) {
+      throw new Error(payload.detail);
+    }
+    throw new Error(typeof payload === "string" && payload ? payload : `Request failed for ${path}`);
   }
 
   return payload;
