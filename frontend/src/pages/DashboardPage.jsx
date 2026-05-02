@@ -9,10 +9,12 @@ import {
   YAxis,
 } from "recharts";
 
-import { apiBaseUrl, getPriceSnapshot, getRecommendation, getSignals } from "../api/client";
+import { apiBaseUrl, getPriceSnapshot, getRecommendation, getSignals, getSystemStatus } from "../api/client";
 import { SectionHeading } from "../components/SectionHeading";
 
 const defaultTicker = "AAPL";
+const quickTickers = ["AAPL", "MSFT", "NVDA", "SPY"];
+const refreshIntervalMs = 60000;
 
 function formatCurrency(value, currency = "USD") {
   return new Intl.NumberFormat("en-US", {
@@ -59,57 +61,123 @@ function recommendationTone(recommendation) {
   return "text-amber-300";
 }
 
+function formatTimestamp(timestamp) {
+  if (!timestamp) {
+    return "--";
+  }
+
+  return new Date(timestamp).toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
+function freshnessStatus(timestamp) {
+  if (!timestamp) {
+    return { label: "Unavailable", tone: "text-slate-400" };
+  }
+
+  const ageMinutes = (Date.now() - new Date(timestamp).getTime()) / 60000;
+
+  if (ageMinutes <= 10) {
+    return { label: "Fresh", tone: "text-emerald-300" };
+  }
+  if (ageMinutes <= 30) {
+    return { label: "Aging", tone: "text-amber-300" };
+  }
+  return { label: "Stale", tone: "text-rose-300" };
+}
+
 export function DashboardPage() {
   const [tickerInput, setTickerInput] = useState(defaultTicker);
   const [activeTicker, setActiveTicker] = useState(defaultTicker);
   const [priceSnapshot, setPriceSnapshot] = useState(null);
   const [signalResult, setSignalResult] = useState(null);
   const [recommendationResult, setRecommendationResult] = useState(null);
+  const [systemStatus, setSystemStatus] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [warning, setWarning] = useState("");
+
+  async function loadDashboard(normalizedTicker) {
+    setLoading(true);
+    setError("");
+    setWarning("");
+
+    const [priceResult, signalResultResponse, recommendationResultResponse, systemStatusResponse] = await Promise.allSettled([
+      getPriceSnapshot(normalizedTicker),
+      getSignals(normalizedTicker),
+      getRecommendation(normalizedTicker),
+      getSystemStatus(),
+    ]);
+
+    const failures = [];
+
+    if (priceResult.status === "fulfilled") {
+      setPriceSnapshot(priceResult.value);
+    } else {
+      setPriceSnapshot(null);
+      failures.push("price");
+    }
+
+    if (signalResultResponse.status === "fulfilled") {
+      setSignalResult(signalResultResponse.value);
+    } else {
+      setSignalResult(null);
+      failures.push("signals");
+    }
+
+    if (recommendationResultResponse.status === "fulfilled") {
+      setRecommendationResult(recommendationResultResponse.value);
+    } else {
+      setRecommendationResult(null);
+      failures.push("recommendation");
+    }
+
+    if (systemStatusResponse.status === "fulfilled") {
+      setSystemStatus(systemStatusResponse.value);
+    } else {
+      setSystemStatus(null);
+    }
+
+    if (failures.length === 3) {
+      throw new Error("All dashboard data requests failed.");
+    }
+
+    if (failures.length > 0) {
+      setWarning(`Some data is unavailable right now: ${failures.join(", ")}.`);
+    }
+
+    setLoading(false);
+  }
 
   useEffect(() => {
     let cancelled = false;
 
-    async function loadDashboard() {
-      setLoading(true);
-      setError("");
-
+    async function executeLoad() {
       try {
         const normalizedTicker = activeTicker.trim().toUpperCase();
-        const [pricePayload, signalPayload, recommendationPayload] = await Promise.all([
-          getPriceSnapshot(normalizedTicker),
-          getSignals(normalizedTicker),
-          getRecommendation(normalizedTicker),
-        ]);
-
-        if (cancelled) {
-          return;
-        }
-
-        setPriceSnapshot(pricePayload);
-        setSignalResult(signalPayload);
-        setRecommendationResult(recommendationPayload);
+        await loadDashboard(normalizedTicker);
       } catch (loadError) {
         if (cancelled) {
           return;
         }
-
         setPriceSnapshot(null);
         setSignalResult(null);
         setRecommendationResult(null);
         setError(loadError.message);
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     }
 
-    loadDashboard();
+    executeLoad();
+    const intervalId = window.setInterval(executeLoad, refreshIntervalMs);
 
     return () => {
       cancelled = true;
+      window.clearInterval(intervalId);
     };
   }, [activeTicker]);
 
@@ -122,6 +190,9 @@ export function DashboardPage() {
     })) ?? [];
 
   const signalValues = signalResult?.data.values;
+  const priceFreshness = freshnessStatus(priceSnapshot?.timestamp);
+  const signalFreshness = freshnessStatus(signalResult?.timestamp);
+  const recommendationFreshness = freshnessStatus(recommendationResult?.timestamp);
   const summaryCards = [
     { label: "Ticker", value: activeTicker },
     {
@@ -157,7 +228,7 @@ export function DashboardPage() {
       <SectionHeading
         eyebrow="Product dashboard"
         title="Search a ticker and inspect the system output end to end."
-        description="This view reads the current file-backed API for price history, signal breakdown, and recommendation logic. Phase 7 focuses on making the data usable, not just available."
+        description="This view reads the current API for price history, signal breakdown, and recommendation logic. It now auto-refreshes, surfaces data freshness, and stays usable even when part of the stack is degraded."
       />
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">
@@ -189,9 +260,30 @@ export function DashboardPage() {
               </button>
             </form>
 
+            <div className="mt-4 flex flex-wrap gap-3">
+              {quickTickers.map((ticker) => (
+                <button
+                  key={ticker}
+                  type="button"
+                  onClick={() => {
+                    setTickerInput(ticker);
+                    setActiveTicker(ticker);
+                  }}
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-200 transition hover:border-cyan-300/40 hover:text-white"
+                >
+                  {ticker}
+                </button>
+              ))}
+            </div>
+
             {error ? (
               <div className="mt-6 rounded-[1.5rem] border border-rose-400/20 bg-rose-400/10 p-5 text-sm text-rose-100">
                 {error}
+              </div>
+            ) : null}
+            {warning ? (
+              <div className="mt-4 rounded-[1.5rem] border border-amber-400/20 bg-amber-400/10 p-5 text-sm text-amber-100">
+                {warning}
               </div>
             ) : null}
 
@@ -202,6 +294,10 @@ export function DashboardPage() {
                   <p className="mt-2 text-3xl font-semibold text-white">
                     {priceSnapshot ? formatCurrency(priceSnapshot.data.current_price, priceSnapshot.data.currency ?? "USD") : "--"}
                   </p>
+                  <div className="mt-2 flex items-center gap-3 text-xs text-slate-400">
+                    <span>Updated {formatTimestamp(priceSnapshot?.timestamp)}</span>
+                    <span className={priceFreshness.tone}>{priceFreshness.label}</span>
+                  </div>
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-slate-400">Latest move</p>
@@ -267,6 +363,10 @@ export function DashboardPage() {
       <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="rounded-[1.8rem] border border-white/10 bg-white/5 p-6">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">Signal breakdown</p>
+          <div className="mt-2 flex items-center gap-3 text-xs text-slate-400">
+            <span>Updated {formatTimestamp(signalResult?.timestamp)}</span>
+            <span className={signalFreshness.tone}>{signalFreshness.label}</span>
+          </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {[
               ["Momentum", signalValues?.momentum ?? "--"],
@@ -290,6 +390,10 @@ export function DashboardPage() {
                 {recommendationResult?.recommendation ?? "--"} with{" "}
                 {recommendationResult ? `${Math.round(recommendationResult.confidence * 100)}%` : "--"} confidence
               </h3>
+              <div className="mt-2 flex items-center gap-3 text-xs text-slate-400">
+                <span>Updated {formatTimestamp(recommendationResult?.timestamp)}</span>
+                <span className={recommendationFreshness.tone}>{recommendationFreshness.label}</span>
+              </div>
             </div>
             <div className={`rounded-full border border-white/10 px-4 py-2 text-sm font-semibold ${riskTone(recommendationResult?.risk)}`}>
               Risk: {recommendationResult?.risk ?? "--"}
@@ -314,6 +418,18 @@ export function DashboardPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Points loaded</p>
               <p className="mt-3 text-sm text-white">{signalResult?.data.data_points_used ?? "--"}</p>
             </div>
+          </div>
+
+          <div className="mt-8 rounded-[1.3rem] border border-white/10 bg-white/[0.04] p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Worker status</p>
+            <p className="mt-3 text-sm text-white">
+              {systemStatus?.worker?.enabled
+                ? `Background refresh every ${systemStatus.worker.interval_seconds}s for ${systemStatus.worker.tickers.join(", ")}`
+                : "Background worker disabled"}
+            </p>
+            <p className="mt-2 text-xs text-slate-400">
+              Last completed: {formatTimestamp(systemStatus?.worker?.last_completed_at)}
+            </p>
           </div>
         </div>
       </div>
