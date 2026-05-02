@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from app.models.api import PriceSnapshotResponse
+from app.models.api import RecommendationHistoryEntry, RecommendationHistoryResponse, PriceSnapshotResponse
 from app.models.recommendation import RecommendationResult
 from app.models.signal import SignalResult
 from app.processing.exceptions import MarketDataReadError
@@ -89,3 +89,37 @@ class StorageBackedReadService:
             return self.file_recommendation_reader.read(ticker)
 
         raise SignalReadError(f"No stored recommendation available for ticker '{ticker.upper()}'.")
+
+    def get_recommendation_history(self, ticker: str, limit: int = 10) -> RecommendationHistoryResponse:
+        if self.storage_mode != "file":
+            try:
+                history = self.repository.list_recommendation_history(ticker, limit)
+                if history:
+                    return RecommendationHistoryResponse(
+                        ticker=ticker.upper(),
+                        timestamp=history[0].timestamp,
+                        data=history,
+                    )
+            except Exception:
+                if self.storage_mode != "hybrid":
+                    raise
+
+        if self.storage_mode in {"file", "hybrid"}:
+            history_results = self.file_recommendation_reader.list_history(ticker, limit)
+            history = [
+                RecommendationHistoryEntry(
+                    timestamp=result.timestamp,
+                    recommendation=result.recommendation,
+                    confidence=result.confidence,
+                    risk=result.risk,
+                    reason=result.reason,
+                )
+                for result in history_results
+            ]
+            return RecommendationHistoryResponse(
+                ticker=ticker.upper(),
+                timestamp=history[0].timestamp,
+                data=history,
+            )
+
+        raise SignalReadError(f"No stored recommendation history available for ticker '{ticker.upper()}'.")
