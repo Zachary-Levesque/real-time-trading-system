@@ -30,6 +30,11 @@ class FakeRepository:
             raise RuntimeError("db unavailable")
         return self.recommendation
 
+    def list_recommendation_history(self, ticker: str, limit: int = 10):
+        if self.should_fail:
+            raise RuntimeError("db unavailable")
+        return []
+
 
 class FakeCache:
     def __init__(self, *, price=None, recommendation=None) -> None:
@@ -71,6 +76,9 @@ class FakeFileRecommendationReader:
 
     def read(self, ticker: str) -> RecommendationResult:
         return self.recommendation
+
+    def list_history(self, ticker: str, limit: int = 10):
+        return [self.recommendation]
 
 
 def build_market_data() -> NormalizedMarketData:
@@ -174,3 +182,4 @@ def test_storage_service_falls_back_to_files_when_storage_fails() -> None:
     assert service.get_price_snapshot("AAPL").ticker == "AAPL"
     assert service.get_signal("AAPL").data.values.trend == "bullish"
     assert service.get_recommendation("AAPL").recommendation == "BUY"
+    assert service.get_recommendation_history("AAPL").data[0].recommendation == "BUY"
