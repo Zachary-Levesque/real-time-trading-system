@@ -65,6 +65,23 @@ def test_recommendation_engine_generates_sell() -> None:
     assert recommendation.confidence == 1.0
 
 
+def test_recommendation_engine_generates_high_confidence_hold_for_balanced_signals() -> None:
+    engine = RecommendationEngine()
+
+    recommendation = engine.generate(
+        make_signal_result(
+            momentum="neutral",
+            trend="neutral",
+            volatility="stable",
+            volume="average",
+        )
+    )
+
+    assert recommendation.recommendation == "HOLD"
+    assert recommendation.risk == "low"
+    assert recommendation.confidence == 0.85
+
+
 def test_recommendation_service_writes_output(tmp_path: Path) -> None:
     signal_dir = tmp_path / "signals"
     recommendation_dir = tmp_path / "recommendations"

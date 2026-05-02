@@ -47,7 +47,7 @@ class RecommendationEngine:
         else:
             recommendation = "SELL"
 
-        confidence = round(abs(final_score - 50) / 50, 2)
+        confidence = self._confidence_label(final_score, recommendation, signals.volatility)
         risk = self._risk_label(signals.volatility, signals.trend)
         reason = self._reason_text(signals, recommendation)
 
@@ -58,6 +58,22 @@ class RecommendationEngine:
             recommendation=recommendation,
             reason=reason,
         )
+
+    @staticmethod
+    def _confidence_label(final_score: int, recommendation: str, volatility: str) -> float:
+        if recommendation in {"BUY", "SELL"}:
+            return round(abs(final_score - 50) / 50, 2)
+
+        hold_distance = abs(final_score - 50)
+        base_confidence = 0.3 + max(0, 20 - hold_distance) / 40
+        volatility_adjustment = {
+            "stable": 0.05,
+            "low": 0.03,
+            "medium": -0.05,
+            "high": -0.1,
+        }[volatility]
+        hold_confidence = max(0.35, min(0.85, base_confidence + volatility_adjustment))
+        return round(hold_confidence, 2)
 
     @staticmethod
     def _momentum_score(momentum: str) -> int:
@@ -115,4 +131,3 @@ class RecommendationEngine:
         if recommendation == "SELL":
             return f"{momentum_text.capitalize()} with {trend_text}, {volatility_text}, and {volume_text} supports a sell bias."
         return f"{momentum_text.capitalize()} with {trend_text}, {volatility_text}, and {volume_text} suggests waiting for clearer confirmation."
-

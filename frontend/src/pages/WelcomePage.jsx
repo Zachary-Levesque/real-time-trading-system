@@ -19,7 +19,7 @@ const systemPillars = [
 
 const proofPoints = [
   "FastAPI backend with explicit API contracts",
-  "Deterministic scoring that is easy to explain in interviews",
+  "Deterministic scoring with explicit signal weighting and bounded outputs",
   "Modular pipeline structure ready for storage and real-time updates",
 ];
 
