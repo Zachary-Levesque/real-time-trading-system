@@ -1,11 +1,19 @@
 from __future__ import annotations
 
+from sqlalchemy import desc
 from sqlalchemy.orm import Session, sessionmaker
 
+from app.models.api import RecommendationHistoryEntry
 from app.models.market_data import NormalizedMarketData
 from app.models.recommendation import RecommendationResult
 from app.models.signal import SignalResult
-from app.storage.models import Base, MarketDataRecord, RecommendationRecord, SignalRecord
+from app.storage.models import (
+    Base,
+    MarketDataRecord,
+    RecommendationHistoryRecord,
+    RecommendationRecord,
+    SignalRecord,
+)
 
 
 class PostgresStorageRepository:
@@ -64,6 +72,18 @@ class PostgresStorageRepository:
                 record.payload = payload
             session.commit()
 
+    def append_recommendation_history(self, recommendation: RecommendationResult) -> None:
+        payload = recommendation.model_dump(mode="json")
+        with self.session_factory() as session:
+            session.add(
+                RecommendationHistoryRecord(
+                    ticker=recommendation.ticker,
+                    timestamp=recommendation.timestamp,
+                    payload=payload,
+                )
+            )
+            session.commit()
+
     def get_market_data(self, ticker: str) -> NormalizedMarketData | None:
         with self.session_factory() as session:
             record = session.get(MarketDataRecord, ticker.upper())
@@ -78,3 +98,24 @@ class PostgresStorageRepository:
         with self.session_factory() as session:
             record = session.get(RecommendationRecord, ticker.upper())
             return RecommendationResult.model_validate(record.payload) if record else None
+
+    def list_recommendation_history(self, ticker: str, limit: int = 10) -> list[RecommendationHistoryEntry]:
+        with self.session_factory() as session:
+            records = (
+                session.query(RecommendationHistoryRecord)
+                .filter(RecommendationHistoryRecord.ticker == ticker.upper())
+                .order_by(desc(RecommendationHistoryRecord.timestamp), desc(RecommendationHistoryRecord.id))
+                .limit(limit)
+                .all()
+            )
+
+            return [
+                RecommendationHistoryEntry(
+                    timestamp=record.payload["timestamp"],
+                    recommendation=record.payload["recommendation"],
+                    confidence=record.payload["confidence"],
+                    risk=record.payload["risk"],
+                    reason=record.payload["reason"],
+                )
+                for record in records
+            ]
