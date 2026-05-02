@@ -1,7 +1,12 @@
+import { Suspense, lazy } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 
-import { DashboardPage } from "./pages/DashboardPage";
-import { WelcomePage } from "./pages/WelcomePage";
+const DashboardPage = lazy(() =>
+  import("./pages/DashboardPage").then((module) => ({ default: module.DashboardPage })),
+);
+const WelcomePage = lazy(() =>
+  import("./pages/WelcomePage").then((module) => ({ default: module.WelcomePage })),
+);
 
 export default function App() {
   return (
@@ -23,12 +28,19 @@ export default function App() {
       </header>
 
       <main>
-        <Routes>
-          <Route path="/" element={<WelcomePage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-        </Routes>
+        <Suspense
+          fallback={
+            <div className="mx-auto flex min-h-[calc(100vh-73px)] max-w-6xl items-center px-6 py-16 text-sm text-slate-400">
+              Loading interface...
+            </div>
+          }
+        >
+          <Routes>
+            <Route path="/" element={<WelcomePage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+          </Routes>
+        </Suspense>
       </main>
     </div>
   );
 }
-

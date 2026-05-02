@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from app.models.api import PriceSnapshotData, PriceSnapshotResponse
+from app.processing.exceptions import MarketDataReadError
 from app.processing.storage import LocalMarketDataReader
 
 
@@ -11,6 +12,12 @@ class PriceSnapshotService:
     def get_snapshot(self, ticker: str) -> PriceSnapshotResponse:
         market_data = self.market_data_reader.read(ticker)
         points = market_data.data.points
+
+        if not points:
+            raise MarketDataReadError(
+                f"Normalized market data for ticker '{ticker.upper()}' does not contain any price points."
+            )
+
         latest_point = points[-1]
         previous_point = points[-2] if len(points) > 1 else None
 
@@ -36,4 +43,3 @@ class PriceSnapshotService:
                 points=points,
             ),
         )
-
