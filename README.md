@@ -1,4 +1,4 @@
-# real-time-trading-system
+# Real Time Trading System
 
 A production-style real-time trading platform that ingests live market data, processes streaming signals, and serves low-latency, risk-aware trade recommendations.
 
