@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 import logging
 import time
+from uuid import uuid4
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,7 +9,7 @@ from starlette.requests import Request
 
 from app.api.router import api_router
 from app.core.config import get_settings
-from app.core.logging import configure_logging
+from app.core.logging import configure_logging, request_id_context
 from app.runtime.state import worker_state
 from app.runtime.worker import BackgroundUpdateWorker, UpdatePipelineService
 
@@ -68,16 +69,23 @@ app.include_router(api_router, prefix=settings.api_v1_prefix)
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
     start = time.perf_counter()
-    response = await call_next(request)
-    duration_ms = round((time.perf_counter() - start) * 1000, 2)
-    logger.info(
-        "request method=%s path=%s status=%s duration_ms=%s",
-        request.method,
-        request.url.path,
-        response.status_code,
-        duration_ms,
-    )
-    return response
+    request_id = request.headers.get("x-request-id", str(uuid4()))
+    token = request_id_context.set(request_id)
+
+    try:
+        response = await call_next(request)
+        duration_ms = round((time.perf_counter() - start) * 1000, 2)
+        response.headers["x-request-id"] = request_id
+        logger.info(
+            "request method=%s path=%s status=%s duration_ms=%s",
+            request.method,
+            request.url.path,
+            response.status_code,
+            duration_ms,
+        )
+        return response
+    finally:
+        request_id_context.reset(token)
 
 
 @app.get("/", tags=["root"])
