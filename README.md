@@ -2,7 +2,7 @@
 
 A production-style real-time trading platform that ingests live market data, processes streaming signals, and serves low-latency, risk-aware trade recommendations.
 
-## Phase 5 Scope
+## Phase 6 Scope
 
 This repository now includes:
 
@@ -10,7 +10,7 @@ This repository now includes:
 - `backend/processing`: deterministic signal calculation from normalized market data
 - `backend/recommendation`: explainable recommendation scoring from processed signals
 - `backend/api`: FastAPI endpoints for price, signals, and recommendation reads
-- `frontend/`: React + Vite application shell with a welcome page and dashboard route
+- `frontend/`: React + Vite application shell with a refined welcome page and dashboard route
 - `docker-compose.yml`: local multi-service orchestration for frontend and backend
 
 Still intentionally out of scope:
@@ -209,6 +209,17 @@ The API behavior in Phase 5 is intentionally file-backed:
 - `/recommendation/{ticker}` reads recommendation output from `data/recommendations`
 - missing tickers return `404`
 
+## Frontend Welcome Page
+
+Phase 6 refines the landing experience so the project explains itself before the user reaches the dashboard.
+
+The welcome page now:
+
+- frames the platform as a systems-first trading product
+- explains the ingestion, signal, and recommendation layers
+- makes the project value clearer for backend and product engineering
+- provides direct calls to action for the dashboard and API docs
+
 ### Manual check
 
 1. Start the backend and frontend.
@@ -286,4 +297,4 @@ Recommendations are stored as:
 
 ## Next Phase
 
-Phase 6 should create the first user-facing welcome page experience on the frontend.
+Phase 7 should turn the dashboard shell into a real product interface backed by the Phase 5 API endpoints.
