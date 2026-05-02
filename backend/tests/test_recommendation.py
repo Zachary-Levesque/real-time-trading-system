@@ -112,3 +112,31 @@ def test_recommendation_service_writes_output(tmp_path: Path) -> None:
     history_dir = recommendation_dir / "AAPL" / "history"
     assert history_dir.exists()
     assert len(list(history_dir.glob("*.json"))) == 1
+
+
+def test_recommendation_storage_does_not_duplicate_identical_history_entries(tmp_path: Path) -> None:
+    storage = LocalRecommendationStorage(tmp_path / "recommendations")
+    engine = RecommendationEngine()
+
+    first = engine.generate(
+        make_signal_result(
+            momentum="neutral",
+            trend="neutral",
+            volatility="stable",
+            volume="average",
+        )
+    )
+    second = engine.generate(
+        make_signal_result(
+            momentum="neutral",
+            trend="neutral",
+            volatility="stable",
+            volume="average",
+        )
+    )
+
+    storage.write(first)
+    storage.write(second)
+
+    history_dir = tmp_path / "recommendations" / "AAPL" / "history"
+    assert len(list(history_dir.glob("*.json"))) == 1
