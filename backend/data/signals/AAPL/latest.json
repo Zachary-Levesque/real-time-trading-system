@@ -1,6 +1,6 @@
 {
   "ticker": "AAPL",
-  "timestamp": "2026-05-02T18:27:16.054488Z",
+  "timestamp": "2026-05-03T16:19:30.221320Z",
   "data": {
     "source": "signal_processor_v1",
     "lookback_points": 20,
