@@ -21,7 +21,6 @@ import {
 import { SectionHeading } from "../components/SectionHeading";
 
 const defaultTicker = "AAPL";
-const fallbackQuickTickers = ["NVDA", "AAPL", "MSFT", "AMZN", "GOOGL", "GOOG", "AVGO", "META"];
 const refreshIntervalMs = 60000;
 
 function formatCurrency(value, currency = "USD") {
@@ -111,7 +110,7 @@ export function DashboardPage() {
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
   const [warning, setWarning] = useState("");
-  const [refreshSummary, setRefreshSummary] = useState(null);
+  const [showSignalExplain, setShowSignalExplain] = useState(false);
   const refreshOnNextLoadRef = useRef(false);
 
   function triggerTickerSelection(nextTicker) {
@@ -139,19 +138,16 @@ export function DashboardPage() {
     setError("");
     setWarning("");
     let refreshError = null;
-    let refreshPayload = null;
 
     if (triggerRefresh) {
       setRefreshing(true);
       try {
-        refreshPayload = await refreshAnalysis(normalizedTicker);
+        const refreshPayload = await refreshAnalysis(normalizedTicker);
         setPriceSnapshot(refreshPayload.data.price_snapshot);
         setSignalResult(refreshPayload.data.signal);
         setRecommendationResult(refreshPayload.data.recommendation);
-        setRefreshSummary(refreshPayload.data);
       } catch (error) {
         refreshError = error;
-        setRefreshSummary(null);
       } finally {
         setRefreshing(false);
       }
@@ -309,12 +305,7 @@ export function DashboardPage() {
     })) ?? [];
 
   const signalValues = signalResult?.data.values;
-  const quickTickers = tickerCatalog?.data.featured_tickers?.slice(0, 12) ?? fallbackQuickTickers;
   const companies = tickerCatalog?.data.companies ?? [];
-  const searchableTickers = tickerCatalog?.data.searchable_tickers ?? [];
-  const tickerUniverseName = tickerCatalog?.data.universe_name ?? "manual";
-  const configuredTickers = tickerCatalog?.data.configured_tickers ?? [];
-  const savedRecommendationTickers = tickerCatalog?.data.saved_recommendation_tickers ?? [];
   const selectedCompanyInUniverse = companies.some((company) => company.ticker === activeTicker);
   const priceFreshness = freshnessStatus(priceSnapshot?.timestamp);
   const signalFreshness = freshnessStatus(signalResult?.timestamp);
@@ -371,7 +362,6 @@ export function DashboardPage() {
           <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">Live market analysis</p>
-              <p className="mt-2 text-sm text-slate-300">Analyze can run the full pipeline on demand, then the dashboard keeps polling the saved result every minute.</p>
             </div>
             <p className="rounded-full border border-white/10 bg-slate-950 px-4 py-2 text-xs text-emerald-200">
               Auto-refreshes every minute
@@ -422,44 +412,6 @@ export function DashboardPage() {
                   </option>
                 ))}
               </select>
-            </div>
-
-            <div className="mt-4 flex flex-wrap gap-3">
-              {quickTickers.map((ticker) => (
-                <button
-                  key={ticker}
-                  type="button"
-                  onClick={() => triggerTickerSelection(ticker)}
-                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-200 transition hover:border-cyan-300/40 hover:text-white"
-                >
-                  {ticker}
-                </button>
-              ))}
-            </div>
-
-            <div className="mt-4 grid gap-3 rounded-[1.25rem] border border-white/10 bg-slate-950/50 p-4">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Search universe</p>
-                <p className="mt-2 text-sm text-slate-300">
-                  {tickerUniverseName === "sp500_all"
-                    ? `Full S&P 500 constituent list available in search and dropdown (${companies.length} companies / ${searchableTickers.length} tickers).`
-                    : tickerUniverseName === "sp500_top100"
-                    ? `Top 100 S&P 500 names available as built-in suggestions (${searchableTickers.length} tickers).`
-                    : `Manual ticker universe (${searchableTickers.length} suggested tickers).`}
-                </p>
-              </div>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Configured worker tickers</p>
-                <p className="mt-2 text-sm text-slate-300">
-                  {configuredTickers.length > 0 ? configuredTickers.join(", ") : "Unavailable"}
-                </p>
-              </div>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Tickers with saved recommendations</p>
-                <p className="mt-2 text-sm text-slate-300">
-                  {savedRecommendationTickers.length > 0 ? savedRecommendationTickers.join(", ") : "None saved yet"}
-                </p>
-              </div>
             </div>
 
             {error ? (
@@ -548,11 +500,41 @@ export function DashboardPage() {
 
       <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="rounded-[1.8rem] border border-white/10 bg-white/5 p-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">Signal breakdown</p>
-          <div className="mt-2 flex items-center gap-3 text-xs text-slate-400">
-            <span>Updated {formatTimestamp(signalResult?.timestamp)}</span>
-            <span className={signalFreshness.tone}>{signalFreshness.label}</span>
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">Signal breakdown</p>
+              <div className="mt-2 flex items-center gap-3 text-xs text-slate-400">
+                <span>Updated {formatTimestamp(signalResult?.timestamp)}</span>
+                <span className={signalFreshness.tone}>{signalFreshness.label}</span>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowSignalExplain((current) => !current)}
+              className="rounded-full border border-white/10 bg-slate-950/50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-200 transition hover:border-cyan-300/40 hover:text-white"
+            >
+              {showSignalExplain ? "Hide explain" : "Explain"}
+            </button>
           </div>
+
+          {showSignalExplain ? (
+            <div className="mt-5 grid gap-3 rounded-[1.3rem] border border-cyan-300/15 bg-cyan-300/[0.06] p-4">
+              <p className="text-sm text-slate-200">
+                <span className="font-semibold text-white">Momentum</span> measures whether recent price movement is positive,
+                neutral, or negative over the short lookback window.
+              </p>
+              <p className="text-sm text-slate-200">
+                <span className="font-semibold text-white">Trend</span> compares the recent price path to indicate whether the stock is behaving in a bullish, neutral, or bearish way.
+              </p>
+              <p className="text-sm text-slate-200">
+                <span className="font-semibold text-white">Volatility</span> estimates how stable or erratic recent price changes have been.
+              </p>
+              <p className="text-sm text-slate-200">
+                <span className="font-semibold text-white">Volume</span> compares recent trading activity against the recent baseline to show whether participation is light, average, or elevated.
+              </p>
+            </div>
+          ) : null}
+
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {[
               ["Momentum", signalValues?.momentum ?? "--"],
@@ -603,22 +585,6 @@ export function DashboardPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Points loaded</p>
               <p className="mt-3 text-sm text-white">{signalResult?.data.data_points_used ?? "--"}</p>
             </div>
-          </div>
-
-          <div className="mt-8 rounded-[1.3rem] border border-white/10 bg-white/[0.04] p-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Latest live refresh</p>
-            <p className="mt-3 text-sm text-white">
-              {refreshSummary === null
-                ? "No manual refresh has been run in this session."
-                : refreshSummary.storage_synced
-                  ? "The latest refresh completed and persisted through the storage sync path."
-                  : "The latest refresh completed, but storage sync did not finish successfully."}
-            </p>
-            <p className="mt-2 text-xs text-slate-400">
-              {refreshSummary === null
-                ? "Use Analyze to run the full ingestion, signal, and recommendation pipeline."
-                : `Persisted market=${String(refreshSummary.persisted_market_data)} signal=${String(refreshSummary.persisted_signal)} recommendation=${String(refreshSummary.persisted_recommendation)}`}
-            </p>
           </div>
 
           <div className="mt-8 rounded-[1.3rem] border border-white/10 bg-white/[0.04] p-4">
