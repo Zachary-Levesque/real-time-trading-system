@@ -1,0 +1,15 @@
+{
+  "ticker": "GOOG",
+  "timestamp": "2026-05-03T16:25:57.181330Z",
+  "data": {
+    "source": "signal_processor_v1",
+    "lookback_points": 20,
+    "data_points_used": 35,
+    "values": {
+      "momentum": "positive",
+      "trend": "neutral",
+      "volatility": "low",
+      "volume": "low"
+    }
+  }
+}

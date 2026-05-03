@@ -1,0 +1,14 @@
+{
+  "ticker": "GOOG",
+  "timestamp": "2026-05-03T16:25:57.181915Z",
+  "recommendation": "HOLD",
+  "confidence": 0.71,
+  "risk": "medium",
+  "signals": {
+    "momentum": "positive",
+    "trend": "neutral",
+    "volatility": "low",
+    "volume": "low"
+  },
+  "reason": "Positive momentum with a neutral trend, low volatility, and low volume suggests waiting for clearer confirmation."
+}

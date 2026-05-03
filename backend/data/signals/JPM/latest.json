@@ -1,0 +1,15 @@
+{
+  "ticker": "JPM",
+  "timestamp": "2026-05-03T16:26:21.577535Z",
+  "data": {
+    "source": "signal_processor_v1",
+    "lookback_points": 20,
+    "data_points_used": 35,
+    "values": {
+      "momentum": "neutral",
+      "trend": "neutral",
+      "volatility": "stable",
+      "volume": "high"
+    }
+  }
+}
