@@ -21,7 +21,7 @@ import {
 import { SectionHeading } from "../components/SectionHeading";
 
 const defaultTicker = "AAPL";
-const fallbackQuickTickers = ["AAPL", "MSFT", "NVDA", "SPY"];
+const fallbackQuickTickers = ["NVDA", "AAPL", "MSFT", "AMZN", "GOOGL", "GOOG", "AVGO", "META"];
 const refreshIntervalMs = 60000;
 
 function formatCurrency(value, currency = "USD") {
@@ -289,7 +289,9 @@ export function DashboardPage() {
     })) ?? [];
 
   const signalValues = signalResult?.data.values;
-  const quickTickers = tickerCatalog?.data.available_tickers?.slice(0, 8) ?? fallbackQuickTickers;
+  const quickTickers = tickerCatalog?.data.featured_tickers?.slice(0, 12) ?? fallbackQuickTickers;
+  const searchableTickers = tickerCatalog?.data.searchable_tickers ?? [];
+  const tickerUniverseName = tickerCatalog?.data.universe_name ?? "manual";
   const configuredTickers = tickerCatalog?.data.configured_tickers ?? [];
   const savedRecommendationTickers = tickerCatalog?.data.saved_recommendation_tickers ?? [];
   const priceFreshness = freshnessStatus(priceSnapshot?.timestamp);
@@ -352,7 +354,7 @@ export function DashboardPage() {
       <SectionHeading
         eyebrow="Dashboard"
         title="Search a ticker to see recent price action, market signals, and a recommendation."
-        description="Run a live analysis for a ticker, then review the latest price action, signal breakdown, and recommendation history."
+        description="Run a live analysis for a ticker, then review the latest price action, signal breakdown, and recommendation history across a broader stock universe."
       />
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">
@@ -369,13 +371,21 @@ export function DashboardPage() {
 
           <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/60 p-6">
             <form className="flex flex-col gap-4 sm:flex-row" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Search ticker, e.g. AAPL"
-                value={tickerInput}
-                onChange={(event) => setTickerInput(event.target.value.toUpperCase())}
-                className="w-full rounded-full border border-white/10 bg-slate-900 px-5 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/40"
-              />
+              <div className="w-full">
+                <input
+                  type="text"
+                  list="ticker-suggestions"
+                  placeholder="Search ticker, e.g. AAPL"
+                  value={tickerInput}
+                  onChange={(event) => setTickerInput(event.target.value.toUpperCase())}
+                  className="w-full rounded-full border border-white/10 bg-slate-900 px-5 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/40"
+                />
+                <datalist id="ticker-suggestions">
+                  {searchableTickers.map((ticker) => (
+                    <option key={ticker} value={ticker} />
+                  ))}
+                </datalist>
+              </div>
               <button
                 type="submit"
                 className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-200"
@@ -413,6 +423,14 @@ export function DashboardPage() {
             </div>
 
             <div className="mt-4 grid gap-3 rounded-[1.25rem] border border-white/10 bg-slate-950/50 p-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Search universe</p>
+                <p className="mt-2 text-sm text-slate-300">
+                  {tickerUniverseName === "sp500_top100"
+                    ? `Top 100 S&P 500 names available as built-in suggestions (${searchableTickers.length} tickers).`
+                    : `Manual ticker universe (${searchableTickers.length} suggested tickers).`}
+                </p>
+              </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Configured worker tickers</p>
                 <p className="mt-2 text-sm text-slate-300">
