@@ -1,0 +1,14 @@
+{
+  "ticker": "AIZ",
+  "timestamp": "2026-05-03T16:54:03.458784Z",
+  "recommendation": "HOLD",
+  "confidence": 0.68,
+  "risk": "low",
+  "signals": {
+    "momentum": "neutral",
+    "trend": "bearish",
+    "volatility": "stable",
+    "volume": "above_average"
+  },
+  "reason": "Neutral momentum with a bearish trend, stable volatility, and above-average volume suggests waiting for clearer confirmation."
+}

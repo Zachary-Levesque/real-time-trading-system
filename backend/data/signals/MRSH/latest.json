@@ -1,0 +1,15 @@
+{
+  "ticker": "MRSH",
+  "timestamp": "2026-05-03T16:54:53.754778Z",
+  "data": {
+    "source": "signal_processor_v1",
+    "lookback_points": 20,
+    "data_points_used": 35,
+    "values": {
+      "momentum": "negative",
+      "trend": "neutral",
+      "volatility": "stable",
+      "volume": "high"
+    }
+  }
+}

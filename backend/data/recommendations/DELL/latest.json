@@ -1,0 +1,14 @@
+{
+  "ticker": "DELL",
+  "timestamp": "2026-05-03T16:54:35.081048Z",
+  "recommendation": "HOLD",
+  "confidence": 0.56,
+  "risk": "medium",
+  "signals": {
+    "momentum": "positive",
+    "trend": "neutral",
+    "volatility": "low",
+    "volume": "average"
+  },
+  "reason": "Positive momentum with a neutral trend, low volatility, and average volume suggests waiting for clearer confirmation."
+}

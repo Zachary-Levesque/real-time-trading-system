@@ -1,0 +1,14 @@
+{
+  "ticker": "TAP",
+  "timestamp": "2026-05-03T16:54:56.076946Z",
+  "recommendation": "SELL",
+  "confidence": 0.22,
+  "risk": "medium",
+  "signals": {
+    "momentum": "neutral",
+    "trend": "bearish",
+    "volatility": "low",
+    "volume": "above_average"
+  },
+  "reason": "Neutral momentum with a bearish trend, low volatility, and above-average volume supports a sell bias."
+}

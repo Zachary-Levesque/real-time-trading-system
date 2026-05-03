@@ -1,0 +1,14 @@
+{
+  "ticker": "LHX",
+  "timestamp": "2026-05-03T16:54:51.480509Z",
+  "recommendation": "SELL",
+  "confidence": 0.22,
+  "risk": "medium",
+  "signals": {
+    "momentum": "negative",
+    "trend": "neutral",
+    "volatility": "low",
+    "volume": "above_average"
+  },
+  "reason": "Negative momentum with a neutral trend, low volatility, and above-average volume supports a sell bias."
+}

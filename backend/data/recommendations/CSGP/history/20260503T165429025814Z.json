@@ -1,0 +1,14 @@
+{
+  "ticker": "CSGP",
+  "timestamp": "2026-05-03T16:54:29.025814Z",
+  "recommendation": "HOLD",
+  "confidence": 0.83,
+  "risk": "medium",
+  "signals": {
+    "momentum": "neutral",
+    "trend": "neutral",
+    "volatility": "low",
+    "volume": "high"
+  },
+  "reason": "Neutral momentum with a neutral trend, low volatility, and high volume suggests waiting for clearer confirmation."
+}

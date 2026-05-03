@@ -1,304 +1,453 @@
 INFO:     Will watch for changes in these directories: ['/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [31077] using WatchFiles
-INFO:     Started server process [31080]
+INFO:     Started reloader process [32079] using WatchFiles
+INFO:     Started server process [32082]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-2026-05-03 12:40:12,684 INFO app.main request_id=8be9321e-92a0-4187-b5c4-fcf3f9dc899e request method=GET path=/api/v1/system/status status=200 duration_ms=8.51
-INFO:     127.0.0.1:60837 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:40:12,688 INFO app.main request_id=67214b3c-0689-4bef-b411-a77b7b476546 request method=GET path=/api/v1/system/status status=200 duration_ms=2.14
-INFO:     127.0.0.1:60837 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:40:12,691 INFO app.main request_id=684ca405-c4b8-4212-b2da-d18a50f7948c request method=GET path=/api/v1/tickers status=200 duration_ms=14.32
-INFO:     127.0.0.1:60839 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:40:12,706 INFO app.main request_id=0f4f5efc-fa6e-4d69-80c8-b68d7254d137 request method=GET path=/api/v1/tickers status=200 duration_ms=12.37
-INFO:     127.0.0.1:60837 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:40:12,722 INFO app.main request_id=80e915ac-c936-4c84-a893-b58fddb082b9 request method=GET path=/api/v1/tickers status=200 duration_ms=14.05
-INFO:     127.0.0.1:60839 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:40:12,733 INFO app.main request_id=e69a65cc-b3e3-4069-94db-8cc5f57de233 request method=GET path=/api/v1/tickers status=200 duration_ms=9.03
-INFO:     127.0.0.1:60837 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:40:12,739 INFO app.main request_id=9f069d6a-9461-45ed-8949-1816b2822071 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=66.02
-INFO:     127.0.0.1:60829 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:40:12,740 INFO app.main request_id=58905243-494a-42de-ad32-933bdada9171 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=65.39
-INFO:     127.0.0.1:60833 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:40:12,740 INFO app.main request_id=92c312c3-a4ae-4e2a-b428-d4355695cf8c request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=66.45
-INFO:     127.0.0.1:60831 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:40:12,745 INFO app.main request_id=f50545c7-6b6d-41ad-8d7b-4d3a9d3b576b request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=70.52
-INFO:     127.0.0.1:60835 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:40:12,746 INFO app.main request_id=40f513e1-4dc0-455e-8559-39a3ad04ffff request method=GET path=/api/v1/price/AAPL status=200 duration_ms=3.93
-INFO:     127.0.0.1:60837 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:40:12,746 INFO app.main request_id=bc744bc6-b439-4d4e-ae8b-f719fdf2c725 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=3.84
-INFO:     127.0.0.1:60839 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:40:12,748 INFO app.main request_id=85f7c2c0-874e-44cb-bca5-5c88f1b2154e request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=5.27
-INFO:     127.0.0.1:60833 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:40:12,750 INFO app.main request_id=a7884e87-ffaa-4f32-8ef5-e7eba5e144ff request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=3.08
-INFO:     127.0.0.1:60831 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:40:25,930 INFO app.main request_id=a143f40b-47a7-43bf-899b-01b88718204e request method=GET path=/api/v1/price/AAPL status=200 duration_ms=20.7
-INFO:     127.0.0.1:60859 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:40:25,931 INFO app.main request_id=efd53ad2-81f5-45f5-950a-30395d2fdefa request method=GET path=/api/v1/system/status status=200 duration_ms=19.01
-INFO:     127.0.0.1:60866 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:40:25,933 INFO app.main request_id=fd1f6246-6f43-4650-a8da-543c085cc01d request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=22.44
-INFO:     127.0.0.1:60861 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:40:25,934 INFO app.main request_id=80c2189d-0019-4794-bcf7-130fc72cbe51 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=22.82
-INFO:     127.0.0.1:60862 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:40:25,937 INFO app.main request_id=7bac53e5-bcf9-45fd-bdc5-021aef418ce3 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=25.37
-INFO:     127.0.0.1:60864 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:40:25,937 INFO app.main request_id=04233035-c237-4357-b48f-e51329a2971d request method=GET path=/api/v1/tickers status=200 duration_ms=24.04
-INFO:     127.0.0.1:60867 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:40:25,939 INFO app.main request_id=c68cd633-fef4-4f64-9bbe-847f10f27c13 request method=GET path=/api/v1/system/status status=200 duration_ms=4.08
-INFO:     127.0.0.1:60866 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:40:25,946 INFO app.main request_id=c0a541de-a147-4f83-9e41-c1c598ab7c21 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=11.47
-INFO:     127.0.0.1:60859 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:40:25,946 INFO app.main request_id=ecef7b95-66e2-43e8-b19e-93a2ddd97bda request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=10.77
-INFO:     127.0.0.1:60862 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:40:25,947 INFO app.main request_id=910c9f22-9f1d-41d9-a2be-a749a1eef51f request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=11.78
-INFO:     127.0.0.1:60861 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:40:25,950 INFO app.main request_id=1281b4fd-0ffb-4390-8e31-4ad4fede2652 request method=GET path=/api/v1/tickers status=200 duration_ms=10.78
-INFO:     127.0.0.1:60864 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:40:25,950 INFO app.main request_id=5df7e582-6176-4abb-8c30-342b0976a539 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=11.12
-INFO:     127.0.0.1:60867 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:40:25,958 INFO app.main request_id=fce7a561-bf1a-4bf4-bc26-7e83ec6466db request method=GET path=/api/v1/tickers status=200 duration_ms=7.47
-INFO:     127.0.0.1:60861 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:40:25,966 INFO app.main request_id=e76d4edb-cddc-448e-b748-2253f7fa95a9 request method=GET path=/api/v1/tickers status=200 duration_ms=7.36
-INFO:     127.0.0.1:60867 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:53:31,161 INFO app.main request_id=b184597d-0f25-4ec8-ba65-f2bb61476b21 request method=GET path=/api/v1/system/status status=200 duration_ms=10.12
+INFO:     127.0.0.1:61167 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:53:31,166 INFO app.main request_id=cfa67302-bdaf-473e-9405-e75309869292 request method=GET path=/api/v1/system/status status=200 duration_ms=2.89
+INFO:     127.0.0.1:61167 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:53:31,168 INFO app.main request_id=085186d9-6f3f-41fc-9706-4e3e2dae4a88 request method=GET path=/api/v1/tickers status=200 duration_ms=15.68
+INFO:     127.0.0.1:61168 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:53:31,186 INFO app.main request_id=00c0f2b5-d50e-42ab-b8d4-6b1f37c23800 request method=GET path=/api/v1/tickers status=200 duration_ms=16.78
+INFO:     127.0.0.1:61167 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:53:31,205 INFO app.main request_id=2b661e6b-6197-4f67-9e8e-f475b16870b6 request method=GET path=/api/v1/tickers status=200 duration_ms=16.91
+INFO:     127.0.0.1:61168 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:53:31,217 INFO app.main request_id=0c93906a-ee69-48a8-8fbb-0ee7afab8705 request method=GET path=/api/v1/tickers status=200 duration_ms=9.36
+INFO:     127.0.0.1:61167 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:53:31,222 INFO app.main request_id=519673d8-f7c0-4d54-8a2f-82239be77241 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=72.87
+INFO:     127.0.0.1:61160 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:53:31,222 INFO app.main request_id=231ab0d4-c169-4d3b-b3ae-64251f6f1703 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=72.61
+INFO:     127.0.0.1:61162 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:53:31,226 INFO app.main request_id=d3e127ff-f8b8-48db-a718-6d0019404c73 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=77.46
+INFO:     127.0.0.1:61158 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:53:31,228 INFO app.main request_id=cfcfaf96-1af6-4354-b2d8-a0b7fb2b1d47 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=3.91
+INFO:     127.0.0.1:61160 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:53:31,228 INFO app.main request_id=db175409-6bac-4125-9449-97e9f3b21363 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=5.42
+INFO:     127.0.0.1:61167 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:53:31,229 INFO app.main request_id=c87ca437-b083-4a04-98e2-beb58333b6f7 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=78.49
+INFO:     127.0.0.1:61165 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:53:31,233 INFO app.main request_id=c219659f-0366-40cc-812e-0c07a877af64 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=6.28
+INFO:     127.0.0.1:61162 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:53:31,235 INFO app.main request_id=0b0c12f0-439d-4364-b8ae-486efff50836 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=4.63
+INFO:     127.0.0.1:61160 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:53:56,588 INFO app.main request_id=ea0fe503-6fa4-4f87-8771-175fdddfb10a request method=GET path=/api/v1/price/AAPL status=200 duration_ms=11.43
+INFO:     127.0.0.1:61184 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:53:56,589 INFO app.main request_id=32118f01-16fc-4b8c-a475-97b1bdd378a7 request method=GET path=/api/v1/system/status status=200 duration_ms=10.06
+INFO:     127.0.0.1:61193 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:53:56,590 INFO app.main request_id=376de837-7680-47fb-8839-acb9ddf32983 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=12.53
+INFO:     127.0.0.1:61186 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:53:56,592 INFO app.main request_id=09c04a69-1691-4cb9-94b7-4c9486e7d535 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=14.33
+INFO:     127.0.0.1:61190 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:53:56,593 INFO app.main request_id=3d538585-a97a-4ed6-9923-c5f14c850002 request method=GET path=/api/v1/tickers status=200 duration_ms=13.33
+INFO:     127.0.0.1:61194 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:53:56,595 INFO app.main request_id=d6809aa3-eb9e-45ea-90d0-46b021f4a45b request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=16.16
+INFO:     127.0.0.1:61191 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:53:56,595 INFO app.main request_id=d8256244-1c5a-453c-b771-416a858e16b3 request method=GET path=/api/v1/system/status status=200 duration_ms=4.13
+INFO:     127.0.0.1:61193 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:53:56,602 INFO app.main request_id=cf2ebd8a-8943-49ca-8ab9-e3850f96387d request method=GET path=/api/v1/price/AAPL status=200 duration_ms=11.63
+INFO:     127.0.0.1:61184 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:53:56,603 INFO app.main request_id=e760444d-21e6-408d-8c70-fef51140375a request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=10.52
+INFO:     127.0.0.1:61186 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:53:56,604 INFO app.main request_id=5663ec98-1bfe-46cf-90c4-a8df375d73e1 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=10.32
+INFO:     127.0.0.1:61190 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:53:56,607 INFO app.main request_id=61012487-0011-4b83-8822-f8f2c2f0e877 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=5.22
+INFO:     127.0.0.1:61191 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:53:56,607 INFO app.main request_id=7efe0ac1-ad53-42e8-a32c-526e1f8234a3 request method=GET path=/api/v1/tickers status=200 duration_ms=12.9
+INFO:     127.0.0.1:61194 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:53:56,617 INFO app.main request_id=16aa9f17-421a-4454-816a-832f86b27632 request method=GET path=/api/v1/tickers status=200 duration_ms=8.21
+INFO:     127.0.0.1:61191 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:53:56,626 INFO app.main request_id=07927767-ab63-4ae3-a56c-d6f879602f83 request method=GET path=/api/v1/tickers status=200 duration_ms=8.14
+INFO:     127.0.0.1:61194 - "GET /api/v1/tickers HTTP/1.1" 200 OK
 /Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
   dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
-2026-05-03 12:40:30,087 INFO app.main request_id=714e36ac-9a6b-4087-8898-c42d3572f33c request method=POST path=/api/v1/analysis/ADM/refresh status=200 duration_ms=953.64
-INFO:     127.0.0.1:60867 - "POST /api/v1/analysis/ADM/refresh HTTP/1.1" 200 OK
-2026-05-03 12:40:30,097 INFO app.main request_id=17bab1aa-6e38-4d5b-8c6b-422573399fdf request method=GET path=/api/v1/system/status status=200 duration_ms=2.11
-INFO:     127.0.0.1:60866 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:40:30,098 INFO app.main request_id=96c4dd4e-9aa7-4e05-9cf6-d39724ba0537 request method=GET path=/api/v1/signals/ADM status=200 duration_ms=3.95
-INFO:     127.0.0.1:60864 - "GET /api/v1/signals/ADM HTTP/1.1" 200 OK
-2026-05-03 12:40:30,099 INFO app.main request_id=4a6386fc-c815-4ed6-ab50-43422bb28199 request method=GET path=/api/v1/price/ADM status=200 duration_ms=5.96
-INFO:     127.0.0.1:60867 - "GET /api/v1/price/ADM HTTP/1.1" 200 OK
-2026-05-03 12:40:30,099 INFO app.main request_id=f48f765f-b58a-412a-a727-7bb197f38660 request method=GET path=/api/v1/recommendation/ADM status=200 duration_ms=4.99
-INFO:     127.0.0.1:60862 - "GET /api/v1/recommendation/ADM HTTP/1.1" 200 OK
-2026-05-03 12:40:30,107 INFO app.main request_id=c333a8fa-da3b-4687-a556-651749b8d251 request method=GET path=/api/v1/recommendation/ADM/history status=200 duration_ms=11.98
-INFO:     127.0.0.1:60859 - "GET /api/v1/recommendation/ADM/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:40:30,111 INFO app.main request_id=7b557eb1-6676-485f-a8dd-8f86d5f0a017 request method=GET path=/api/v1/tickers status=200 duration_ms=11.79
-INFO:     127.0.0.1:60866 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:54:03,461 INFO app.main request_id=b9bb50e4-cfc9-4a1f-a9ad-c2ac77bcce98 request method=POST path=/api/v1/analysis/AIZ/refresh status=200 duration_ms=812.57
+INFO:     127.0.0.1:61196 - "POST /api/v1/analysis/AIZ/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:03,480 INFO app.main request_id=b93d865b-7fe1-4548-8242-89a1fd6ab377 request method=GET path=/api/v1/price/AIZ status=200 duration_ms=13.97
+INFO:     127.0.0.1:61196 - "GET /api/v1/price/AIZ HTTP/1.1" 200 OK
+2026-05-03 12:54:03,481 INFO app.main request_id=18b363ff-e062-409e-9876-2d67e9304fb2 request method=GET path=/api/v1/system/status status=200 duration_ms=12.6
+INFO:     127.0.0.1:61207 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:03,483 INFO app.main request_id=c7037973-b032-4eb2-9876-ca80c9106086 request method=GET path=/api/v1/recommendation/AIZ/history status=200 duration_ms=14.56
+INFO:     127.0.0.1:61205 - "GET /api/v1/recommendation/AIZ/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:03,484 INFO app.main request_id=506a1ef2-ca8d-4a8c-b2ff-5fe47c61a6a0 request method=GET path=/api/v1/signals/AIZ status=200 duration_ms=15.77
+INFO:     127.0.0.1:61202 - "GET /api/v1/signals/AIZ HTTP/1.1" 200 OK
+2026-05-03 12:54:03,484 INFO app.main request_id=425598fa-f084-43f9-afa7-91e8c2c08886 request method=GET path=/api/v1/recommendation/AIZ status=200 duration_ms=16.17
+INFO:     127.0.0.1:61204 - "GET /api/v1/recommendation/AIZ HTTP/1.1" 200 OK
+2026-05-03 12:54:03,487 INFO app.main request_id=1a2a5e37-5298-4273-8420-e072b8924760 request method=GET path=/api/v1/tickers status=200 duration_ms=17.82
+INFO:     127.0.0.1:61208 - "GET /api/v1/tickers HTTP/1.1" 200 OK
 /Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
   dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
-2026-05-03 12:40:30,398 INFO app.main request_id=43db2a29-4cc8-41f5-a6c3-3ae18da5689f request method=POST path=/api/v1/analysis/ADM/refresh status=200 duration_ms=553.21
-INFO:     127.0.0.1:60861 - "POST /api/v1/analysis/ADM/refresh HTTP/1.1" 200 OK
-2026-05-03 12:40:30,415 INFO app.main request_id=553216dc-fffb-497a-adb5-cd39412df50f request method=GET path=/api/v1/system/status status=200 duration_ms=11.95
-INFO:     127.0.0.1:60867 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:40:30,417 INFO app.main request_id=8718a8d9-f4d4-474e-b2cc-dd3b1bbfdbfc request method=GET path=/api/v1/signals/ADM status=200 duration_ms=14.67
-INFO:     127.0.0.1:60866 - "GET /api/v1/signals/ADM HTTP/1.1" 200 OK
-2026-05-03 12:40:30,418 INFO app.main request_id=e771f3dd-6071-45ed-bc1d-c53ca93c9153 request method=GET path=/api/v1/recommendation/ADM status=200 duration_ms=14.8
-INFO:     127.0.0.1:60859 - "GET /api/v1/recommendation/ADM HTTP/1.1" 200 OK
-2026-05-03 12:40:30,419 INFO app.main request_id=cddb34f3-b23d-4cc5-bbb4-e2ecd0e0b0b3 request method=GET path=/api/v1/price/ADM status=200 duration_ms=16.98
-INFO:     127.0.0.1:60861 - "GET /api/v1/price/ADM HTTP/1.1" 200 OK
-2026-05-03 12:40:30,419 INFO app.main request_id=ce56b5b9-fa7a-452c-8a78-7acc49444f3c request method=GET path=/api/v1/recommendation/ADM/history status=200 duration_ms=16.43
-INFO:     127.0.0.1:60862 - "GET /api/v1/recommendation/ADM/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:40:30,421 INFO app.main request_id=61b5c230-37e3-484e-b125-c06a7be02a0e request method=GET path=/api/v1/tickers status=200 duration_ms=17.73
-INFO:     127.0.0.1:60864 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:54:04,911 INFO app.main request_id=cb15be68-ce06-47d9-9e57-8df660bc6c0c request method=POST path=/api/v1/analysis/AIZ/refresh status=200 duration_ms=474.97
+INFO:     127.0.0.1:61208 - "POST /api/v1/analysis/AIZ/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:04,927 INFO app.main request_id=739968d7-001d-4d46-b76e-a3a3895b7183 request method=GET path=/api/v1/system/status status=200 duration_ms=10.48
+INFO:     127.0.0.1:61207 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:04,929 INFO app.main request_id=bd547077-7ca6-47a8-a95b-b88a4d515648 request method=GET path=/api/v1/price/AIZ status=200 duration_ms=14.19
+INFO:     127.0.0.1:61208 - "GET /api/v1/price/AIZ HTTP/1.1" 200 OK
+2026-05-03 12:54:04,931 INFO app.main request_id=6b813fa1-6c0c-463c-bac1-419c53faaaf0 request method=GET path=/api/v1/signals/AIZ status=200 duration_ms=14.8
+INFO:     127.0.0.1:61204 - "GET /api/v1/signals/AIZ HTTP/1.1" 200 OK
+2026-05-03 12:54:04,931 INFO app.main request_id=1cb2651d-27be-4bbe-8bfe-5e730bbbb6d6 request method=GET path=/api/v1/recommendation/AIZ status=200 duration_ms=14.99
+INFO:     127.0.0.1:61202 - "GET /api/v1/recommendation/AIZ HTTP/1.1" 200 OK
+2026-05-03 12:54:04,932 INFO app.main request_id=a7c00782-95e9-4e77-9069-7b0d67733a6b request method=GET path=/api/v1/recommendation/AIZ/history status=200 duration_ms=15.33
+INFO:     127.0.0.1:61205 - "GET /api/v1/recommendation/AIZ/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:04,934 INFO app.main request_id=1ab2543e-94d0-4846-9cce-39800f540ee3 request method=GET path=/api/v1/tickers status=200 duration_ms=17.36
+INFO:     127.0.0.1:61196 - "GET /api/v1/tickers HTTP/1.1" 200 OK
 /Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
   dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
-2026-05-03 12:40:49,702 INFO app.main request_id=c3e1ffdd-8403-4b56-90ee-f350cba96c95 request method=POST path=/api/v1/analysis/T/refresh status=200 duration_ms=544.04
-INFO:     127.0.0.1:60872 - "POST /api/v1/analysis/T/refresh HTTP/1.1" 200 OK
-2026-05-03 12:40:49,716 INFO app.main request_id=98bf99c3-9a47-49b5-8fcb-0fb546348fcd request method=GET path=/api/v1/system/status status=200 duration_ms=3.43
-INFO:     127.0.0.1:60884 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:40:49,717 INFO app.main request_id=6864d624-6d2d-492f-b394-e60cf8054d15 request method=GET path=/api/v1/price/T status=200 duration_ms=6.4
-INFO:     127.0.0.1:60872 - "GET /api/v1/price/T HTTP/1.1" 200 OK
-2026-05-03 12:40:49,718 INFO app.main request_id=df3d262a-96da-4038-82a4-a22b9162b786 request method=GET path=/api/v1/signals/T status=200 duration_ms=6.1
-INFO:     127.0.0.1:60879 - "GET /api/v1/signals/T HTTP/1.1" 200 OK
-2026-05-03 12:40:49,719 INFO app.main request_id=f1fdb4ad-ea00-450c-a039-f2dd77c94560 request method=GET path=/api/v1/recommendation/T status=200 duration_ms=7.13
-INFO:     127.0.0.1:60881 - "GET /api/v1/recommendation/T HTTP/1.1" 200 OK
-2026-05-03 12:40:49,720 INFO app.main request_id=8c02d6b5-acb8-4b84-93e2-eaa32b805d80 request method=GET path=/api/v1/recommendation/T/history status=200 duration_ms=7.84
-INFO:     127.0.0.1:60883 - "GET /api/v1/recommendation/T/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:40:49,743 INFO app.main request_id=8c403151-e547-4afd-9eec-e0339a299c24 request method=GET path=/api/v1/tickers status=200 duration_ms=23.33
-INFO:     127.0.0.1:60884 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:54:07,815 INFO app.main request_id=ba8f1edc-6b9e-4c39-a78e-1b92e7d5628a request method=POST path=/api/v1/analysis/AVY/refresh status=200 duration_ms=621.53
+INFO:     127.0.0.1:61196 - "POST /api/v1/analysis/AVY/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:07,840 INFO app.main request_id=5ad8c66b-7aeb-476e-8dbc-4b16697b317e request method=GET path=/api/v1/system/status status=200 duration_ms=13.54
+INFO:     127.0.0.1:61208 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:07,843 INFO app.main request_id=3993be20-87e7-416f-9259-2d7703528a29 request method=GET path=/api/v1/recommendation/AVY status=200 duration_ms=17.06
+INFO:     127.0.0.1:61202 - "GET /api/v1/recommendation/AVY HTTP/1.1" 200 OK
+2026-05-03 12:54:07,844 INFO app.main request_id=b60a263a-dc3e-4ae3-9a71-40c3d160e704 request method=GET path=/api/v1/price/AVY status=200 duration_ms=18.88
+INFO:     127.0.0.1:61196 - "GET /api/v1/price/AVY HTTP/1.1" 200 OK
+2026-05-03 12:54:07,845 INFO app.main request_id=919f8a43-1e5f-45c5-ae03-9a9eef74f754 request method=GET path=/api/v1/signals/AVY status=200 duration_ms=18.5
+INFO:     127.0.0.1:61205 - "GET /api/v1/signals/AVY HTTP/1.1" 200 OK
+2026-05-03 12:54:07,846 INFO app.main request_id=bdc3fee7-a5b6-41b4-a2fe-c86f893e9a69 request method=GET path=/api/v1/recommendation/AVY/history status=200 duration_ms=19.24
+INFO:     127.0.0.1:61204 - "GET /api/v1/recommendation/AVY/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:07,849 INFO app.main request_id=f356196c-c33c-4b42-b3cc-9715b88f9a67 request method=GET path=/api/v1/tickers status=200 duration_ms=21.61
+INFO:     127.0.0.1:61207 - "GET /api/v1/tickers HTTP/1.1" 200 OK
 /Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
   dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
-2026-05-03 12:40:50,014 INFO app.main request_id=8a3e86e9-62ee-428f-b190-be53939a4128 request method=POST path=/api/v1/analysis/T/refresh status=200 duration_ms=444.57
-INFO:     127.0.0.1:60875 - "POST /api/v1/analysis/T/refresh HTTP/1.1" 200 OK
-2026-05-03 12:40:50,034 INFO app.main request_id=a90460c3-59ee-4728-affa-ac6b0922a49b request method=GET path=/api/v1/system/status status=200 duration_ms=11.27
-INFO:     127.0.0.1:60879 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:40:50,037 INFO app.main request_id=bb969b57-3d8d-4ce6-9a2e-e2f9bb59ff96 request method=GET path=/api/v1/signals/T status=200 duration_ms=15.79
-INFO:     127.0.0.1:60884 - "GET /api/v1/signals/T HTTP/1.1" 200 OK
-2026-05-03 12:40:50,038 INFO app.main request_id=29641201-e855-406d-964e-9a550c1826f5 request method=GET path=/api/v1/price/T status=200 duration_ms=16.81
-INFO:     127.0.0.1:60875 - "GET /api/v1/price/T HTTP/1.1" 200 OK
-2026-05-03 12:40:50,038 INFO app.main request_id=87b8ca40-cea6-4ad3-9e6d-c8f5fb532456 request method=GET path=/api/v1/recommendation/T status=200 duration_ms=16.65
-INFO:     127.0.0.1:60883 - "GET /api/v1/recommendation/T HTTP/1.1" 200 OK
-2026-05-03 12:40:50,040 INFO app.main request_id=e43b700b-055e-4a90-ab6d-9e0a35c9a207 request method=GET path=/api/v1/recommendation/T/history status=200 duration_ms=17.99
-INFO:     127.0.0.1:60881 - "GET /api/v1/recommendation/T/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:40:50,046 INFO app.main request_id=88b6afe1-9e8b-4873-b9e7-3746780eb866 request method=GET path=/api/v1/tickers status=200 duration_ms=24.17
-INFO:     127.0.0.1:60872 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:54:10,118 INFO app.main request_id=70f42ef1-ab2a-4657-b5ab-0b41023e31f4 request method=POST path=/api/v1/analysis/BIIB/refresh status=200 duration_ms=483.17
+INFO:     127.0.0.1:61207 - "POST /api/v1/analysis/BIIB/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:10,141 INFO app.main request_id=b039644d-d0e6-4263-9842-4098d1bf2607 request method=GET path=/api/v1/system/status status=200 duration_ms=14.27
+INFO:     127.0.0.1:61202 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:10,144 INFO app.main request_id=86ac6777-91f3-4e13-9ca6-5357e702608e request method=GET path=/api/v1/signals/BIIB status=200 duration_ms=17.45
+INFO:     127.0.0.1:61204 - "GET /api/v1/signals/BIIB HTTP/1.1" 200 OK
+2026-05-03 12:54:10,144 INFO app.main request_id=15697702-8a6d-4032-a871-0b74c1d9052c request method=GET path=/api/v1/price/BIIB status=200 duration_ms=18.73
+INFO:     127.0.0.1:61207 - "GET /api/v1/price/BIIB HTTP/1.1" 200 OK
+2026-05-03 12:54:10,146 INFO app.main request_id=1da952cd-e5b6-49f4-8b8f-1f90c5ff1c4b request method=GET path=/api/v1/recommendation/BIIB status=200 duration_ms=19.49
+INFO:     127.0.0.1:61205 - "GET /api/v1/recommendation/BIIB HTTP/1.1" 200 OK
+2026-05-03 12:54:10,147 INFO app.main request_id=79cf8302-285f-42d1-8392-040f4575f44b request method=GET path=/api/v1/recommendation/BIIB/history status=200 duration_ms=19.94
+INFO:     127.0.0.1:61196 - "GET /api/v1/recommendation/BIIB/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:10,149 INFO app.main request_id=6161286a-3cb3-4509-bb84-785959c37ec2 request method=GET path=/api/v1/tickers status=200 duration_ms=21.73
+INFO:     127.0.0.1:61208 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:54:19,411 ERROR yfinance request_id=011ef233-d507-4899-9d40-da6cef48dee9 $BF.B: possibly delisted; no price data found  (period=5d)
+2026-05-03 12:54:19,413 INFO app.main request_id=011ef233-d507-4899-9d40-da6cef48dee9 request method=POST path=/api/v1/analysis/BF.B/refresh status=404 duration_ms=224.55
+INFO:     127.0.0.1:61213 - "POST /api/v1/analysis/BF.B/refresh HTTP/1.1" 404 Not Found
+2026-05-03 12:54:19,419 INFO app.main request_id=a65eecf5-03e7-4278-9835-574d1b08cf8e request method=GET path=/api/v1/price/BF.B status=404 duration_ms=1.27
+INFO:     127.0.0.1:61213 - "GET /api/v1/price/BF.B HTTP/1.1" 404 Not Found
+2026-05-03 12:54:19,436 INFO app.main request_id=5a9298ed-5c73-463d-ab83-dd424280fce3 request method=GET path=/api/v1/system/status status=200 duration_ms=15.89
+INFO:     127.0.0.1:61222 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:19,437 INFO app.main request_id=8e217e55-2c9d-4ada-953f-bcd1d370acac request method=GET path=/api/v1/recommendation/BF.B/history status=404 duration_ms=17.24
+INFO:     127.0.0.1:61221 - "GET /api/v1/recommendation/BF.B/history?limit=6 HTTP/1.1" 404 Not Found
+2026-05-03 12:54:19,437 INFO app.main request_id=40a9b886-f01e-4059-8308-706d43d0f30b request method=GET path=/api/v1/signals/BF.B status=404 duration_ms=17.73
+INFO:     127.0.0.1:61218 - "GET /api/v1/signals/BF.B HTTP/1.1" 404 Not Found
+2026-05-03 12:54:19,438 INFO app.main request_id=0f5086c5-79f0-49fc-9822-0601faeaa247 request method=GET path=/api/v1/recommendation/BF.B status=404 duration_ms=18.67
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/BF.B HTTP/1.1" 404 Not Found
+2026-05-03 12:54:19,442 INFO app.main request_id=5674ca5f-aab3-449f-899f-ab3b75f946df request method=GET path=/api/v1/tickers status=200 duration_ms=20.99
+INFO:     127.0.0.1:61224 - "GET /api/v1/tickers HTTP/1.1" 200 OK
 /Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
   dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
-2026-05-03 12:40:51,009 INFO app.main request_id=b271b307-478d-4b53-8916-8000e771271f request method=POST path=/api/v1/analysis/T/refresh status=200 duration_ms=436.96
-INFO:     127.0.0.1:60872 - "POST /api/v1/analysis/T/refresh HTTP/1.1" 200 OK
-2026-05-03 12:40:51,029 INFO app.main request_id=d93fbf47-d00d-423d-9203-53aac9b1f46a request method=GET path=/api/v1/system/status status=200 duration_ms=12.13
-INFO:     127.0.0.1:60884 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:40:51,032 INFO app.main request_id=7bb6baec-e9fd-4ce1-af40-b2de90881bc7 request method=GET path=/api/v1/price/T status=200 duration_ms=16.11
-INFO:     127.0.0.1:60872 - "GET /api/v1/price/T HTTP/1.1" 200 OK
-2026-05-03 12:40:51,032 INFO app.main request_id=531651db-6731-4dc3-957e-7b6e3b072499 request method=GET path=/api/v1/recommendation/T status=200 duration_ms=15.97
-INFO:     127.0.0.1:60883 - "GET /api/v1/recommendation/T HTTP/1.1" 200 OK
-2026-05-03 12:40:51,034 INFO app.main request_id=bd893d9d-f596-43e3-be4d-867299c8cd94 request method=GET path=/api/v1/signals/T status=200 duration_ms=18.0
-INFO:     127.0.0.1:60881 - "GET /api/v1/signals/T HTTP/1.1" 200 OK
-2026-05-03 12:40:51,034 INFO app.main request_id=d88e75dd-2edc-4dc2-a3e1-7405a2417fef request method=GET path=/api/v1/recommendation/T/history status=200 duration_ms=17.9
-INFO:     127.0.0.1:60875 - "GET /api/v1/recommendation/T/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:40:51,037 INFO app.main request_id=5373e167-1434-4720-b4f7-5bbd6d012e79 request method=GET path=/api/v1/tickers status=200 duration_ms=19.96
-INFO:     127.0.0.1:60879 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:41:31,854 INFO app.main request_id=432d336b-290c-4279-8c02-6eb4bad61a01 request method=GET path=/api/v1/system/status status=200 duration_ms=19.26
-INFO:     127.0.0.1:60895 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:41:31,855 INFO app.main request_id=01b3fe8c-edda-4f07-8d20-d1de8ac77cde request method=GET path=/api/v1/price/AAPL status=200 duration_ms=26.04
-INFO:     127.0.0.1:60887 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:41:31,857 INFO app.main request_id=600537b2-3527-4ba6-8857-9409e803fecc request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=25.96
-INFO:     127.0.0.1:60890 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:41:31,858 INFO app.main request_id=7649a2b9-5241-4d95-a14e-3da02eee5d7c request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=25.77
-INFO:     127.0.0.1:60892 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:41:31,861 INFO app.main request_id=9c65a316-f5fc-4384-8670-50c92a916dad request method=GET path=/api/v1/tickers status=200 duration_ms=24.17
-INFO:     127.0.0.1:60897 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:41:31,863 INFO app.main request_id=47f0f311-3f7f-4718-b0f6-30d2698de13f request method=GET path=/api/v1/system/status status=200 duration_ms=5.46
-INFO:     127.0.0.1:60895 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:41:31,864 INFO app.main request_id=af49aa1b-262e-47b0-80ee-7379fdb3b28a request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=30.13
-INFO:     127.0.0.1:60894 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:41:31,865 INFO app.main request_id=82b4b466-e0b8-45de-a63c-f25261cef370 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=6.48
-INFO:     127.0.0.1:60887 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:41:31,875 INFO app.main request_id=3fe859b4-03e3-4dc0-8d9c-ee5250fbffbe request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=14.63
-INFO:     127.0.0.1:60892 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:41:31,875 INFO app.main request_id=6b20ef48-1d7e-41f7-95dc-8446c09e6f43 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=14.8
-INFO:     127.0.0.1:60890 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:41:31,878 INFO app.main request_id=078d1384-42bf-4832-979d-f8e69a163ed3 request method=GET path=/api/v1/tickers status=200 duration_ms=14.36
-INFO:     127.0.0.1:60897 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:41:31,879 INFO app.main request_id=80146263-0c43-4e48-be28-470faeeafe51 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=5.91
-INFO:     127.0.0.1:60895 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:41:31,887 INFO app.main request_id=9f3ef3c6-ad69-4f1d-b6a3-0cfba056692c request method=GET path=/api/v1/tickers status=200 duration_ms=8.11
-INFO:     127.0.0.1:60890 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:41:31,897 INFO app.main request_id=f7f98853-fc81-405d-8203-baa4dc55a8c7 request method=GET path=/api/v1/tickers status=200 duration_ms=8.41
-INFO:     127.0.0.1:60895 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:42:31,846 INFO app.main request_id=67105315-942f-4c93-9f81-9a5748d0171a request method=GET path=/api/v1/system/status status=200 duration_ms=14.1
-INFO:     127.0.0.1:60916 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:42:31,848 INFO app.main request_id=c443d3ba-ca2b-4762-b56b-1acc21a61c74 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=18.81
-INFO:     127.0.0.1:60909 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:42:31,849 INFO app.main request_id=3eda7cad-9feb-4c83-89af-5d9ff981c427 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=19.8
-INFO:     127.0.0.1:60908 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:42:31,853 INFO app.main request_id=e3f23f00-50da-4616-8457-d9dd1e771b1c request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=22.79
-INFO:     127.0.0.1:60912 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:42:31,853 INFO app.main request_id=2c73ba40-4abd-4e22-9f5d-713812d773d2 request method=GET path=/api/v1/tickers status=200 duration_ms=21.44
-INFO:     127.0.0.1:60917 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:42:31,855 INFO app.main request_id=59559979-8395-4981-82a3-64c22a91cb23 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=24.27
-INFO:     127.0.0.1:60914 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:43:31,851 INFO app.main request_id=465249c9-7c30-4ab7-93eb-64dfe93e5caa request method=GET path=/api/v1/system/status status=200 duration_ms=14.97
-INFO:     127.0.0.1:60929 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:43:31,853 INFO app.main request_id=2acdf033-3dd3-4646-a578-97e3b4a92a6f request method=GET path=/api/v1/price/AAPL status=200 duration_ms=23.63
-INFO:     127.0.0.1:60922 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:43:31,854 INFO app.main request_id=5fecf443-aeba-4d5e-b198-adbcbf5013f2 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=21.52
-INFO:     127.0.0.1:60924 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:43:31,855 INFO app.main request_id=3417c921-bcf1-41fd-95fc-3161968e3d92 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=22.46
-INFO:     127.0.0.1:60925 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:43:31,859 INFO app.main request_id=1643b983-ce01-4c10-9f73-5968bf43ba31 request method=GET path=/api/v1/tickers status=200 duration_ms=22.16
-INFO:     127.0.0.1:60930 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:43:31,860 INFO app.main request_id=318cc8f8-fe6e-4683-8772-8739d3567035 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=26.55
-INFO:     127.0.0.1:60926 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:44:31,844 INFO app.main request_id=9ee062dc-538c-4ddb-b921-46b2957f75bb request method=GET path=/api/v1/system/status status=200 duration_ms=15.44
-INFO:     127.0.0.1:60954 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:44:31,845 INFO app.main request_id=58ff8c8b-5dc5-42b4-9503-0045f5c5b806 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=19.62
-INFO:     127.0.0.1:60945 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:44:31,846 INFO app.main request_id=05e09af5-abe7-4ccd-8355-7bfe99689b40 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=19.86
-INFO:     127.0.0.1:60949 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:44:31,847 INFO app.main request_id=50f53ab6-022f-4bc5-a114-0111eacffa8b request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=19.42
-INFO:     127.0.0.1:60950 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:44:31,851 INFO app.main request_id=7a1b03ba-f27e-4afb-a520-394a30d241d4 request method=GET path=/api/v1/tickers status=200 duration_ms=22.16
-INFO:     127.0.0.1:60955 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:44:31,852 INFO app.main request_id=f2f6db57-d58d-4cb4-98d4-acf5ebec2f95 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=23.55
-INFO:     127.0.0.1:60952 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:45:32,806 INFO app.main request_id=e47fa636-2ffa-45be-8e11-ce7f3f0539dd request method=GET path=/api/v1/system/status status=200 duration_ms=18.35
-INFO:     127.0.0.1:60975 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:45:32,811 INFO app.main request_id=56479799-3caa-40e7-840a-82006676a1e4 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=26.86
-INFO:     127.0.0.1:60968 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:45:32,811 INFO app.main request_id=2a1886f9-17d3-4fb7-a200-9e212bb73ff5 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=29.46
-INFO:     127.0.0.1:60966 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:45:32,812 INFO app.main request_id=d5d0a155-84c0-434c-958c-e3352e870931 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=27.2
-INFO:     127.0.0.1:60970 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:45:32,814 INFO app.main request_id=fa6dc96e-be59-4463-a4b4-0574366c6427 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=29.0
-INFO:     127.0.0.1:60973 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:45:32,816 INFO app.main request_id=9a5b6c86-4a01-482c-bb8b-e44b053953c1 request method=GET path=/api/v1/tickers status=200 duration_ms=26.86
-INFO:     127.0.0.1:60976 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:46:08,828 INFO app.main request_id=199a8227-2b2b-4cad-82f5-d9cebd504e86 request method=GET path=/api/v1/system/status status=200 duration_ms=18.32
-INFO:     127.0.0.1:60992 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:46:08,831 INFO app.main request_id=c201c62d-ff11-49ce-964f-4eb8f08726d0 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=22.87
-INFO:     127.0.0.1:60985 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:46:08,832 INFO app.main request_id=1d38912c-6ce3-4de1-b7e8-7eae73dede6d request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=22.76
-INFO:     127.0.0.1:60987 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:46:08,832 INFO app.main request_id=b2ec0513-43f8-4bdb-81d0-8c196b5a9ecd request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=22.95
-INFO:     127.0.0.1:60988 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:46:08,835 INFO app.main request_id=2b3371e1-0b2a-4926-b930-e96fa822603b request method=GET path=/api/v1/tickers status=200 duration_ms=23.68
-INFO:     127.0.0.1:60993 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:46:08,842 INFO app.main request_id=5de924b4-1669-4bde-b5bb-5890c8608ff6 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=32.56
-INFO:     127.0.0.1:60990 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:46:08,844 INFO app.main request_id=c082a0ce-acfb-47cc-b1f4-74ec93f5b66d request method=GET path=/api/v1/tickers status=200 duration_ms=8.25
-INFO:     127.0.0.1:60988 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:47:09,797 INFO app.main request_id=197177dc-145e-4418-bb30-4d2358e1602f request method=GET path=/api/v1/system/status status=200 duration_ms=20.01
-INFO:     127.0.0.1:61014 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:47:09,798 INFO app.main request_id=b3da1362-e8a5-4059-9ff9-a27358d38772 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=24.64
-INFO:     127.0.0.1:61005 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:47:09,799 INFO app.main request_id=1cf7f617-1af2-4ede-b2e6-186552fdd5bc request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=24.79
-INFO:     127.0.0.1:61007 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:47:09,800 INFO app.main request_id=38bcd4cf-42ed-4163-aec9-21b850c684cf request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=25.54
-INFO:     127.0.0.1:61009 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:47:09,803 INFO app.main request_id=98f5f6ac-8a7d-43a6-b5dc-bff1bf9349ac request method=GET path=/api/v1/tickers status=200 duration_ms=25.57
-INFO:     127.0.0.1:61015 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:47:09,805 INFO app.main request_id=37bbe96e-b5dd-4f21-9cd8-0d00b6e0e871 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=29.06
-INFO:     127.0.0.1:61011 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:48:09,793 INFO app.main request_id=22f9ad3c-a563-4cbe-814d-76afa618bb46 request method=GET path=/api/v1/system/status status=200 duration_ms=21.11
-INFO:     127.0.0.1:61029 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:48:09,794 INFO app.main request_id=e4c17f72-cfc1-4368-b500-7a5aa6813b13 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=24.7
-INFO:     127.0.0.1:61023 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:48:09,795 INFO app.main request_id=f8c86156-df03-46eb-b32c-0ef61754e2c1 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=25.4
-INFO:     127.0.0.1:61025 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:48:09,797 INFO app.main request_id=820d35d9-8cde-4857-bb35-ab4c09e25f19 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=27.83
-INFO:     127.0.0.1:61021 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:48:09,800 INFO app.main request_id=3f5e12f2-583e-4b70-a70c-9f75bb13db57 request method=GET path=/api/v1/tickers status=200 duration_ms=27.7
-INFO:     127.0.0.1:61030 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:48:09,801 INFO app.main request_id=0e1c0700-5fbf-49e0-b165-e5fd2d713e91 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=30.16
-INFO:     127.0.0.1:61027 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:49:09,789 INFO app.main request_id=ec10f24f-1336-4eb3-9921-97606f27fc7e request method=GET path=/api/v1/system/status status=200 duration_ms=19.01
-INFO:     127.0.0.1:61048 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:49:09,792 INFO app.main request_id=bf30a603-b92f-4cfa-9843-01e54e4bfe4c request method=GET path=/api/v1/price/AAPL status=200 duration_ms=24.88
-INFO:     127.0.0.1:61041 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:49:09,793 INFO app.main request_id=3c9726a3-97de-4aaa-a38f-46126e861cbf request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=25.08
-INFO:     127.0.0.1:61043 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:49:09,794 INFO app.main request_id=0e657609-4335-44b8-8a28-db05c1f65d67 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=25.86
-INFO:     127.0.0.1:61045 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:49:09,796 INFO app.main request_id=06466eab-c7c7-4f87-985f-0fc2355fe498 request method=GET path=/api/v1/tickers status=200 duration_ms=26.28
-INFO:     127.0.0.1:61050 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:49:09,798 INFO app.main request_id=1877c971-1e37-4936-944c-8b8977f228f0 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=29.29
-INFO:     127.0.0.1:61047 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:50:09,805 INFO app.main request_id=ae60ff88-91d3-4bae-a27e-2df25b1c1f0b request method=GET path=/api/v1/system/status status=200 duration_ms=21.52
-INFO:     127.0.0.1:61062 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:50:09,808 INFO app.main request_id=1eda9381-f269-40cd-af12-966cf28aea1a request method=GET path=/api/v1/price/AAPL status=200 duration_ms=33.89
-INFO:     127.0.0.1:61055 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:50:09,809 INFO app.main request_id=6104383e-0b63-48a9-86fa-2e9259c3d685 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=31.29
-INFO:     127.0.0.1:61057 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:50:09,809 INFO app.main request_id=5fc408b1-75ea-44c5-98bb-6f035b882315 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=30.23
-INFO:     127.0.0.1:61058 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:50:09,813 INFO app.main request_id=2bba4530-321f-4f8e-ba52-3b76562d1358 request method=GET path=/api/v1/tickers status=200 duration_ms=27.32
-INFO:     127.0.0.1:61063 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:50:09,814 INFO app.main request_id=361cacb5-d7bf-400c-8db6-a9bb4ebacf3b request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=33.07
-INFO:     127.0.0.1:61060 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:51:09,786 INFO app.main request_id=4e95bd4f-d1d8-4b0b-a8c9-36322ae30fea request method=GET path=/api/v1/system/status status=200 duration_ms=18.78
-INFO:     127.0.0.1:61086 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:51:09,788 INFO app.main request_id=50640f57-4022-47dd-9332-86d05171118d request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=22.59
-INFO:     127.0.0.1:61080 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:51:09,789 INFO app.main request_id=9aae9f5e-c898-4e6f-93ae-b8fd1de5f6df request method=GET path=/api/v1/price/AAPL status=200 duration_ms=23.88
-INFO:     127.0.0.1:61078 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:51:09,789 INFO app.main request_id=a0cbbd59-6ea9-47a5-af3d-9f48dbda0f08 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=23.25
-INFO:     127.0.0.1:61081 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:51:09,792 INFO app.main request_id=f9e013ab-e84c-4c76-a517-4934f3d47697 request method=GET path=/api/v1/tickers status=200 duration_ms=24.52
-INFO:     127.0.0.1:61087 - "GET /api/v1/tickers HTTP/1.1" 200 OK
-2026-05-03 12:51:09,793 INFO app.main request_id=59d60107-c0c2-419c-8165-96fbc7ab07e1 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=26.86
-INFO:     127.0.0.1:61084 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:52:56,789 INFO app.main request_id=643a7f2c-6c76-4eea-951d-b041378b3bdc request method=GET path=/api/v1/system/status status=200 duration_ms=17.01
-INFO:     127.0.0.1:61127 - "GET /api/v1/system/status HTTP/1.1" 200 OK
-2026-05-03 12:52:56,792 INFO app.main request_id=1b5b2b08-1dd1-45a6-8e8c-ca00b0f982fd request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=24.22
-INFO:     127.0.0.1:61121 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:52:56,792 INFO app.main request_id=7d303447-973c-4637-9300-16d2448f9f58 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=27.55
-INFO:     127.0.0.1:61119 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:52:56,793 INFO app.main request_id=4560d011-1ef5-4a2f-83dd-df624c8273e1 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=24.15
-INFO:     127.0.0.1:61123 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
-2026-05-03 12:52:56,796 INFO app.main request_id=d9c945d3-c1df-47fd-b571-703e0fcf4042 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=26.58
-INFO:     127.0.0.1:61124 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
-2026-05-03 12:52:56,797 INFO app.main request_id=cef49e00-4650-4504-b938-27749ca1824b request method=GET path=/api/v1/tickers status=200 duration_ms=23.13
-INFO:     127.0.0.1:61128 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:54:23,271 INFO app.main request_id=0591b6c5-5828-4f98-802a-35f721313714 request method=POST path=/api/v1/analysis/COF/refresh status=200 duration_ms=633.12
+INFO:     127.0.0.1:61224 - "POST /api/v1/analysis/COF/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:23,294 INFO app.main request_id=f438d365-9d2f-4c3a-8621-2291bbf36a52 request method=GET path=/api/v1/system/status status=200 duration_ms=13.0
+INFO:     127.0.0.1:61218 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:23,294 INFO app.main request_id=6bf4d12d-3bc4-47bb-a826-e5b864ba7c44 request method=GET path=/api/v1/price/COF status=200 duration_ms=14.77
+INFO:     127.0.0.1:61224 - "GET /api/v1/price/COF HTTP/1.1" 200 OK
+2026-05-03 12:54:23,296 INFO app.main request_id=3f825ff0-80ab-4e8f-b2d7-6121f463c908 request method=GET path=/api/v1/signals/COF status=200 duration_ms=16.35
+INFO:     127.0.0.1:61220 - "GET /api/v1/signals/COF HTTP/1.1" 200 OK
+2026-05-03 12:54:23,297 INFO app.main request_id=be61ee06-d1b9-4400-a152-e0a9e36ff147 request method=GET path=/api/v1/recommendation/COF status=200 duration_ms=16.87
+INFO:     127.0.0.1:61221 - "GET /api/v1/recommendation/COF HTTP/1.1" 200 OK
+2026-05-03 12:54:23,299 INFO app.main request_id=57951c4a-614c-4131-baac-3839bc8e6521 request method=GET path=/api/v1/recommendation/COF/history status=200 duration_ms=18.45
+INFO:     127.0.0.1:61222 - "GET /api/v1/recommendation/COF/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:23,302 INFO app.main request_id=6bb361d9-c000-4974-9bd6-ccee2930be20 request method=GET path=/api/v1/tickers status=200 duration_ms=20.99
+INFO:     127.0.0.1:61213 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:26,019 INFO app.main request_id=3cfa842e-048e-4f97-ad5e-57b75c349553 request method=POST path=/api/v1/analysis/CMG/refresh status=200 duration_ms=463.92
+INFO:     127.0.0.1:61213 - "POST /api/v1/analysis/CMG/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:26,041 INFO app.main request_id=43615004-431a-42ce-a1c4-c7be1cc8209b request method=GET path=/api/v1/system/status status=200 duration_ms=14.28
+INFO:     127.0.0.1:61218 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:26,043 INFO app.main request_id=3b7809de-2ec9-4e97-a170-d93831570922 request method=GET path=/api/v1/signals/CMG status=200 duration_ms=17.71
+INFO:     127.0.0.1:61222 - "GET /api/v1/signals/CMG HTTP/1.1" 200 OK
+2026-05-03 12:54:26,044 INFO app.main request_id=ed51f322-b488-4b1c-be64-4847f52dc55b request method=GET path=/api/v1/price/CMG status=200 duration_ms=18.61
+INFO:     127.0.0.1:61213 - "GET /api/v1/price/CMG HTTP/1.1" 200 OK
+2026-05-03 12:54:26,044 INFO app.main request_id=f98fb184-bdb5-46d9-aa04-141d0c2590c4 request method=GET path=/api/v1/recommendation/CMG status=200 duration_ms=18.18
+INFO:     127.0.0.1:61221 - "GET /api/v1/recommendation/CMG HTTP/1.1" 200 OK
+2026-05-03 12:54:26,046 INFO app.main request_id=2cd002d3-3f8e-48c3-a36a-1c6b82398226 request method=GET path=/api/v1/recommendation/CMG/history status=200 duration_ms=19.95
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/CMG/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:26,049 INFO app.main request_id=554f5439-3a72-42a5-9453-41225dcffcf2 request method=GET path=/api/v1/tickers status=200 duration_ms=21.74
+INFO:     127.0.0.1:61224 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:29,029 INFO app.main request_id=ac2a11cc-0825-4331-b6bc-97848d7e5237 request method=POST path=/api/v1/analysis/CSGP/refresh status=200 duration_ms=541.99
+INFO:     127.0.0.1:61224 - "POST /api/v1/analysis/CSGP/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:29,049 INFO app.main request_id=474871cb-3251-4a6d-b05e-045eca62f00f request method=GET path=/api/v1/price/CSGP status=200 duration_ms=13.57
+INFO:     127.0.0.1:61224 - "GET /api/v1/price/CSGP HTTP/1.1" 200 OK
+2026-05-03 12:54:29,049 INFO app.main request_id=4c486be7-29d9-43e1-931b-c465d1ae051f request method=GET path=/api/v1/system/status status=200 duration_ms=12.59
+INFO:     127.0.0.1:61222 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:29,051 INFO app.main request_id=607d076b-4f30-44db-bb6a-e4d74969de25 request method=GET path=/api/v1/recommendation/CSGP status=200 duration_ms=15.29
+INFO:     127.0.0.1:61221 - "GET /api/v1/recommendation/CSGP HTTP/1.1" 200 OK
+2026-05-03 12:54:29,052 INFO app.main request_id=a67fd0ec-548e-4500-a4c1-35784f0b85b9 request method=GET path=/api/v1/signals/CSGP status=200 duration_ms=16.47
+INFO:     127.0.0.1:61220 - "GET /api/v1/signals/CSGP HTTP/1.1" 200 OK
+2026-05-03 12:54:29,053 INFO app.main request_id=810b7b74-a14a-4c89-9f17-67901327a87e request method=GET path=/api/v1/recommendation/CSGP/history status=200 duration_ms=16.79
+INFO:     127.0.0.1:61213 - "GET /api/v1/recommendation/CSGP/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:29,056 INFO app.main request_id=fa82e1f0-5713-41ad-81ec-2d8d32a72f42 request method=GET path=/api/v1/tickers status=200 duration_ms=19.47
+INFO:     127.0.0.1:61218 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:32,142 INFO app.main request_id=a651ca5c-84d9-41bc-a93b-978fcb826123 request method=POST path=/api/v1/analysis/DG/refresh status=200 duration_ms=504.68
+INFO:     127.0.0.1:61218 - "POST /api/v1/analysis/DG/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:32,163 INFO app.main request_id=359911b8-4a00-4dcc-8f41-115e1273c0c3 request method=GET path=/api/v1/system/status status=200 duration_ms=12.29
+INFO:     127.0.0.1:61222 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:32,164 INFO app.main request_id=489710fd-d3fd-402a-9f0c-c8e05941bff3 request method=GET path=/api/v1/price/DG status=200 duration_ms=15.43
+INFO:     127.0.0.1:61218 - "GET /api/v1/price/DG HTTP/1.1" 200 OK
+2026-05-03 12:54:32,165 INFO app.main request_id=2c21ed2f-a0cc-41d3-a54f-d2ae3730df3e request method=GET path=/api/v1/signals/DG status=200 duration_ms=16.21
+INFO:     127.0.0.1:61213 - "GET /api/v1/signals/DG HTTP/1.1" 200 OK
+2026-05-03 12:54:32,167 INFO app.main request_id=30294e31-06cd-4243-af47-a4782d49d4b9 request method=GET path=/api/v1/recommendation/DG status=200 duration_ms=16.81
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/DG HTTP/1.1" 200 OK
+2026-05-03 12:54:32,168 INFO app.main request_id=e4463a1d-c16f-4120-897c-822d4dd852c1 request method=GET path=/api/v1/recommendation/DG/history status=200 duration_ms=17.8
+INFO:     127.0.0.1:61221 - "GET /api/v1/recommendation/DG/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:32,171 INFO app.main request_id=f30099c0-2a8a-4d09-bb77-1dcb6356aa2e request method=GET path=/api/v1/tickers status=200 duration_ms=19.89
+INFO:     127.0.0.1:61224 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:35,084 INFO app.main request_id=5f45d2c2-33e1-4da9-8ccb-fcba8d86a70b request method=POST path=/api/v1/analysis/DELL/refresh status=200 duration_ms=596.4
+INFO:     127.0.0.1:61224 - "POST /api/v1/analysis/DELL/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:35,106 INFO app.main request_id=03081100-0322-474e-90f7-0728745ea3d4 request method=GET path=/api/v1/system/status status=200 duration_ms=13.87
+INFO:     127.0.0.1:61218 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:35,108 INFO app.main request_id=64f26063-f69c-4bca-82d4-cd2f8acd0b07 request method=GET path=/api/v1/price/DELL status=200 duration_ms=17.38
+INFO:     127.0.0.1:61224 - "GET /api/v1/price/DELL HTTP/1.1" 200 OK
+2026-05-03 12:54:35,109 INFO app.main request_id=32fccee2-a33c-493e-b222-21228bda26d3 request method=GET path=/api/v1/signals/DELL status=200 duration_ms=17.82
+INFO:     127.0.0.1:61221 - "GET /api/v1/signals/DELL HTTP/1.1" 200 OK
+2026-05-03 12:54:35,109 INFO app.main request_id=ab5d4689-c4e7-4bf8-bb43-38f018e1565b request method=GET path=/api/v1/recommendation/DELL status=200 duration_ms=18.07
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/DELL HTTP/1.1" 200 OK
+2026-05-03 12:54:35,110 INFO app.main request_id=c6b766a8-0271-496a-b5b1-996dbd144b77 request method=GET path=/api/v1/recommendation/DELL/history status=200 duration_ms=18.31
+INFO:     127.0.0.1:61213 - "GET /api/v1/recommendation/DELL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:35,113 INFO app.main request_id=ed41ef6f-71c3-45f6-9aa6-f876d6c854df request method=GET path=/api/v1/tickers status=200 duration_ms=20.94
+INFO:     127.0.0.1:61222 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:37,380 INFO app.main request_id=4357105e-118e-4f3d-9d7f-98434b517e44 request method=POST path=/api/v1/analysis/EQT/refresh status=200 duration_ms=519.18
+INFO:     127.0.0.1:61222 - "POST /api/v1/analysis/EQT/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:37,398 INFO app.main request_id=d9111fff-c446-4752-873b-653a057be6ef request method=GET path=/api/v1/system/status status=200 duration_ms=12.79
+INFO:     127.0.0.1:61224 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:37,400 INFO app.main request_id=0139aaaf-10be-4d54-9a92-12d711e74994 request method=GET path=/api/v1/price/EQT status=200 duration_ms=15.89
+INFO:     127.0.0.1:61222 - "GET /api/v1/price/EQT HTTP/1.1" 200 OK
+2026-05-03 12:54:37,402 INFO app.main request_id=1b4ddec1-feb4-4c3e-8d1c-a8ebaad86884 request method=GET path=/api/v1/signals/EQT status=200 duration_ms=16.93
+INFO:     127.0.0.1:61213 - "GET /api/v1/signals/EQT HTTP/1.1" 200 OK
+2026-05-03 12:54:37,402 INFO app.main request_id=819970d5-4753-4747-9559-20c4dbfd5f1d request method=GET path=/api/v1/recommendation/EQT status=200 duration_ms=16.84
+INFO:     127.0.0.1:61221 - "GET /api/v1/recommendation/EQT HTTP/1.1" 200 OK
+2026-05-03 12:54:37,403 INFO app.main request_id=ad06e983-66ad-41f6-91c8-81944d4e280d request method=GET path=/api/v1/recommendation/EQT/history status=200 duration_ms=17.55
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/EQT/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:37,406 INFO app.main request_id=6ca1be84-25c3-418b-bc70-9d6e9ca13179 request method=GET path=/api/v1/tickers status=200 duration_ms=20.23
+INFO:     127.0.0.1:61218 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:40,068 INFO app.main request_id=e03858c1-6c67-4244-b8be-1e007aed3892 request method=POST path=/api/v1/analysis/FTV/refresh status=200 duration_ms=473.38
+INFO:     127.0.0.1:61218 - "POST /api/v1/analysis/FTV/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:40,085 INFO app.main request_id=6a9d7386-1f97-43da-9eaa-5d871432a131 request method=GET path=/api/v1/system/status status=200 duration_ms=9.33
+INFO:     127.0.0.1:61222 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:40,087 INFO app.main request_id=1214b6e9-f0d9-4e15-9bec-6a3fac068f71 request method=GET path=/api/v1/price/FTV status=200 duration_ms=11.75
+INFO:     127.0.0.1:61218 - "GET /api/v1/price/FTV HTTP/1.1" 200 OK
+2026-05-03 12:54:40,087 INFO app.main request_id=70db666d-bc70-4a74-be12-77dfb102ce8f request method=GET path=/api/v1/recommendation/FTV status=200 duration_ms=11.28
+INFO:     127.0.0.1:61221 - "GET /api/v1/recommendation/FTV HTTP/1.1" 200 OK
+2026-05-03 12:54:40,087 INFO app.main request_id=86f8b6e7-f571-4c34-be76-a6971fdfd0d0 request method=GET path=/api/v1/signals/FTV status=200 duration_ms=11.57
+INFO:     127.0.0.1:61220 - "GET /api/v1/signals/FTV HTTP/1.1" 200 OK
+2026-05-03 12:54:40,089 INFO app.main request_id=3f39f66c-7148-4edd-804e-4acd6990b946 request method=GET path=/api/v1/recommendation/FTV/history status=200 duration_ms=12.87
+INFO:     127.0.0.1:61213 - "GET /api/v1/recommendation/FTV/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:40,092 INFO app.main request_id=a3a5c74a-f39f-44ad-bb5a-7f3e0a734fce request method=GET path=/api/v1/tickers status=200 duration_ms=15.37
+INFO:     127.0.0.1:61224 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:43,175 INFO app.main request_id=438020c4-6c97-4c7b-a5c1-68f9fd6a0db2 request method=POST path=/api/v1/analysis/HAL/refresh status=200 duration_ms=647.93
+INFO:     127.0.0.1:61224 - "POST /api/v1/analysis/HAL/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:43,195 INFO app.main request_id=079cbf23-576f-4719-b6ca-42e5fd4d4b91 request method=GET path=/api/v1/system/status status=200 duration_ms=13.87
+INFO:     127.0.0.1:61218 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:43,197 INFO app.main request_id=b42757ec-1876-4ef3-ae46-d460064d8172 request method=GET path=/api/v1/price/HAL status=200 duration_ms=17.52
+INFO:     127.0.0.1:61224 - "GET /api/v1/price/HAL HTTP/1.1" 200 OK
+2026-05-03 12:54:43,198 INFO app.main request_id=c7bd35b0-2935-4748-89ae-fcaca762baba request method=GET path=/api/v1/signals/HAL status=200 duration_ms=17.99
+INFO:     127.0.0.1:61213 - "GET /api/v1/signals/HAL HTTP/1.1" 200 OK
+2026-05-03 12:54:43,199 INFO app.main request_id=55ed58ed-27b1-4f71-ad3e-32fdd7606d7d request method=GET path=/api/v1/recommendation/HAL status=200 duration_ms=18.65
+INFO:     127.0.0.1:61221 - "GET /api/v1/recommendation/HAL HTTP/1.1" 200 OK
+2026-05-03 12:54:43,201 INFO app.main request_id=0492be8e-7752-4cd4-80d5-e041c6222c2b request method=GET path=/api/v1/recommendation/HAL/history status=200 duration_ms=20.05
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/HAL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:43,204 INFO app.main request_id=ddf9f758-cee0-4efa-afa3-83495c017fb6 request method=GET path=/api/v1/tickers status=200 duration_ms=22.32
+INFO:     127.0.0.1:61222 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:46,532 INFO app.main request_id=51a81cda-cd54-49eb-ae7f-fb25a50621e7 request method=POST path=/api/v1/analysis/HBAN/refresh status=200 duration_ms=638.01
+INFO:     127.0.0.1:61222 - "POST /api/v1/analysis/HBAN/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:46,547 INFO app.main request_id=34b9a69b-38c4-4b22-a97e-b6a529b54bbf request method=GET path=/api/v1/system/status status=200 duration_ms=9.53
+INFO:     127.0.0.1:61224 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:46,548 INFO app.main request_id=c4f68208-ab17-494c-bef5-6028bd2cde7f request method=GET path=/api/v1/price/HBAN status=200 duration_ms=12.19
+INFO:     127.0.0.1:61222 - "GET /api/v1/price/HBAN HTTP/1.1" 200 OK
+2026-05-03 12:54:46,549 INFO app.main request_id=1bfcbc57-76a2-44e2-89be-caf95ff9d34a request method=GET path=/api/v1/signals/HBAN status=200 duration_ms=12.3
+INFO:     127.0.0.1:61220 - "GET /api/v1/signals/HBAN HTTP/1.1" 200 OK
+2026-05-03 12:54:46,550 INFO app.main request_id=45a5b9ea-cd43-4f61-a71a-2163df34de38 request method=GET path=/api/v1/recommendation/HBAN status=200 duration_ms=12.42
+INFO:     127.0.0.1:61221 - "GET /api/v1/recommendation/HBAN HTTP/1.1" 200 OK
+2026-05-03 12:54:46,551 INFO app.main request_id=716db21a-b256-4a3a-a440-097477e8927a request method=GET path=/api/v1/recommendation/HBAN/history status=200 duration_ms=13.81
+INFO:     127.0.0.1:61213 - "GET /api/v1/recommendation/HBAN/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:46,553 INFO app.main request_id=42fc76de-cf73-4172-9332-e1e45178a445 request method=GET path=/api/v1/tickers status=200 duration_ms=15.9
+INFO:     127.0.0.1:61218 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:49,076 INFO app.main request_id=fd8def1e-b694-41a2-9076-c93f7d34e017 request method=POST path=/api/v1/analysis/JBHT/refresh status=200 duration_ms=707.58
+INFO:     127.0.0.1:61218 - "POST /api/v1/analysis/JBHT/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:49,098 INFO app.main request_id=b8343f23-c4e0-479b-8f8e-cd16c4cf762e request method=GET path=/api/v1/price/JBHT status=200 duration_ms=14.41
+INFO:     127.0.0.1:61218 - "GET /api/v1/price/JBHT HTTP/1.1" 200 OK
+2026-05-03 12:54:49,099 INFO app.main request_id=7756ace5-4db1-474b-9341-117b07d77150 request method=GET path=/api/v1/system/status status=200 duration_ms=14.39
+INFO:     127.0.0.1:61222 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:49,100 INFO app.main request_id=4e1baaf6-41b8-4f23-b6d3-60289e0231a0 request method=GET path=/api/v1/signals/JBHT status=200 duration_ms=15.96
+INFO:     127.0.0.1:61213 - "GET /api/v1/signals/JBHT HTTP/1.1" 200 OK
+2026-05-03 12:54:49,100 INFO app.main request_id=d4c88511-75a6-42c6-8a39-3eedcd37cf55 request method=GET path=/api/v1/recommendation/JBHT status=200 duration_ms=16.08
+INFO:     127.0.0.1:61221 - "GET /api/v1/recommendation/JBHT HTTP/1.1" 200 OK
+2026-05-03 12:54:49,102 INFO app.main request_id=888c38b2-bb54-4a52-8fc2-8116d3a0d0e1 request method=GET path=/api/v1/recommendation/JBHT/history status=200 duration_ms=18.1
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/JBHT/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:49,105 INFO app.main request_id=d859387d-1c09-48eb-8394-d1a8ba43e772 request method=GET path=/api/v1/tickers status=200 duration_ms=20.31
+INFO:     127.0.0.1:61224 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:51,484 INFO app.main request_id=013e68a2-47d0-4553-8d14-c5d6fdd6d994 request method=POST path=/api/v1/analysis/LHX/refresh status=200 duration_ms=596.54
+INFO:     127.0.0.1:61224 - "POST /api/v1/analysis/LHX/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:51,503 INFO app.main request_id=eae5b08f-4cbc-435e-b537-2b69477bfc9d request method=GET path=/api/v1/system/status status=200 duration_ms=10.98
+INFO:     127.0.0.1:61222 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:51,505 INFO app.main request_id=ce15c071-ee58-4aa0-87bd-42096c3efb8d request method=GET path=/api/v1/recommendation/LHX status=200 duration_ms=13.45
+INFO:     127.0.0.1:61221 - "GET /api/v1/recommendation/LHX HTTP/1.1" 200 OK
+2026-05-03 12:54:51,505 INFO app.main request_id=5a573851-2f7d-4761-9f24-7c3f884d12a9 request method=GET path=/api/v1/signals/LHX status=200 duration_ms=13.91
+INFO:     127.0.0.1:61220 - "GET /api/v1/signals/LHX HTTP/1.1" 200 OK
+2026-05-03 12:54:51,507 INFO app.main request_id=ba1d92ec-8acc-44e2-a4c4-7442ebeabe91 request method=GET path=/api/v1/price/LHX status=200 duration_ms=16.9
+INFO:     127.0.0.1:61224 - "GET /api/v1/price/LHX HTTP/1.1" 200 OK
+2026-05-03 12:54:51,508 INFO app.main request_id=a76cf4f2-bbe7-45fd-9eba-adfbec478df1 request method=GET path=/api/v1/recommendation/LHX/history status=200 duration_ms=16.9
+INFO:     127.0.0.1:61213 - "GET /api/v1/recommendation/LHX/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:51,511 INFO app.main request_id=5b711ea0-e552-41ad-a191-69d98280cc87 request method=GET path=/api/v1/tickers status=200 duration_ms=18.89
+INFO:     127.0.0.1:61218 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:53,758 INFO app.main request_id=57d010d0-a3e4-4cdf-b71e-eb7e377f5f72 request method=POST path=/api/v1/analysis/MRSH/refresh status=200 duration_ms=633.56
+INFO:     127.0.0.1:61218 - "POST /api/v1/analysis/MRSH/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:53,778 INFO app.main request_id=854dd6dc-ec0c-448c-8ea8-afb188dfe930 request method=GET path=/api/v1/price/MRSH status=200 duration_ms=15.44
+INFO:     127.0.0.1:61218 - "GET /api/v1/price/MRSH HTTP/1.1" 200 OK
+2026-05-03 12:54:53,779 INFO app.main request_id=20241150-9ed2-404f-9e33-0bc5e2283a0e request method=GET path=/api/v1/system/status status=200 duration_ms=13.68
+INFO:     127.0.0.1:61221 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:53,780 INFO app.main request_id=bbc0671f-776c-4bfd-a747-4d8c2f1efd2b request method=GET path=/api/v1/signals/MRSH status=200 duration_ms=17.04
+INFO:     127.0.0.1:61213 - "GET /api/v1/signals/MRSH HTTP/1.1" 200 OK
+2026-05-03 12:54:53,782 INFO app.main request_id=1cf304d5-ced1-4c3c-b194-c38252aec24c request method=GET path=/api/v1/recommendation/MRSH status=200 duration_ms=17.54
+INFO:     127.0.0.1:61224 - "GET /api/v1/recommendation/MRSH HTTP/1.1" 200 OK
+2026-05-03 12:54:53,783 INFO app.main request_id=2d2e7205-fb3a-4f42-a2cd-e8ca32f31d55 request method=GET path=/api/v1/recommendation/MRSH/history status=200 duration_ms=17.6
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/MRSH/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:53,786 INFO app.main request_id=f9cf7767-16c2-4682-82d0-007dddc41960 request method=GET path=/api/v1/tickers status=200 duration_ms=19.94
+INFO:     127.0.0.1:61222 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:56,080 INFO app.main request_id=c987b777-a259-4e4f-b157-28cabe885dfb request method=POST path=/api/v1/analysis/TAP/refresh status=200 duration_ms=583.45
+INFO:     127.0.0.1:61222 - "POST /api/v1/analysis/TAP/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:56,099 INFO app.main request_id=efbf3141-c71d-4636-a940-3088eb2cad12 request method=GET path=/api/v1/system/status status=200 duration_ms=12.49
+INFO:     127.0.0.1:61221 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:56,101 INFO app.main request_id=2b43bfcf-1234-4238-97f2-956a451277bd request method=GET path=/api/v1/price/TAP status=200 duration_ms=15.91
+INFO:     127.0.0.1:61222 - "GET /api/v1/price/TAP HTTP/1.1" 200 OK
+2026-05-03 12:54:56,101 INFO app.main request_id=32e69b39-270d-498b-8ee8-3d90b2891b92 request method=GET path=/api/v1/recommendation/TAP status=200 duration_ms=15.74
+INFO:     127.0.0.1:61224 - "GET /api/v1/recommendation/TAP HTTP/1.1" 200 OK
+2026-05-03 12:54:56,102 INFO app.main request_id=20570a9c-8b9c-4ccf-a72f-88a27109a570 request method=GET path=/api/v1/signals/TAP status=200 duration_ms=16.38
+INFO:     127.0.0.1:61220 - "GET /api/v1/signals/TAP HTTP/1.1" 200 OK
+2026-05-03 12:54:56,104 INFO app.main request_id=ee2e6b4c-5075-481d-83d9-3c3706456b4d request method=GET path=/api/v1/recommendation/TAP/history status=200 duration_ms=18.01
+INFO:     127.0.0.1:61213 - "GET /api/v1/recommendation/TAP/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:56,107 INFO app.main request_id=a3b223f1-55d8-4f35-ab3c-4c145e47f310 request method=GET path=/api/v1/tickers status=200 duration_ms=20.04
+INFO:     127.0.0.1:61218 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:54:58,849 INFO app.main request_id=a1d22927-55fc-446b-a874-1683b92f3d23 request method=POST path=/api/v1/analysis/NDSN/refresh status=200 duration_ms=543.33
+INFO:     127.0.0.1:61218 - "POST /api/v1/analysis/NDSN/refresh HTTP/1.1" 200 OK
+2026-05-03 12:54:58,869 INFO app.main request_id=03b308d0-3fcc-4a29-a849-6ded4c3c0555 request method=GET path=/api/v1/system/status status=200 duration_ms=13.05
+INFO:     127.0.0.1:61224 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:54:58,871 INFO app.main request_id=67a60f29-95de-442b-a72a-f3105a2c25bf request method=GET path=/api/v1/price/NDSN status=200 duration_ms=16.81
+INFO:     127.0.0.1:61218 - "GET /api/v1/price/NDSN HTTP/1.1" 200 OK
+2026-05-03 12:54:58,873 INFO app.main request_id=9a681a01-c929-4ba0-b88d-edca8d4c413d request method=GET path=/api/v1/signals/NDSN status=200 duration_ms=17.79
+INFO:     127.0.0.1:61213 - "GET /api/v1/signals/NDSN HTTP/1.1" 200 OK
+2026-05-03 12:54:58,873 INFO app.main request_id=3ee078d5-da7a-458c-bae7-2ed566cf7e8d request method=GET path=/api/v1/recommendation/NDSN status=200 duration_ms=17.59
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/NDSN HTTP/1.1" 200 OK
+2026-05-03 12:54:58,875 INFO app.main request_id=89298ec0-dd03-44db-8df1-b9a6b85aa3a6 request method=GET path=/api/v1/recommendation/NDSN/history status=200 duration_ms=18.85
+INFO:     127.0.0.1:61222 - "GET /api/v1/recommendation/NDSN/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:54:58,878 INFO app.main request_id=65406d6a-9a7e-4b80-9b3f-6c0b2180fbc0 request method=GET path=/api/v1/tickers status=200 duration_ms=21.49
+INFO:     127.0.0.1:61221 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:55:01,166 INFO app.main request_id=62032ed6-489f-46c3-89a9-4c7dedbb2566 request method=POST path=/api/v1/analysis/ORLY/refresh status=200 duration_ms=408.48
+INFO:     127.0.0.1:61221 - "POST /api/v1/analysis/ORLY/refresh HTTP/1.1" 200 OK
+2026-05-03 12:55:01,174 INFO app.main request_id=457ff4f1-488d-45b1-9864-99db270a96d7 request method=GET path=/api/v1/price/ORLY status=200 duration_ms=1.88
+INFO:     127.0.0.1:61221 - "GET /api/v1/price/ORLY HTTP/1.1" 200 OK
+2026-05-03 12:55:01,189 INFO app.main request_id=63b3ffde-81e2-4d66-a33c-b351b3100f39 request method=GET path=/api/v1/system/status status=200 duration_ms=12.42
+INFO:     127.0.0.1:61218 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:55:01,190 INFO app.main request_id=da447ec6-a0f5-4438-9676-9e4d902b0612 request method=GET path=/api/v1/signals/ORLY status=200 duration_ms=15.81
+INFO:     127.0.0.1:61222 - "GET /api/v1/signals/ORLY HTTP/1.1" 200 OK
+2026-05-03 12:55:01,191 INFO app.main request_id=228a9cb6-5625-45f1-8691-b5ebfdf876c5 request method=GET path=/api/v1/recommendation/ORLY status=200 duration_ms=15.98
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/ORLY HTTP/1.1" 200 OK
+2026-05-03 12:55:01,192 INFO app.main request_id=18077c2b-2629-4d01-bd46-62eb791e119e request method=GET path=/api/v1/recommendation/ORLY/history status=200 duration_ms=16.42
+INFO:     127.0.0.1:61213 - "GET /api/v1/recommendation/ORLY/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:55:01,195 INFO app.main request_id=9827c743-2145-4ee9-b0a9-3cfdc5fec9b9 request method=GET path=/api/v1/tickers status=200 duration_ms=18.62
+INFO:     127.0.0.1:61224 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:55:03,196 INFO app.main request_id=044e4220-7a04-466e-9683-75bbca50aee0 request method=POST path=/api/v1/analysis/PKG/refresh status=200 duration_ms=587.1
+INFO:     127.0.0.1:61224 - "POST /api/v1/analysis/PKG/refresh HTTP/1.1" 200 OK
+2026-05-03 12:55:03,229 INFO app.main request_id=c21f2da3-531d-4b53-b0c1-b7b65bb8853e request method=GET path=/api/v1/system/status status=200 duration_ms=26.9
+INFO:     127.0.0.1:61218 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:55:03,238 INFO app.main request_id=c3605be6-fde7-4d2c-9e3f-e485c9c2cccc request method=GET path=/api/v1/signals/PKG status=200 duration_ms=36.66
+INFO:     127.0.0.1:61213 - "GET /api/v1/signals/PKG HTTP/1.1" 200 OK
+2026-05-03 12:55:03,238 INFO app.main request_id=76bb95de-ac39-44e1-b1aa-f60ee726db8b request method=GET path=/api/v1/price/PKG status=200 duration_ms=37.98
+INFO:     127.0.0.1:61224 - "GET /api/v1/price/PKG HTTP/1.1" 200 OK
+2026-05-03 12:55:03,239 INFO app.main request_id=69a0adf9-f63e-4745-a5ca-134ca5483f70 request method=GET path=/api/v1/recommendation/PKG status=200 duration_ms=37.48
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/PKG HTTP/1.1" 200 OK
+2026-05-03 12:55:03,239 INFO app.main request_id=27e71cd5-e87a-4c88-8181-28eedb225e77 request method=GET path=/api/v1/recommendation/PKG/history status=200 duration_ms=37.32
+INFO:     127.0.0.1:61222 - "GET /api/v1/recommendation/PKG/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:55:03,242 INFO app.main request_id=42d056f1-85c8-4bb9-a99f-02c4fdb962f5 request method=GET path=/api/v1/tickers status=200 duration_ms=39.72
+INFO:     127.0.0.1:61221 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:55:05,291 INFO app.main request_id=cca82161-72bf-42eb-8971-1919fe731b19 request method=POST path=/api/v1/analysis/PPG/refresh status=200 duration_ms=535.63
+INFO:     127.0.0.1:61221 - "POST /api/v1/analysis/PPG/refresh HTTP/1.1" 200 OK
+2026-05-03 12:55:05,309 INFO app.main request_id=b1960c75-7b73-43fa-b091-8298611bada0 request method=GET path=/api/v1/system/status status=200 duration_ms=11.98
+INFO:     127.0.0.1:61224 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:55:05,310 INFO app.main request_id=b1c0d437-988f-4133-a557-4aed6960da6b request method=GET path=/api/v1/price/PPG status=200 duration_ms=14.29
+INFO:     127.0.0.1:61221 - "GET /api/v1/price/PPG HTTP/1.1" 200 OK
+2026-05-03 12:55:05,311 INFO app.main request_id=bcaa1820-7c05-4f04-9f5c-3aef9517d9df request method=GET path=/api/v1/signals/PPG status=200 duration_ms=14.67
+INFO:     127.0.0.1:61222 - "GET /api/v1/signals/PPG HTTP/1.1" 200 OK
+2026-05-03 12:55:05,313 INFO app.main request_id=682c2236-ae1e-4282-8eaa-5b6c03d006e7 request method=GET path=/api/v1/recommendation/PPG status=200 duration_ms=16.33
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/PPG HTTP/1.1" 200 OK
+2026-05-03 12:55:05,314 INFO app.main request_id=1ed9cbde-80b6-4606-951c-3b530bfc9550 request method=GET path=/api/v1/recommendation/PPG/history status=200 duration_ms=16.73
+INFO:     127.0.0.1:61213 - "GET /api/v1/recommendation/PPG/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:55:05,317 INFO app.main request_id=fd7346cc-f7f6-4944-9874-543d12eb1dbe request method=GET path=/api/v1/tickers status=200 duration_ms=19.44
+INFO:     127.0.0.1:61218 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:55:07,881 INFO app.main request_id=6f177297-e647-4161-a4cf-ab58461a8052 request method=POST path=/api/v1/analysis/PHM/refresh status=200 duration_ms=659.06
+INFO:     127.0.0.1:61218 - "POST /api/v1/analysis/PHM/refresh HTTP/1.1" 200 OK
+2026-05-03 12:55:07,904 INFO app.main request_id=93a1949d-feb8-4eb7-9021-f3df6ea0be3d request method=GET path=/api/v1/system/status status=200 duration_ms=12.8
+INFO:     127.0.0.1:61221 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:55:07,905 INFO app.main request_id=1949ef8d-8c33-4c02-bab9-dca86f5e9ebf request method=GET path=/api/v1/signals/PHM status=200 duration_ms=15.55
+INFO:     127.0.0.1:61213 - "GET /api/v1/signals/PHM HTTP/1.1" 200 OK
+2026-05-03 12:55:07,906 INFO app.main request_id=477f1970-33fd-4ed3-8f57-3720d5b44aa8 request method=GET path=/api/v1/recommendation/PHM status=200 duration_ms=16.24
+INFO:     127.0.0.1:61220 - "GET /api/v1/recommendation/PHM HTTP/1.1" 200 OK
+2026-05-03 12:55:07,908 INFO app.main request_id=5d8fe34e-3b11-46ed-ae7f-6b6c53eb8eb1 request method=GET path=/api/v1/price/PHM status=200 duration_ms=18.54
+INFO:     127.0.0.1:61218 - "GET /api/v1/price/PHM HTTP/1.1" 200 OK
+2026-05-03 12:55:07,909 INFO app.main request_id=835ab972-6025-47f0-b8e5-e4c874be87b3 request method=GET path=/api/v1/recommendation/PHM/history status=200 duration_ms=18.62
+INFO:     127.0.0.1:61222 - "GET /api/v1/recommendation/PHM/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:55:07,912 INFO app.main request_id=d4e5007a-aa2c-4c84-a63a-cba3e58862c6 request method=GET path=/api/v1/tickers status=200 duration_ms=21.1
+INFO:     127.0.0.1:61224 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:56:07,231 INFO app.main request_id=489808a3-7a89-4358-9af4-265157dfd76e request method=GET path=/api/v1/system/status status=200 duration_ms=18.26
+INFO:     127.0.0.1:61249 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:56:07,233 INFO app.main request_id=28268872-c5e4-4421-9fa0-f6147bda48f0 request method=GET path=/api/v1/price/PHM status=200 duration_ms=22.51
+INFO:     127.0.0.1:61241 - "GET /api/v1/price/PHM HTTP/1.1" 200 OK
+2026-05-03 12:56:07,234 INFO app.main request_id=de1acc47-8b35-4e9b-8a84-205618289092 request method=GET path=/api/v1/recommendation/PHM status=200 duration_ms=22.55
+INFO:     127.0.0.1:61244 - "GET /api/v1/recommendation/PHM HTTP/1.1" 200 OK
+2026-05-03 12:56:07,235 INFO app.main request_id=1fb3a493-fb72-4f92-9e6f-1a605d83847b request method=GET path=/api/v1/signals/PHM status=200 duration_ms=23.97
+INFO:     127.0.0.1:61243 - "GET /api/v1/signals/PHM HTTP/1.1" 200 OK
+2026-05-03 12:56:07,237 INFO app.main request_id=ee3df67a-7a4e-44f0-878c-2a9ffd85ff38 request method=GET path=/api/v1/recommendation/PHM/history status=200 duration_ms=25.05
+INFO:     127.0.0.1:61247 - "GET /api/v1/recommendation/PHM/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:56:07,240 INFO app.main request_id=9805bbe9-f266-49b8-b3ea-9d9655150bbf request method=GET path=/api/v1/tickers status=200 duration_ms=27.2
+INFO:     127.0.0.1:61250 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:57:07,230 INFO app.main request_id=6da7221f-c27b-4b97-aa33-f07bddba512b request method=GET path=/api/v1/system/status status=200 duration_ms=18.84
+INFO:     127.0.0.1:61272 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:57:07,232 INFO app.main request_id=e8c6551b-7d3d-4c32-8b37-cf0eb311df0b request method=GET path=/api/v1/signals/PHM status=200 duration_ms=22.38
+INFO:     127.0.0.1:61266 - "GET /api/v1/signals/PHM HTTP/1.1" 200 OK
+2026-05-03 12:57:07,234 INFO app.main request_id=ed558e7a-fbbe-464a-9c1e-48a9a044c9be request method=GET path=/api/v1/price/PHM status=200 duration_ms=25.47
+INFO:     127.0.0.1:61264 - "GET /api/v1/price/PHM HTTP/1.1" 200 OK
+2026-05-03 12:57:07,235 INFO app.main request_id=44f7bcfc-56da-4358-803b-55a4408f0ac6 request method=GET path=/api/v1/recommendation/PHM status=200 duration_ms=24.91
+INFO:     127.0.0.1:61268 - "GET /api/v1/recommendation/PHM HTTP/1.1" 200 OK
+2026-05-03 12:57:07,236 INFO app.main request_id=9843c2db-4e6c-4ef2-a9e9-1adc37bcc536 request method=GET path=/api/v1/recommendation/PHM/history status=200 duration_ms=25.48
+INFO:     127.0.0.1:61270 - "GET /api/v1/recommendation/PHM/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:57:07,239 INFO app.main request_id=d3c215ec-799a-4c5b-b6d1-90d9d8bef48d request method=GET path=/api/v1/tickers status=200 duration_ms=27.74
+INFO:     127.0.0.1:61273 - "GET /api/v1/tickers HTTP/1.1" 200 OK

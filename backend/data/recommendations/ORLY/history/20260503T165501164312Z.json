@@ -1,0 +1,14 @@
+{
+  "ticker": "ORLY",
+  "timestamp": "2026-05-03T16:55:01.164312Z",
+  "recommendation": "HOLD",
+  "confidence": 0.83,
+  "risk": "medium",
+  "signals": {
+    "momentum": "positive",
+    "trend": "bearish",
+    "volatility": "low",
+    "volume": "high"
+  },
+  "reason": "Positive momentum with a bearish trend, low volatility, and high volume suggests waiting for clearer confirmation."
+}

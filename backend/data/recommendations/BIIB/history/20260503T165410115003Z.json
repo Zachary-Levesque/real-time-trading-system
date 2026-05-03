@@ -1,0 +1,14 @@
+{
+  "ticker": "BIIB",
+  "timestamp": "2026-05-03T16:54:10.115003Z",
+  "recommendation": "SELL",
+  "confidence": 0.38,
+  "risk": "medium",
+  "signals": {
+    "momentum": "negative",
+    "trend": "neutral",
+    "volatility": "low",
+    "volume": "average"
+  },
+  "reason": "Negative momentum with a neutral trend, low volatility, and average volume supports a sell bias."
+}

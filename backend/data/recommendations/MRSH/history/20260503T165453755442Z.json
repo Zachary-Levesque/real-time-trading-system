@@ -1,0 +1,14 @@
+{
+  "ticker": "MRSH",
+  "timestamp": "2026-05-03T16:54:53.755442Z",
+  "recommendation": "SELL",
+  "confidence": 0.22,
+  "risk": "low",
+  "signals": {
+    "momentum": "negative",
+    "trend": "neutral",
+    "volatility": "stable",
+    "volume": "high"
+  },
+  "reason": "Negative momentum with a neutral trend, stable volatility, and high volume supports a sell bias."
+}

@@ -1,0 +1,14 @@
+{
+  "ticker": "CMG",
+  "timestamp": "2026-05-03T16:54:26.016253Z",
+  "recommendation": "SELL",
+  "confidence": 0.38,
+  "risk": "medium",
+  "signals": {
+    "momentum": "neutral",
+    "trend": "bearish",
+    "volatility": "low",
+    "volume": "average"
+  },
+  "reason": "Neutral momentum with a bearish trend, low volatility, and average volume supports a sell bias."
+}
