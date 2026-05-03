@@ -1,3 +1,26 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import TypedDict
+
+
+class CompanyInfo(TypedDict):
+    ticker: str
+    name: str
+
+
+DATA_PATH = Path(__file__).with_name("sp500_companies.json")
+
+
+def load_sp500_companies() -> list[CompanyInfo]:
+    payload = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+    return [{"ticker": company["ticker"], "name": company["name"]} for company in payload]
+
+
+SP500_COMPANIES = load_sp500_companies()
+SP500_TICKERS = [company["ticker"] for company in SP500_COMPANIES]
+
 SP500_TOP_100_TICKERS = [
     "NVDA",
     "AAPL",

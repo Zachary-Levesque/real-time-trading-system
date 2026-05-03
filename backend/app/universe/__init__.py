@@ -1,3 +1,3 @@
-from app.universe.sp500 import SP500_TOP_100_TICKERS
+from app.universe.sp500 import SP500_COMPANIES, SP500_TICKERS, SP500_TOP_100_TICKERS
 
-__all__ = ["SP500_TOP_100_TICKERS"]
+__all__ = ["SP500_COMPANIES", "SP500_TICKERS", "SP500_TOP_100_TICKERS"]
