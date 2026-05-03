@@ -39,6 +39,19 @@ class RecommendationHistoryResponse(BaseModel):
     data: list[RecommendationHistoryEntry]
 
 
+class TickerCatalogData(BaseModel):
+    configured_tickers: list[str]
+    saved_market_tickers: list[str]
+    saved_signal_tickers: list[str]
+    saved_recommendation_tickers: list[str]
+    available_tickers: list[str]
+
+
+class TickerCatalogResponse(BaseModel):
+    timestamp: datetime
+    data: TickerCatalogData
+
+
 class AnalysisRefreshData(BaseModel):
     price_snapshot: PriceSnapshotResponse
     signal: SignalResult
