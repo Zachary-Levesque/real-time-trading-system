@@ -56,6 +56,16 @@ Still intentionally out of scope:
 
 ## Run Locally
 
+### One-command launch
+
+From the repo root:
+
+```bash
+./run-local.sh
+```
+
+This starts both the backend and frontend in one terminal, writes logs to `.logs/backend.log` and `.logs/frontend.log`, and stops both services when you press `Ctrl+C`.
+
 ### Backend
 
 ```bash
@@ -330,20 +340,23 @@ The API behavior now prefers storage when available:
 
 ## Ticker Universe
 
-As of May 3, 2026, the app now ships with a built-in `sp500_top100` ticker universe for discovery and autocomplete. This is based on a current S&P 500 market-cap style ranking and is intended to give the UI a much broader, but still usable, stock set without forcing the background worker to refresh hundreds of tickers by default.
+As of May 3, 2026, the app now ships with a built-in `sp500_all` ticker universe for discovery and browsing. The current local snapshot contains 503 listed S&P 500 constituent tickers because the index includes multiple share classes for a few companies even though it is commonly referred to as the S&P 500.
 
 Important distinction:
 
 - on-demand analysis can still be run for any valid ticker symbol the ingestion provider can fetch
-- the built-in search and quick-pick experience now covers a top-100 S&P 500 universe
+- the built-in search and dropdown experience now covers the full S&P 500 constituent list snapshot
+- quick-pick chips still stay focused on a smaller featured set so the UI does not become noisy
 - the background worker remains separately configurable so you do not accidentally schedule 100 tickers every cycle unless you explicitly want that
 
 Environment controls:
 
-- `TICKER_UNIVERSE=sp500_top100` uses the built-in top-100 universe for search suggestions and featured tickers
+- `TICKER_UNIVERSE=sp500_all` uses the full built-in S&P 500 constituent snapshot for search suggestions and the company dropdown
+- `TICKER_UNIVERSE=sp500_top100` uses the narrower top-100 universe instead
 - `FEATURED_TICKER_COUNT=12` controls how many of those appear as quick-pick chips in the UI
 - `BACKGROUND_WORKER_UNIVERSE=manual` keeps the worker on the explicit `BACKGROUND_WORKER_TICKERS` list
 - `BACKGROUND_WORKER_UNIVERSE=sp500_top100` expands scheduled background refresh to the full built-in top-100 universe
+- `BACKGROUND_WORKER_UNIVERSE=sp500_all` expands scheduled background refresh to the full built-in S&P 500 constituent snapshot
 
 ## Frontend Welcome Page
 
@@ -364,7 +377,8 @@ The dashboard now:
 
 - can trigger a live backend analysis for a searched ticker
 - fetches price, signal, and recommendation data from the backend API
-- offers built-in ticker suggestions across a top-100 S&P 500 universe
+- offers built-in ticker suggestions across the full S&P 500 constituent snapshot
+- includes a scrollable company dropdown so users can browse all supported constituent names and symbols
 - shows which tickers are configured for background refresh and which already have saved recommendation data
 - reports whether the latest live refresh was fully persisted through the storage sync path
 - supports ticker search
@@ -379,11 +393,13 @@ The dashboard now:
 3. Verify the welcome page renders.
 4. Open the dashboard page.
 5. Confirm the quick-pick tickers and the configured/saved ticker lists render.
-6. Search `AAPL` and click `Analyze`. Verify the price chart, signal cards, recommendation, history, and live refresh status populate.
-7. Search `MSFT`, `NVDA`, or `SPY` and verify the dashboard updates.
-8. Search a ticker that is not already saved, such as `AMD`, and click `Analyze`. If market data is available from `yfinance`, verify the dashboard still fills with a new analysis.
-9. Confirm `http://localhost:8000/api/v1/health`, `http://localhost:8000/api/v1/system/status`, and `http://localhost:8000/api/v1/tickers` return JSON responses.
-10. Optionally stop PostgreSQL or Redis and confirm the dashboard still surfaces useful warnings rather than failing silently when persistence cannot complete.
+6. Open the company dropdown and verify you can scroll through the full constituent list.
+7. Search `AAPL` and click `Analyze`. Verify the price chart, signal cards, recommendation, history, and live refresh status populate.
+8. Search `MSFT`, `NVDA`, or `SPY` and verify the dashboard updates.
+9. Choose a company from the dropdown, such as `XOM - Exxon Mobil` or `NVDA - NVIDIA`, and verify the dashboard refreshes.
+10. Search a ticker that is not already saved, such as `AMD`, and click `Analyze`. If market data is available from `yfinance`, verify the dashboard still fills with a new analysis.
+11. Confirm `http://localhost:8000/api/v1/health`, `http://localhost:8000/api/v1/system/status`, and `http://localhost:8000/api/v1/tickers` return JSON responses.
+12. Optionally stop PostgreSQL or Redis and confirm the dashboard still surfaces useful warnings rather than failing silently when persistence cannot complete.
 
 ## Current Data Contract
 
