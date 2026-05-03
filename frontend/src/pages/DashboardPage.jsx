@@ -588,20 +588,6 @@ export function DashboardPage() {
           </div>
 
           <div className="mt-8 rounded-[1.3rem] border border-white/10 bg-white/[0.04] p-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Worker status</p>
-            <p className="mt-3 text-sm text-white">
-              {systemStatus === null
-                ? "System status is unavailable right now"
-                : systemStatus.worker.enabled
-                ? `Background refresh every ${systemStatus.worker.interval_seconds}s for ${systemStatus.worker.tickers.join(", ")}`
-                : "Automatic refresh is currently turned off"}
-            </p>
-            <p className="mt-2 text-xs text-slate-400">
-              Last completed: {formatTimestamp(systemStatus?.worker?.last_completed_at)}
-            </p>
-          </div>
-
-          <div className="mt-8 rounded-[1.3rem] border border-white/10 bg-white/[0.04] p-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Recommendation history</p>
