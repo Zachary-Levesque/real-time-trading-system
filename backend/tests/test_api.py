@@ -189,11 +189,15 @@ def test_ticker_catalog_endpoint_lists_saved_and_configured_tickers(tmp_path: Pa
 
     assert response.status_code == 200
     payload = response.json()
+    assert payload["data"]["universe_name"] == "sp500_top100"
+    assert payload["data"]["featured_tickers"][:4] == ["NVDA", "AAPL", "MSFT", "AMZN"]
+    assert payload["data"]["searchable_tickers"][:4] == ["NVDA", "AAPL", "MSFT", "AMZN"]
     assert payload["data"]["configured_tickers"] == ["AAPL", "MSFT", "NVDA"]
     assert payload["data"]["saved_market_tickers"] == ["AAPL"]
     assert payload["data"]["saved_signal_tickers"] == ["AAPL"]
     assert payload["data"]["saved_recommendation_tickers"] == ["AAPL"]
-    assert payload["data"]["available_tickers"] == ["AAPL", "MSFT", "NVDA"]
+    assert "AMD" in payload["data"]["available_tickers"]
+    assert "NVDA" in payload["data"]["available_tickers"]
 
 
 def test_analysis_refresh_endpoint_returns_latest_objects(tmp_path: Path) -> None:
