@@ -42,3 +42,15 @@ def test_settings_resolve_top100_universes(monkeypatch) -> None:
     assert settings.searchable_ticker_universe[:5] == ["NVDA", "AAPL", "MSFT", "AMZN", "GOOGL"]
     assert settings.featured_tickers == ["NVDA", "AAPL", "MSFT", "AMZN", "GOOGL"]
     assert settings.resolved_background_worker_tickers[:5] == ["NVDA", "AAPL", "MSFT", "AMZN", "GOOGL"]
+
+
+def test_settings_resolve_full_sp500_universe(monkeypatch) -> None:
+    monkeypatch.setenv("TICKER_UNIVERSE", "sp500_all")
+    monkeypatch.setenv("BACKGROUND_WORKER_UNIVERSE", "manual")
+    monkeypatch.setenv("FEATURED_TICKER_COUNT", "3")
+
+    settings = Settings(_env_file=None)
+
+    assert len(settings.searchable_ticker_universe) == 503
+    assert settings.searchable_ticker_universe[0] == "MMM"
+    assert settings.featured_tickers == ["MMM", "AOS", "ABT"]
