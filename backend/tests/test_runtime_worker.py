@@ -90,6 +90,7 @@ def test_update_pipeline_runs_full_sequence() -> None:
         recommendation_service=recommendation,
         storage_sync_service=sync,
     )
+    service.settings.storage_mode = "hybrid"
 
     result = service.run_once_for_ticker("AAPL")
 
@@ -98,3 +99,29 @@ def test_update_pipeline_runs_full_sequence() -> None:
     assert recommendation.calls == ["AAPL"]
     assert sync.calls == ["AAPL"]
     assert result.storage_synced is True
+
+
+def test_update_pipeline_marks_file_mode_refresh_as_synced_without_storage_call() -> None:
+    ingestion = StubIngestionService()
+    processing = StubProcessingService()
+    recommendation = StubRecommendationService()
+    sync = StubStorageSyncService()
+    service = UpdatePipelineService(
+        ingestion_service=ingestion,
+        processing_service=processing,
+        recommendation_service=recommendation,
+        storage_sync_service=sync,
+    )
+    service.settings.storage_mode = "file"
+
+    result = service.run_once_for_ticker("AAPL")
+
+    assert ingestion.calls == [("AAPL", "5d", "1h")]
+    assert processing.calls == ["AAPL"]
+    assert recommendation.calls == ["AAPL"]
+    assert sync.calls == []
+    assert result.storage_synced is True
+    assert result.storage_result is not None
+    assert result.storage_result.persisted_market_data is True
+    assert result.storage_result.persisted_signal is True
+    assert result.storage_result.persisted_recommendation is True
