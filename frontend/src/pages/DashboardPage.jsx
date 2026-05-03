@@ -114,6 +114,26 @@ export function DashboardPage() {
   const [refreshSummary, setRefreshSummary] = useState(null);
   const refreshOnNextLoadRef = useRef(false);
 
+  function triggerTickerSelection(nextTicker) {
+    const normalizedTicker = nextTicker.trim().toUpperCase();
+    setTickerInput(normalizedTicker);
+
+    if (normalizedTicker === activeTicker) {
+      void loadDashboard(normalizedTicker, { triggerRefresh: true }).catch((loadError) => {
+        setPriceSnapshot(null);
+        setSignalResult(null);
+        setRecommendationResult(null);
+        setRecommendationHistory(null);
+        setError(loadError.message);
+        setLoading(false);
+      });
+      return;
+    }
+
+    refreshOnNextLoadRef.current = true;
+    setActiveTicker(normalizedTicker);
+  }
+
   async function loadDashboard(normalizedTicker, { triggerRefresh = false } = {}) {
     setLoading(true);
     setError("");
@@ -290,6 +310,7 @@ export function DashboardPage() {
 
   const signalValues = signalResult?.data.values;
   const quickTickers = tickerCatalog?.data.featured_tickers?.slice(0, 12) ?? fallbackQuickTickers;
+  const companies = tickerCatalog?.data.companies ?? [];
   const searchableTickers = tickerCatalog?.data.searchable_tickers ?? [];
   const tickerUniverseName = tickerCatalog?.data.universe_name ?? "manual";
   const configuredTickers = tickerCatalog?.data.configured_tickers ?? [];
@@ -333,20 +354,7 @@ export function DashboardPage() {
       return;
     }
 
-    if (normalizedTicker === activeTicker) {
-      void loadDashboard(normalizedTicker, { triggerRefresh: true }).catch((loadError) => {
-        setPriceSnapshot(null);
-        setSignalResult(null);
-        setRecommendationResult(null);
-        setRecommendationHistory(null);
-        setError(loadError.message);
-        setLoading(false);
-      });
-      return;
-    }
-
-    refreshOnNextLoadRef.current = true;
-    setActiveTicker(normalizedTicker);
+    triggerTickerSelection(normalizedTicker);
   }
 
   return (
@@ -381,8 +389,10 @@ export function DashboardPage() {
                   className="w-full rounded-full border border-white/10 bg-slate-900 px-5 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/40"
                 />
                 <datalist id="ticker-suggestions">
-                  {searchableTickers.map((ticker) => (
-                    <option key={ticker} value={ticker} />
+                  {companies.map((company) => (
+                    <option key={company.ticker} value={company.ticker}>
+                      {company.name}
+                    </option>
                   ))}
                 </datalist>
               </div>
@@ -394,27 +404,31 @@ export function DashboardPage() {
               </button>
             </form>
 
+            <div className="mt-4">
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400" htmlFor="company-select">
+                Browse companies
+              </label>
+              <select
+                id="company-select"
+                value={activeTicker}
+                onChange={(event) => triggerTickerSelection(event.target.value)}
+                className="h-12 w-full rounded-2xl border border-white/10 bg-slate-900 px-4 text-sm text-white outline-none transition focus:border-cyan-300/40"
+              >
+                {companies.length === 0 ? <option value={activeTicker}>{activeTicker}</option> : null}
+                {companies.map((company) => (
+                  <option key={company.ticker} value={company.ticker}>
+                    {company.ticker} - {company.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <div className="mt-4 flex flex-wrap gap-3">
               {quickTickers.map((ticker) => (
                 <button
                   key={ticker}
                   type="button"
-                  onClick={() => {
-                    setTickerInput(ticker);
-                    if (ticker === activeTicker) {
-                      void loadDashboard(ticker, { triggerRefresh: true }).catch((loadError) => {
-                        setPriceSnapshot(null);
-                        setSignalResult(null);
-                        setRecommendationResult(null);
-                        setRecommendationHistory(null);
-                        setError(loadError.message);
-                        setLoading(false);
-                      });
-                      return;
-                    }
-                    refreshOnNextLoadRef.current = true;
-                    setActiveTicker(ticker);
-                  }}
+                  onClick={() => triggerTickerSelection(ticker)}
                   className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-200 transition hover:border-cyan-300/40 hover:text-white"
                 >
                   {ticker}
@@ -426,7 +440,9 @@ export function DashboardPage() {
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Search universe</p>
                 <p className="mt-2 text-sm text-slate-300">
-                  {tickerUniverseName === "sp500_top100"
+                  {tickerUniverseName === "sp500_all"
+                    ? `Full S&P 500 constituent list available in search and dropdown (${companies.length} companies / ${searchableTickers.length} tickers).`
+                    : tickerUniverseName === "sp500_top100"
                     ? `Top 100 S&P 500 names available as built-in suggestions (${searchableTickers.length} tickers).`
                     : `Manual ticker universe (${searchableTickers.length} suggested tickers).`}
                 </p>
