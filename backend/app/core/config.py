@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     default_market_interval: str = "1h"
     database_url: str = "postgresql+psycopg://postgres:postgres@localhost:5432/trading_system"
     redis_url: str = "redis://localhost:6379/0"
-    storage_mode: Literal["file", "hybrid", "storage"] = "hybrid"
+    storage_mode: Literal["file", "hybrid", "storage"] = "file"
     cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
     enable_background_worker: bool = False
     background_worker_interval_seconds: int = 300
