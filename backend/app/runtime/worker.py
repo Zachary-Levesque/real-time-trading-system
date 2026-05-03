@@ -72,6 +72,18 @@ class UpdatePipelineService:
         self.processing_service.process(normalized_ticker)
         self.recommendation_service.generate(normalized_ticker)
 
+        if self.settings.storage_mode == "file":
+            return UpdatePipelineResult(
+                ticker=normalized_ticker,
+                storage_synced=True,
+                storage_result=StorageSyncResult(
+                    ticker=normalized_ticker,
+                    persisted_market_data=True,
+                    persisted_signal=True,
+                    persisted_recommendation=True,
+                ),
+            )
+
         try:
             storage_result = self.storage_sync_service.sync_ticker(normalized_ticker)
             return UpdatePipelineResult(
