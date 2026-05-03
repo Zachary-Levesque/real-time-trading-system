@@ -1,62 +1,88 @@
 # Real-Time Trading System
 
-A production-style real-time trading platform that ingests live market data, processes streaming signals, and serves low-latency, risk-aware trade recommendations.
+Real-Time Trading System is a full-stack trading analysis platform built to ingest market data, turn it into deterministic signals, and serve an explainable buy, hold, or sell recommendation through a usable web product.
 
-## Phase 10 Scope
+Simple meaning:
 
-This repository now includes:
+- the system fetches recent stock data
+- it computes momentum, trend, volatility, and volume signals
+- it converts those signals into a recommendation with confidence, risk, and reasoning
+- it shows the result in a browser dashboard
 
-- `backend/`: FastAPI application shell with configuration, API router, health endpoint, and a first-pass market data ingestion module
-- `backend/processing`: deterministic signal calculation from normalized market data
-- `backend/recommendation`: explainable recommendation scoring from processed signals
-- `backend/api`: FastAPI endpoints for price, signals, and recommendation reads
-- `backend/storage`: PostgreSQL persistence, Redis caching, and storage sync tooling
-- `backend/alembic`: migration environment and schema history baseline
-- `backend/runtime`: background update worker for scheduled pipeline refreshes
-- `frontend/`: React + Vite application with a refined welcome page and an API-backed dashboard
-- `docker-compose.yml`: health-checked multi-service orchestration for frontend and backend
-- `.github/workflows/ci.yml`: automated backend and frontend validation in CI
+This project is not about predicting the market with machine learning. It is about building a complete engineering system around market analysis.
 
-Still intentionally out of scope:
+## Goal
 
-- WebSocket push updates
-- advanced event streaming infrastructure
+The goal of this project is to build something that is both technically valuable and professionally meaningful.
 
-## Project Structure
+The project focuses on:
 
-```txt
-.
-├── backend/
-│   ├── app/
-│   │   ├── api/
-│   │   ├── core/
-│   │   ├── ingestion/
-│   │   ├── models/
-│   │   ├── processing/
-│   │   ├── recommendation/
-│   │   ├── storage/
-│   │   └── main.py
-│   ├── data/
-│   ├── tests/
-│   ├── Dockerfile
-│   └── requirements.txt
-├── frontend/
-│   ├── src/
-│   │   ├── api/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── styles/
-│   ├── Dockerfile
-│   └── package.json
-├── docker-compose.yml
-├── Implementation.md
-├── Instructions.md
-└── README.md
-```
+- backend service design
+- market data ingestion
+- signal processing
+- explainable recommendation logic
+- API design
+- frontend product development
+- storage and caching architecture
+- testing and validation
 
-## Run Locally
+## Why It Matters
 
-### One-command launch
+Most stock projects stop at a notebook, a chart, or a toy prediction script.
+
+This project matters because it shows how to build a real software system around financial data:
+
+- how raw market data is fetched and normalized
+- how signals are computed in a stable, testable way
+- how recommendations are served through an API
+- how a frontend turns system output into a usable product
+- how local files, PostgreSQL, and Redis fit into one architecture
+- how engineering tradeoffs change between local development and richer infrastructure modes
+
+So this project connects:
+
+- backend engineering
+- data engineering
+- systems design
+- product engineering
+- production-style development discipline
+
+## What Was Built
+
+- a FastAPI backend with versioned API routes
+- a market ingestion service using `yfinance`
+- a signal-processing layer for momentum, trend, volatility, and volume
+- an explainable recommendation engine for `BUY`, `HOLD`, and `SELL`
+- file-backed local persistence for fast local use
+- optional PostgreSQL and Redis integration for hybrid storage
+- a React dashboard with live refresh, charting, ticker search, and a company dropdown
+- a full S&P 500 constituent snapshot for browsing companies in the UI
+- a one-command local launcher for normal users
+- automated backend tests and frontend build validation
+
+## Why The Product Is Valuable
+
+This project is valuable because it demonstrates more than code correctness.
+
+It shows:
+
+- a real end-to-end data flow
+- a product surface someone can actually interact with
+- explainable outputs instead of black-box results
+- design choices that make the project easy to demo, extend, and discuss
+
+For interviews and portfolio use, that matters. It gives a stronger story than “I trained a model” because it shows how software systems are built, not just how formulas are run.
+
+## Main Folders
+
+- `backend`: API, ingestion, processing, recommendation, storage, runtime worker
+- `frontend`: React dashboard and UI
+- `backend/data`: saved market, signal, and recommendation outputs
+- `backend/tests`: backend test suite
+- `docker-compose.yml`: multi-service local stack
+- `run-local.sh`: one-command launcher for local use
+
+## Try It
 
 From the repo root:
 
@@ -64,412 +90,46 @@ From the repo root:
 ./run-local.sh
 ```
 
-This starts both the backend and frontend in one terminal, writes logs to `.logs/backend.log` and `.logs/frontend.log`, and stops both services when you press `Ctrl+C`.
+Then open:
 
-### Backend
+```txt
+http://localhost:5173
+```
+
+Useful routes:
+
+- `http://localhost:8000/api/v1/health`
+- `http://localhost:8000/docs`
+- `http://localhost:8000/api/v1/tickers`
+
+## What To Do In The UI
+
+- search a ticker like `NVDA`, `AAPL`, or `XOM`
+- open the company dropdown and browse the S&P 500 list
+- click `Analyze` to run the full pipeline on demand
+- inspect the signal breakdown and use `Explain` to understand each signal
+- review the recommendation, confidence, risk, and recommendation history
+
+## Results
+
+- the backend can ingest, process, and recommend on demand
+- the dashboard can browse and analyze S&P 500 companies
+- the recommendation flow is explainable rather than opaque
+- the system works in a simple local file mode and can also support a richer storage setup
+- tests and build validation pass
+
+## Validation
+
+Backend:
 
 ```bash
 cd backend
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload
+./.venv/bin/pytest
 ```
 
-Backend URLs:
-
-- API root: `http://localhost:8000/`
-- OpenAPI docs: `http://localhost:8000/docs`
-- Health check: `http://localhost:8000/api/v1/health`
-
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Frontend URL:
-
-- App: `http://localhost:5173/`
-
-## Run With Docker
-
-```bash
-docker compose up --build
-```
-
-The compose stack now includes:
-
-- service health checks for PostgreSQL, Redis, backend, and frontend
-- startup ordering based on healthy dependencies
-- Docker-specific overrides for database, Redis, and CORS environment values
-
-## Database Migrations
-
-The backend now includes an Alembic migration baseline instead of relying only on opportunistic table creation.
-
-Run migrations locally from `backend/`:
-
-```bash
-alembic upgrade head
-```
-
-Create a new migration after schema changes:
-
-```bash
-alembic revision -m "describe change"
-```
-
-## Basic Validation
-
-### Backend test
-
-```bash
-cd backend
-pytest
-```
-
-### Frontend build
+Frontend:
 
 ```bash
 cd frontend
 npm run build
 ```
-
-### Market ingestion
-
-```bash
-cd backend
-python -m app.ingestion --ticker AAPL
-```
-
-Example output:
-
-```json
-{
-  "ticker": "AAPL",
-  "timestamp": "2026-05-02T12:00:00+00:00",
-  "points": 35,
-  "output_path": "data/market/AAPL/latest.json"
-}
-```
-
-The ingestion command:
-
-- fetches recent market data from `yfinance`
-- normalizes it into a stable JSON contract
-- stores the latest result at `backend/data/market/<TICKER>/latest.json`
-- returns a non-zero exit code on fetch or persistence failures
-
-### Signal processing
-
-```bash
-cd backend
-python -m app.processing --ticker AAPL
-```
-
-Example output:
-
-```json
-{
-  "ticker": "AAPL",
-  "timestamp": "2026-05-02T17:15:00+00:00",
-  "signals": {
-    "momentum": "positive",
-    "trend": "bullish",
-    "volatility": "stable",
-    "volume": "above_average"
-  },
-  "output_path": "data/signals/AAPL/latest.json"
-}
-```
-
-The processing command:
-
-- reads normalized market data from `backend/data/market/<TICKER>/latest.json`
-- computes momentum, trend, volatility, and volume labels
-- stores the latest signal object at `backend/data/signals/<TICKER>/latest.json`
-- returns a non-zero exit code if the market data is missing or insufficient
-
-### Recommendation generation
-
-```bash
-cd backend
-python -m app.recommendation --ticker AAPL
-```
-
-Example output:
-
-```json
-{
-  "ticker": "AAPL",
-  "timestamp": "2026-05-02T17:30:00+00:00",
-  "recommendation": "BUY",
-  "confidence": 0.6,
-  "risk": "low",
-  "signals": {
-    "momentum": "positive",
-    "trend": "bullish",
-    "volatility": "stable",
-    "volume": "average"
-  },
-  "reason": "Positive momentum with a bullish trend, stable volatility, and average volume supports a buy bias."
-}
-```
-
-The recommendation command:
-
-- reads processed signals from `backend/data/signals/<TICKER>/latest.json`
-- scores them into `BUY`, `HOLD`, or `SELL`
-- adds confidence, risk, and reasoning
-- stores the latest output at `backend/data/recommendations/<TICKER>/latest.json`
-
-### Storage sync
-
-```bash
-cd backend
-python -m app.storage --ticker AAPL
-```
-
-The storage sync command:
-
-- creates the PostgreSQL tables if they do not exist
-- persists the latest market data, signals, and recommendation for a ticker
-- caches the latest price snapshot and recommendation in Redis
-- prepares the API to read from storage in `hybrid` mode
-
-## Background Updates
-
-Phase 9 adds a background worker that can automatically refresh a configured ticker set.
-
-Default worker environment variables:
-
-- `ENABLE_BACKGROUND_WORKER=true`
-- `BACKGROUND_WORKER_INTERVAL_SECONDS=300`
-- `BACKGROUND_WORKER_TICKERS=AAPL,MSFT,NVDA,SPY`
-- `BACKGROUND_WORKER_RUN_IMMEDIATELY=true`
-
-When enabled, the worker runs:
-
-1. market ingestion
-2. signal processing
-3. recommendation generation
-4. storage sync
-
-This gives the system real-time-style behavior without requiring manual commands for every refresh.
-
-## Deployment Hardening
-
-Phase 10 adds:
-
-- smaller Docker build contexts through per-service `.dockerignore` files
-- non-reloader backend container startup for cleaner container behavior
-- compose-level health checks and dependency gating
-- CI coverage for backend tests and frontend builds
-- request-scoped observability through `X-Request-ID` propagation and structured request logging
-- stricter settings validation for storage mode, app environment, and worker interval values
-
-Recommended developer workflow:
-
-1. `docker compose up --build`
-2. confirm `http://localhost:8000/docs` and `http://localhost:5173/` load
-3. use the dashboard or CLI tools
-4. stop the stack with `Ctrl+C`
-
-## Storage Layer
-
-Phase 8 introduces:
-
-- PostgreSQL as the persistent system of record for market data, signals, and recommendations
-- Redis as a cache for latest price snapshots and recommendations
-- a `hybrid` storage mode where the API prefers storage but can fall back to local files
-
-Default storage environment variables:
-
-- local shell default: `DATABASE_URL=postgresql+psycopg://postgres:postgres@localhost:5432/trading_system`
-- local shell default: `REDIS_URL=redis://localhost:6379/0`
-- `STORAGE_MODE=hybrid`
-
-`STORAGE_MODE` now accepts only:
-
-- `file`
-- `hybrid`
-- `storage`
-
-When running through Docker Compose, the backend service uses:
-
-- `DATABASE_URL=postgresql+psycopg://postgres:postgres@postgres:5432/trading_system`
-- `REDIS_URL=redis://redis:6379/0`
-
-## API Endpoints
-
-With the backend running, the current API now exposes:
-
-- `GET /api/v1/health`
-- `GET /api/v1/price/{ticker}`
-- `GET /api/v1/signals/{ticker}`
-- `GET /api/v1/recommendation/{ticker}`
-- `GET /api/v1/recommendation/{ticker}/history`
-- `GET /api/v1/system/status`
-- `GET /api/v1/tickers`
-- `POST /api/v1/analysis/{ticker}/refresh`
-
-Examples:
-
-```bash
-curl http://localhost:8000/api/v1/price/AAPL
-curl http://localhost:8000/api/v1/signals/AAPL
-curl http://localhost:8000/api/v1/recommendation/AAPL
-curl http://localhost:8000/api/v1/tickers
-curl -X POST http://localhost:8000/api/v1/analysis/AAPL/refresh
-```
-
-The API behavior now prefers storage when available:
-
-- `/price/{ticker}` checks Redis, then PostgreSQL, then local market files in `hybrid` mode
-- `/signals/{ticker}` reads PostgreSQL first, then local signal files in `hybrid` mode
-- `/recommendation/{ticker}` checks Redis, then PostgreSQL, then local recommendation files in `hybrid` mode
-- `/recommendation/{ticker}/history` reads PostgreSQL first, then local recommendation history in `hybrid` mode
-- `/system/status` reports worker cadence, last run metadata, and error state
-- `/tickers` reports the built-in search universe, featured tickers, configured worker tickers, and discovered saved tickers
-- `/analysis/{ticker}/refresh` runs ingestion, signal processing, recommendation generation, and storage sync on demand
-- missing tickers return `404`
-- request responses include `X-Request-ID` for traceability
-
-## Ticker Universe
-
-As of May 3, 2026, the app now ships with a built-in `sp500_all` ticker universe for discovery and browsing. The current local snapshot contains 503 listed S&P 500 constituent tickers because the index includes multiple share classes for a few companies even though it is commonly referred to as the S&P 500.
-
-Important distinction:
-
-- on-demand analysis can still be run for any valid ticker symbol the ingestion provider can fetch
-- the built-in search and dropdown experience now covers the full S&P 500 constituent list snapshot
-- quick-pick chips still stay focused on a smaller featured set so the UI does not become noisy
-- the background worker remains separately configurable so you do not accidentally schedule 100 tickers every cycle unless you explicitly want that
-
-Environment controls:
-
-- `TICKER_UNIVERSE=sp500_all` uses the full built-in S&P 500 constituent snapshot for search suggestions and the company dropdown
-- `TICKER_UNIVERSE=sp500_top100` uses the narrower top-100 universe instead
-- `FEATURED_TICKER_COUNT=12` controls how many of those appear as quick-pick chips in the UI
-- `BACKGROUND_WORKER_UNIVERSE=manual` keeps the worker on the explicit `BACKGROUND_WORKER_TICKERS` list
-- `BACKGROUND_WORKER_UNIVERSE=sp500_top100` expands scheduled background refresh to the full built-in top-100 universe
-- `BACKGROUND_WORKER_UNIVERSE=sp500_all` expands scheduled background refresh to the full built-in S&P 500 constituent snapshot
-
-## Frontend Welcome Page
-
-Phase 6 refines the landing experience so the project explains itself before the user reaches the dashboard.
-
-The welcome page now:
-
-- frames the platform as a systems-first trading product
-- explains the ingestion, signal, and recommendation layers
-- makes the project value clearer for backend and product engineering
-- provides direct calls to action for the dashboard and API docs
-
-## Frontend Dashboard
-
-Phase 7 turns the dashboard into a working product surface.
-
-The dashboard now:
-
-- can trigger a live backend analysis for a searched ticker
-- fetches price, signal, and recommendation data from the backend API
-- offers built-in ticker suggestions across the full S&P 500 constituent snapshot
-- includes a scrollable company dropdown so users can browse all supported constituent names and symbols
-- shows which tickers are configured for background refresh and which already have saved recommendation data
-- reports whether the latest live refresh was fully persisted through the storage sync path
-- supports ticker search
-- displays loading and error states
-- renders a price chart using Recharts
-- shows recommendation, confidence, risk, signal breakdown, explanation, worker status, and recommendation history
-
-### Manual UI Check
-
-1. Start the backend and frontend.
-2. Open `http://localhost:5173/`.
-3. Verify the welcome page renders.
-4. Open the dashboard page.
-5. Confirm the quick-pick tickers and the configured/saved ticker lists render.
-6. Open the company dropdown and verify you can scroll through the full constituent list.
-7. Search `AAPL` and click `Analyze`. Verify the price chart, signal cards, recommendation, history, and live refresh status populate.
-8. Search `MSFT`, `NVDA`, or `SPY` and verify the dashboard updates.
-9. Choose a company from the dropdown, such as `XOM - Exxon Mobil` or `NVDA - NVIDIA`, and verify the dashboard refreshes.
-10. Search a ticker that is not already saved, such as `AMD`, and click `Analyze`. If market data is available from `yfinance`, verify the dashboard still fills with a new analysis.
-11. Confirm `http://localhost:8000/api/v1/health`, `http://localhost:8000/api/v1/system/status`, and `http://localhost:8000/api/v1/tickers` return JSON responses.
-12. Optionally stop PostgreSQL or Redis and confirm the dashboard still surfaces useful warnings rather than failing silently when persistence cannot complete.
-
-## Current Data Contract
-
-Normalized market data is stored as:
-
-```json
-{
-  "ticker": "AAPL",
-  "timestamp": "ISO-8601",
-  "data": {
-    "source": "yfinance",
-    "currency": "USD",
-    "exchange_timezone": "America/New_York",
-    "period": "5d",
-    "interval": "1h",
-    "points": [
-      {
-        "timestamp": "ISO-8601",
-        "open": 210.25,
-        "high": 212.0,
-        "low": 209.75,
-        "close": 211.55,
-        "volume": 3200100
-      }
-    ]
-  }
-}
-```
-
-Processed signals are stored as:
-
-```json
-{
-  "ticker": "AAPL",
-  "timestamp": "ISO-8601",
-  "data": {
-    "source": "signal_processor_v1",
-    "lookback_points": 20,
-    "data_points_used": 35,
-    "values": {
-      "momentum": "positive",
-      "trend": "bullish",
-      "volatility": "stable",
-      "volume": "above_average"
-    }
-  }
-}
-```
-
-Recommendations are stored as:
-
-```json
-{
-  "ticker": "AAPL",
-  "timestamp": "ISO-8601",
-  "recommendation": "BUY",
-  "confidence": 0.6,
-  "risk": "low",
-  "signals": {
-    "momentum": "positive",
-    "trend": "bullish",
-    "volatility": "stable",
-    "volume": "average"
-  },
-  "reason": "Positive momentum with a bullish trend, stable volatility, and average volume supports a buy bias."
-}
-```
-
-Recommendation history is now deduplicated on semantic content, so repeated background refreshes do not create noisy history entries when recommendation state has not materially changed.
-
-## Next Phase
-
-The system is now through the planned implementation phases in the current roadmap. The next sensible work would be polish, observability, or new product capabilities rather than another required core phase.
