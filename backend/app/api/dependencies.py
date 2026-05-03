@@ -4,6 +4,7 @@ from pathlib import Path
 from app.core.config import get_settings
 from app.processing.storage import LocalMarketDataReader
 from app.recommendation.storage import LocalRecommendationReader, LocalSignalReader
+from app.runtime.worker import UpdatePipelineService
 from app.storage.cache import RedisCache
 from app.storage.db import create_session_factory
 from app.storage.local_queries import PriceSnapshotService
@@ -43,3 +44,7 @@ def get_storage_read_service() -> StorageBackedReadService:
         file_recommendation_reader=LocalRecommendationReader(Path(settings.recommendation_data_dir)),
         storage_mode=settings.storage_mode,
     )
+
+
+def get_update_pipeline_service() -> UpdatePipelineService:
+    return UpdatePipelineService()
