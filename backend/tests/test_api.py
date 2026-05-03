@@ -189,9 +189,10 @@ def test_ticker_catalog_endpoint_lists_saved_and_configured_tickers(tmp_path: Pa
 
     assert response.status_code == 200
     payload = response.json()
-    assert payload["data"]["universe_name"] == "sp500_top100"
-    assert payload["data"]["featured_tickers"][:4] == ["NVDA", "AAPL", "MSFT", "AMZN"]
-    assert payload["data"]["searchable_tickers"][:4] == ["NVDA", "AAPL", "MSFT", "AMZN"]
+    assert payload["data"]["universe_name"] == "sp500_all"
+    assert payload["data"]["featured_tickers"][:3] == ["MMM", "AOS", "ABT"]
+    assert payload["data"]["searchable_tickers"][:3] == ["MMM", "AOS", "ABT"]
+    assert payload["data"]["companies"][0] == {"ticker": "MMM", "name": "3M"}
     assert payload["data"]["configured_tickers"] == ["AAPL", "MSFT", "NVDA"]
     assert payload["data"]["saved_market_tickers"] == ["AAPL"]
     assert payload["data"]["saved_signal_tickers"] == ["AAPL"]
