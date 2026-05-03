@@ -38,7 +38,7 @@ export function WelcomePage() {
                 Systems-first trading product
               </p>
               <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
-                See recent market moves translated into clear, explainable trade signals.
+                Real Time Trading System
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-slate-300">
                 Real-Time Trading System helps you explore recent stock activity, understand the signals behind it,
