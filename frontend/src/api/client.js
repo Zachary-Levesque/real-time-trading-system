@@ -46,6 +46,10 @@ export function getSystemStatus() {
   return readJson("/system/status");
 }
 
+export function getTickerCatalog() {
+  return readJson("/tickers");
+}
+
 export function refreshAnalysis(ticker) {
   return readJson(`/analysis/${ticker}/refresh`, {
     method: "POST",
