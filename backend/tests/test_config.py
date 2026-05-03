@@ -53,4 +53,4 @@ def test_settings_resolve_full_sp500_universe(monkeypatch) -> None:
 
     assert len(settings.searchable_ticker_universe) == 503
     assert settings.searchable_ticker_universe[0] == "MMM"
-    assert settings.featured_tickers == ["MMM", "AOS", "ABT"]
+    assert settings.featured_tickers == ["NVDA", "AAPL", "MSFT"]
