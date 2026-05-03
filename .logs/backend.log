@@ -1,0 +1,306 @@
+INFO:     Will watch for changes in these directories: ['/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [28902] using WatchFiles
+INFO:     Started server process [28905]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+2026-05-03 12:33:31,032 INFO app.main request_id=1ec82754-5f56-4019-88c5-c9f5e113a2fe request method=GET path=/docs status=200 duration_ms=1.07
+INFO:     127.0.0.1:60502 - "GET /docs HTTP/1.1" 200 OK
+2026-05-03 12:33:31,400 INFO app.main request_id=53358327-17a3-4075-9097-b355102183b9 request method=GET path=/openapi.json status=200 duration_ms=21.9
+INFO:     127.0.0.1:60502 - "GET /openapi.json HTTP/1.1" 200 OK
+2026-05-03 12:33:36,383 INFO app.main request_id=d7520535-1e96-4bf1-a621-67469cd746da request method=GET path=/api/v1/system/status status=200 duration_ms=8.91
+INFO:     127.0.0.1:60521 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:33:36,386 INFO app.main request_id=b0dc475b-da56-497f-ae32-0d0e2b45111e request method=GET path=/api/v1/system/status status=200 duration_ms=1.47
+INFO:     127.0.0.1:60521 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:33:36,388 INFO app.main request_id=207c2cb0-d747-4d3a-b5c0-a7cfcb35ee82 request method=GET path=/api/v1/tickers status=200 duration_ms=14.01
+INFO:     127.0.0.1:60522 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:33:36,400 INFO app.main request_id=281040b8-ecad-43b3-95c3-e20cc55b8f54 request method=GET path=/api/v1/tickers status=200 duration_ms=10.41
+INFO:     127.0.0.1:60521 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:33:36,419 INFO app.main request_id=5b052437-4c82-4ca2-9b65-35a094b688f5 request method=GET path=/api/v1/tickers status=200 duration_ms=14.33
+INFO:     127.0.0.1:60522 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:33:36,430 INFO app.main request_id=3c1208b5-f8fd-4c77-8463-9e7d10fe2698 request method=GET path=/api/v1/tickers status=200 duration_ms=9.16
+INFO:     127.0.0.1:60521 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:33:36,488 WARNING app.storage.service request_id=a86831e9-ffda-49a4-9434-5807c2150539 Falling back to file-backed signals for AAPL after storage read failure.
+2026-05-03 12:33:36,489 WARNING app.storage.service request_id=e4bca455-2136-4d1e-bf7c-baf38b67b514 Falling back to file-backed recommendation for AAPL after storage read failure.
+2026-05-03 12:33:36,489 WARNING app.storage.service request_id=71082c0f-bc62-4c8b-97e0-a3a8aa676a09 Falling back to file-backed price data for AAPL after storage read failure.
+2026-05-03 12:33:36,490 WARNING app.storage.service request_id=4e8e91d2-0741-4104-bcb3-a507697c86ad Falling back to file-backed recommendation history for AAPL after storage read failure.
+2026-05-03 12:33:36,491 INFO app.main request_id=e4bca455-2136-4d1e-bf7c-baf38b67b514 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=118.35
+INFO:     127.0.0.1:60516 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:33:36,492 INFO app.main request_id=a86831e9-ffda-49a4-9434-5807c2150539 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=120.52
+INFO:     127.0.0.1:60514 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:33:36,492 INFO app.main request_id=71082c0f-bc62-4c8b-97e0-a3a8aa676a09 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=122.06
+INFO:     127.0.0.1:60512 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:33:36,497 WARNING app.storage.service request_id=0120aed8-e226-4df3-87d9-3e57c84be82c Falling back to file-backed recommendation for AAPL after storage read failure.
+2026-05-03 12:33:36,498 WARNING app.storage.service request_id=1b8bb3d0-b287-4da2-ba15-56285a7eb4eb Falling back to file-backed price data for AAPL after storage read failure.
+2026-05-03 12:33:36,499 WARNING app.storage.service request_id=2b2c8dc0-d77f-4c94-9dff-51a5300254a5 Falling back to file-backed signals for AAPL after storage read failure.
+2026-05-03 12:33:36,499 INFO app.main request_id=4e8e91d2-0741-4104-bcb3-a507697c86ad request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=125.31
+INFO:     127.0.0.1:60520 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:33:36,500 INFO app.main request_id=0120aed8-e226-4df3-87d9-3e57c84be82c request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=7.05
+INFO:     127.0.0.1:60521 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:33:36,501 INFO app.main request_id=1b8bb3d0-b287-4da2-ba15-56285a7eb4eb request method=GET path=/api/v1/price/AAPL status=200 duration_ms=6.76
+INFO:     127.0.0.1:60514 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:33:36,501 INFO app.main request_id=2b2c8dc0-d77f-4c94-9dff-51a5300254a5 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=7.44
+INFO:     127.0.0.1:60522 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:33:36,505 WARNING app.storage.service request_id=29d077ae-a3fe-4798-a18d-0e3eec2196bd Falling back to file-backed recommendation history for AAPL after storage read failure.
+2026-05-03 12:33:36,506 INFO app.main request_id=29d077ae-a3fe-4798-a18d-0e3eec2196bd request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=6.13
+INFO:     127.0.0.1:60512 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:33:42,975 WARNING app.runtime.worker request_id=e2da2cb3-f05d-4d24-b3f4-82d9e8c03111 Storage sync failed for WSM: (psycopg.OperationalError) connection failed: connection to server at "127.0.0.1", port 5432 failed: could not receive data from server: Connection refused
+Multiple connection attempts failed. All failures were:
+- host: 'localhost', port: 5432, hostaddr: '::1': connection failed: connection to server at "::1", port 5432 failed: could not receive data from server: Connection refused
+- host: 'localhost', port: 5432, hostaddr: '127.0.0.1': connection failed: connection to server at "127.0.0.1", port 5432 failed: could not receive data from server: Connection refused
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-05-03 12:33:42,976 WARNING app.storage.service request_id=e2da2cb3-f05d-4d24-b3f4-82d9e8c03111 Falling back to file-backed price data for WSM after storage read failure.
+2026-05-03 12:33:42,980 WARNING app.storage.service request_id=e2da2cb3-f05d-4d24-b3f4-82d9e8c03111 Falling back to file-backed signals for WSM after storage read failure.
+2026-05-03 12:33:42,981 WARNING app.storage.service request_id=e2da2cb3-f05d-4d24-b3f4-82d9e8c03111 Falling back to file-backed recommendation for WSM after storage read failure.
+2026-05-03 12:33:42,982 INFO app.main request_id=e2da2cb3-f05d-4d24-b3f4-82d9e8c03111 request method=POST path=/api/v1/analysis/WSM/refresh status=200 duration_ms=1096.3
+INFO:     127.0.0.1:60540 - "POST /api/v1/analysis/WSM/refresh HTTP/1.1" 200 OK
+2026-05-03 12:33:42,992 WARNING app.storage.service request_id=dbc88943-ec05-4552-b921-8c7be0f91cc1 Falling back to file-backed price data for WSM after storage read failure.
+2026-05-03 12:33:43,007 INFO app.main request_id=dbc88943-ec05-4552-b921-8c7be0f91cc1 request method=GET path=/api/v1/price/WSM status=200 duration_ms=16.63
+INFO:     127.0.0.1:60540 - "GET /api/v1/price/WSM HTTP/1.1" 200 OK
+2026-05-03 12:33:43,011 INFO app.main request_id=fca8df59-750f-4f88-b2ad-7769ddc3bf30 request method=GET path=/api/v1/system/status status=200 duration_ms=18.26
+INFO:     127.0.0.1:60560 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:33:43,015 WARNING app.storage.service request_id=abf7d5f3-e0f0-4447-bfbb-c2b0ee4f4744 Falling back to file-backed signals for WSM after storage read failure.
+2026-05-03 12:33:43,015 WARNING app.storage.service request_id=19198a3c-374d-45c6-84f6-b42723697a0c Falling back to file-backed recommendation for WSM after storage read failure.
+2026-05-03 12:33:43,015 WARNING app.storage.service request_id=1de61630-1fec-4eb8-aa23-b6cba50354c8 Falling back to file-backed recommendation history for WSM after storage read failure.
+2026-05-03 12:33:43,016 INFO app.main request_id=19198a3c-374d-45c6-84f6-b42723697a0c request method=GET path=/api/v1/recommendation/WSM status=200 duration_ms=23.48
+INFO:     127.0.0.1:60556 - "GET /api/v1/recommendation/WSM HTTP/1.1" 200 OK
+2026-05-03 12:33:43,017 INFO app.main request_id=abf7d5f3-e0f0-4447-bfbb-c2b0ee4f4744 request method=GET path=/api/v1/signals/WSM status=200 duration_ms=24.94
+INFO:     127.0.0.1:60554 - "GET /api/v1/signals/WSM HTTP/1.1" 200 OK
+2026-05-03 12:33:43,018 INFO app.main request_id=1de61630-1fec-4eb8-aa23-b6cba50354c8 request method=GET path=/api/v1/recommendation/WSM/history status=200 duration_ms=25.46
+INFO:     127.0.0.1:60557 - "GET /api/v1/recommendation/WSM/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:33:43,020 INFO app.main request_id=b2aff57d-f887-4166-b4e3-5d392e1e54cc request method=GET path=/api/v1/tickers status=200 duration_ms=26.9
+INFO:     127.0.0.1:60562 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:34:38,695 WARNING app.storage.service request_id=b8a83ac2-6255-41f6-abad-acc0514f5240 Falling back to file-backed price data for AAPL after storage read failure.
+2026-05-03 12:34:38,701 WARNING app.storage.service request_id=1a5d5357-69c3-410c-b04d-c5737a676e86 Falling back to file-backed recommendation for AAPL after storage read failure.
+2026-05-03 12:34:38,705 WARNING app.storage.service request_id=8b5a4a53-0446-4855-b836-506ac0446709 Falling back to file-backed recommendation history for AAPL after storage read failure.
+2026-05-03 12:34:38,705 WARNING app.storage.service request_id=7cd04009-54bc-459b-b512-5fdce4d14b40 Falling back to file-backed signals for AAPL after storage read failure.
+2026-05-03 12:34:38,706 INFO app.main request_id=fa8b7ba9-3a46-483c-9c2a-ccd094c9781d request method=GET path=/api/v1/system/status status=200 duration_ms=30.58
+INFO:     127.0.0.1:60587 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:34:38,709 INFO app.main request_id=b8a83ac2-6255-41f6-abad-acc0514f5240 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=36.02
+INFO:     127.0.0.1:60580 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:34:38,710 INFO app.main request_id=1a5d5357-69c3-410c-b04d-c5737a676e86 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=35.29
+INFO:     127.0.0.1:60583 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:34:38,710 INFO app.main request_id=7cd04009-54bc-459b-b512-5fdce4d14b40 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=35.96
+INFO:     127.0.0.1:60582 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:34:38,715 INFO app.main request_id=3c57f286-638f-4e31-886e-862080038d36 request method=GET path=/api/v1/tickers status=200 duration_ms=38.08
+INFO:     127.0.0.1:60588 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:34:38,716 INFO app.main request_id=5f26f4ee-5c87-4111-9047-f4bc89ad11c5 request method=GET path=/api/v1/system/status status=200 duration_ms=6.69
+INFO:     127.0.0.1:60587 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:34:38,721 INFO app.main request_id=8b5a4a53-0446-4855-b836-506ac0446709 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=46.19
+INFO:     127.0.0.1:60585 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:34:38,722 WARNING app.storage.service request_id=4f9a08f2-1ec8-4b18-b722-97a4f6ab5a14 Falling back to file-backed price data for AAPL after storage read failure.
+2026-05-03 12:34:38,722 WARNING app.storage.service request_id=49d98ba5-4f10-48ad-97c2-2e75bededaa8 Falling back to file-backed signals for AAPL after storage read failure.
+2026-05-03 12:34:38,722 WARNING app.storage.service request_id=07eba408-27c7-4467-b432-647b0560c4b2 Falling back to file-backed recommendation for AAPL after storage read failure.
+2026-05-03 12:34:38,731 INFO app.main request_id=4f9a08f2-1ec8-4b18-b722-97a4f6ab5a14 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=18.87
+INFO:     127.0.0.1:60580 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:34:38,732 INFO app.main request_id=49d98ba5-4f10-48ad-97c2-2e75bededaa8 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=18.42
+INFO:     127.0.0.1:60582 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:34:38,734 INFO app.main request_id=07eba408-27c7-4467-b432-647b0560c4b2 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=20.77
+INFO:     127.0.0.1:60583 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:34:38,738 WARNING app.storage.service request_id=3da8b033-fa0e-4c08-8276-83195282bbc0 Falling back to file-backed recommendation history for AAPL after storage read failure.
+2026-05-03 12:34:38,739 INFO app.main request_id=9691eb79-43b8-4dfe-a356-4287d53292ed request method=GET path=/api/v1/tickers status=200 duration_ms=20.94
+INFO:     127.0.0.1:60588 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:34:38,747 INFO app.main request_id=3da8b033-fa0e-4c08-8276-83195282bbc0 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=16.78
+INFO:     127.0.0.1:60587 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:34:38,749 INFO app.main request_id=f3ad8986-6f2c-44b6-9e9e-4ec3d4b5d7b5 request method=GET path=/api/v1/tickers status=200 duration_ms=8.66
+INFO:     127.0.0.1:60583 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:34:38,758 INFO app.main request_id=7cdece72-a2f5-457f-8190-eb023c535727 request method=GET path=/api/v1/tickers status=200 duration_ms=8.22
+INFO:     127.0.0.1:60587 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:35:38,690 WARNING app.storage.service request_id=07bc18c4-101a-45cc-9920-b62ab3fee857 Falling back to file-backed signals for AAPL after storage read failure.
+2026-05-03 12:35:38,694 WARNING app.storage.service request_id=a4e3f9c9-3e93-453e-8e5a-e8f2943c9fa3 Falling back to file-backed price data for AAPL after storage read failure.
+2026-05-03 12:35:38,695 INFO app.main request_id=3013ab64-a5d5-4aa8-b56d-db5185db3361 request method=GET path=/api/v1/system/status status=200 duration_ms=28.42
+INFO:     127.0.0.1:60616 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:35:38,695 WARNING app.storage.service request_id=50ac43bb-5a4d-45ba-abb1-ff25a695191c Falling back to file-backed recommendation for AAPL after storage read failure.
+2026-05-03 12:35:38,698 WARNING app.storage.service request_id=26a922a7-7981-4bec-9aab-6c0827dd812f Falling back to file-backed recommendation history for AAPL after storage read failure.
+2026-05-03 12:35:38,699 INFO app.main request_id=07bc18c4-101a-45cc-9920-b62ab3fee857 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=35.53
+INFO:     127.0.0.1:60610 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:35:38,700 INFO app.main request_id=50ac43bb-5a4d-45ba-abb1-ff25a695191c request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=35.95
+INFO:     127.0.0.1:60612 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:35:38,701 INFO app.main request_id=a4e3f9c9-3e93-453e-8e5a-e8f2943c9fa3 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=38.31
+INFO:     127.0.0.1:60608 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:35:38,703 INFO app.main request_id=cfaa8ac9-193e-43f4-9fc0-8856574f3f63 request method=GET path=/api/v1/tickers status=200 duration_ms=36.37
+INFO:     127.0.0.1:60617 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:35:38,705 INFO app.main request_id=26a922a7-7981-4bec-9aab-6c0827dd812f request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=39.93
+INFO:     127.0.0.1:60614 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:36:29,181 WARNING app.runtime.worker request_id=e287b3dd-bf1b-450e-bec2-6cf3c0b1d291 Storage sync failed for AAPL: (psycopg.OperationalError) connection failed: connection to server at "127.0.0.1", port 5432 failed: could not receive data from server: Connection refused
+Multiple connection attempts failed. All failures were:
+- host: 'localhost', port: 5432, hostaddr: '::1': connection failed: connection to server at "::1", port 5432 failed: could not receive data from server: Connection refused
+- host: 'localhost', port: 5432, hostaddr: '127.0.0.1': connection failed: connection to server at "127.0.0.1", port 5432 failed: could not receive data from server: Connection refused
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-05-03 12:36:29,182 WARNING app.storage.service request_id=e287b3dd-bf1b-450e-bec2-6cf3c0b1d291 Falling back to file-backed price data for AAPL after storage read failure.
+2026-05-03 12:36:29,187 WARNING app.storage.service request_id=e287b3dd-bf1b-450e-bec2-6cf3c0b1d291 Falling back to file-backed signals for AAPL after storage read failure.
+2026-05-03 12:36:29,188 WARNING app.storage.service request_id=e287b3dd-bf1b-450e-bec2-6cf3c0b1d291 Falling back to file-backed recommendation for AAPL after storage read failure.
+2026-05-03 12:36:29,189 INFO app.main request_id=e287b3dd-bf1b-450e-bec2-6cf3c0b1d291 request method=POST path=/api/v1/analysis/AAPL/refresh status=200 duration_ms=758.23
+INFO:     127.0.0.1:60636 - "POST /api/v1/analysis/AAPL/refresh HTTP/1.1" 200 OK
+2026-05-03 12:36:29,199 WARNING app.storage.service request_id=860a6c41-918c-4663-93ac-ec5b8897b4e9 Falling back to file-backed price data for AAPL after storage read failure.
+2026-05-03 12:36:29,216 INFO app.main request_id=860a6c41-918c-4663-93ac-ec5b8897b4e9 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=20.33
+INFO:     127.0.0.1:60636 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:36:29,217 INFO app.main request_id=b2fdee8a-2d6f-435c-a3dd-873712b48ea5 request method=GET path=/api/v1/system/status status=200 duration_ms=18.14
+INFO:     127.0.0.1:60653 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:36:29,219 WARNING app.storage.service request_id=76e5b200-bf2e-4de7-9e83-986bbeb2d78c Falling back to file-backed recommendation for AAPL after storage read failure.
+2026-05-03 12:36:29,223 WARNING app.storage.service request_id=fcdde4a3-854b-4399-a3f9-8cf0a2466ead Falling back to file-backed signals for AAPL after storage read failure.
+2026-05-03 12:36:29,224 WARNING app.storage.service request_id=2e8369cd-c7bf-41d7-a50a-df21b9685262 Falling back to file-backed recommendation history for AAPL after storage read failure.
+2026-05-03 12:36:29,225 INFO app.main request_id=76e5b200-bf2e-4de7-9e83-986bbeb2d78c request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=26.44
+INFO:     127.0.0.1:60650 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:36:29,225 INFO app.main request_id=fcdde4a3-854b-4399-a3f9-8cf0a2466ead request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=27.56
+INFO:     127.0.0.1:60648 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:36:29,228 INFO app.main request_id=e776f784-3e6c-42d4-bac3-f6c1b37864e4 request method=GET path=/api/v1/tickers status=200 duration_ms=28.22
+INFO:     127.0.0.1:60656 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:36:29,229 INFO app.main request_id=2e8369cd-c7bf-41d7-a50a-df21b9685262 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=30.64
+INFO:     127.0.0.1:60652 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:36:38,687 WARNING app.storage.service request_id=8737cf4e-b40c-45e4-94ad-2e4015669646 Falling back to file-backed signals for AAPL after storage read failure.
+2026-05-03 12:36:38,687 WARNING app.storage.service request_id=ef095245-ddcf-46d9-a256-e468838f0f2e Falling back to file-backed price data for AAPL after storage read failure.
+2026-05-03 12:36:38,687 INFO app.main request_id=da3e4f0b-6153-499a-b886-6659a40a7783 request method=GET path=/api/v1/system/status status=200 duration_ms=24.16
+INFO:     127.0.0.1:60674 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:36:38,687 WARNING app.storage.service request_id=1219ee3e-026e-4260-a375-7cfaac12d93f Falling back to file-backed recommendation for AAPL after storage read failure.
+2026-05-03 12:36:38,691 WARNING app.storage.service request_id=6d360e17-68dd-4f18-b33c-569ec34a86d0 Falling back to file-backed recommendation history for AAPL after storage read failure.
+2026-05-03 12:36:38,693 INFO app.main request_id=8737cf4e-b40c-45e4-94ad-2e4015669646 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=31.39
+INFO:     127.0.0.1:60668 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:36:38,693 INFO app.main request_id=ef095245-ddcf-46d9-a256-e468838f0f2e request method=GET path=/api/v1/price/AAPL status=200 duration_ms=32.29
+INFO:     127.0.0.1:60666 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:36:38,694 INFO app.main request_id=1219ee3e-026e-4260-a375-7cfaac12d93f request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=32.46
+INFO:     127.0.0.1:60670 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:36:38,697 INFO app.main request_id=e630f336-4bf4-4002-9132-e72a0a2d43c9 request method=GET path=/api/v1/tickers status=200 duration_ms=33.45
+INFO:     127.0.0.1:60675 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:36:38,698 INFO app.main request_id=6d360e17-68dd-4f18-b33c-569ec34a86d0 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=35.76
+INFO:     127.0.0.1:60672 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:37:05,121 WARNING app.runtime.worker request_id=703cc8a2-7f91-4faa-9f3a-fa051490470e Storage sync failed for ARES: (psycopg.OperationalError) connection failed: connection to server at "127.0.0.1", port 5432 failed: could not receive data from server: Connection refused
+Multiple connection attempts failed. All failures were:
+- host: 'localhost', port: 5432, hostaddr: '::1': connection failed: connection to server at "::1", port 5432 failed: could not receive data from server: Connection refused
+- host: 'localhost', port: 5432, hostaddr: '127.0.0.1': connection failed: connection to server at "127.0.0.1", port 5432 failed: could not receive data from server: Connection refused
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-05-03 12:37:05,122 WARNING app.storage.service request_id=703cc8a2-7f91-4faa-9f3a-fa051490470e Falling back to file-backed price data for ARES after storage read failure.
+2026-05-03 12:37:05,126 WARNING app.storage.service request_id=703cc8a2-7f91-4faa-9f3a-fa051490470e Falling back to file-backed signals for ARES after storage read failure.
+2026-05-03 12:37:05,127 WARNING app.storage.service request_id=703cc8a2-7f91-4faa-9f3a-fa051490470e Falling back to file-backed recommendation for ARES after storage read failure.
+2026-05-03 12:37:05,128 INFO app.main request_id=703cc8a2-7f91-4faa-9f3a-fa051490470e request method=POST path=/api/v1/analysis/ARES/refresh status=200 duration_ms=578.75
+INFO:     127.0.0.1:60686 - "POST /api/v1/analysis/ARES/refresh HTTP/1.1" 200 OK
+2026-05-03 12:37:05,132 WARNING app.storage.service request_id=7c94e808-ca85-4028-b567-1423c589e4ef Falling back to file-backed price data for ARES after storage read failure.
+2026-05-03 12:37:05,134 INFO app.main request_id=7c94e808-ca85-4028-b567-1423c589e4ef request method=GET path=/api/v1/price/ARES status=200 duration_ms=2.32
+INFO:     127.0.0.1:60686 - "GET /api/v1/price/ARES HTTP/1.1" 200 OK
+2026-05-03 12:37:05,153 WARNING app.storage.service request_id=dfead05f-7d76-42e1-ac0e-0fc41909e2fc Falling back to file-backed signals for ARES after storage read failure.
+2026-05-03 12:37:05,154 WARNING app.storage.service request_id=beaa1cb7-9627-481d-b0a4-54abd58b783a Falling back to file-backed recommendation history for ARES after storage read failure.
+2026-05-03 12:37:05,154 INFO app.main request_id=08dcccbe-3409-4f9e-84ac-027b5ef093b2 request method=GET path=/api/v1/system/status status=200 duration_ms=17.72
+INFO:     127.0.0.1:60704 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:37:05,153 WARNING app.storage.service request_id=97e13e87-86ca-4c7e-83cc-71202d0058a6 Falling back to file-backed recommendation for ARES after storage read failure.
+2026-05-03 12:37:05,156 INFO app.main request_id=dfead05f-7d76-42e1-ac0e-0fc41909e2fc request method=GET path=/api/v1/signals/ARES status=200 duration_ms=20.4
+INFO:     127.0.0.1:60701 - "GET /api/v1/signals/ARES HTTP/1.1" 200 OK
+2026-05-03 12:37:05,157 INFO app.main request_id=beaa1cb7-9627-481d-b0a4-54abd58b783a request method=GET path=/api/v1/recommendation/ARES/history status=200 duration_ms=20.93
+INFO:     127.0.0.1:60686 - "GET /api/v1/recommendation/ARES/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:37:05,158 INFO app.main request_id=97e13e87-86ca-4c7e-83cc-71202d0058a6 request method=GET path=/api/v1/recommendation/ARES status=200 duration_ms=21.58
+INFO:     127.0.0.1:60702 - "GET /api/v1/recommendation/ARES HTTP/1.1" 200 OK
+2026-05-03 12:37:05,159 INFO app.main request_id=6ef7be9f-f9f5-44e4-a9e2-bb6a3be56972 request method=GET path=/api/v1/tickers status=200 duration_ms=22.92
+INFO:     127.0.0.1:60706 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+/Users/zacharylevesque/Documents/GitHub/Real-Time-Trading-System/backend/.venv/lib/python3.14/site-packages/yfinance/scrapers/quote.py:149: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.
+  dnow = pd.Timestamp.utcnow().tz_convert(self.timezone).date()
+2026-05-03 12:37:06,120 WARNING app.runtime.worker request_id=8c83c445-c8b9-4eac-9c88-6483b8e0e1e3 Storage sync failed for ARES: (psycopg.OperationalError) connection failed: connection to server at "127.0.0.1", port 5432 failed: could not receive data from server: Connection refused
+Multiple connection attempts failed. All failures were:
+- host: 'localhost', port: 5432, hostaddr: '::1': connection failed: connection to server at "::1", port 5432 failed: could not receive data from server: Connection refused
+- host: 'localhost', port: 5432, hostaddr: '127.0.0.1': connection failed: connection to server at "127.0.0.1", port 5432 failed: could not receive data from server: Connection refused
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-05-03 12:37:06,121 WARNING app.storage.service request_id=8c83c445-c8b9-4eac-9c88-6483b8e0e1e3 Falling back to file-backed price data for ARES after storage read failure.
+2026-05-03 12:37:06,127 WARNING app.storage.service request_id=8c83c445-c8b9-4eac-9c88-6483b8e0e1e3 Falling back to file-backed signals for ARES after storage read failure.
+2026-05-03 12:37:06,128 WARNING app.storage.service request_id=8c83c445-c8b9-4eac-9c88-6483b8e0e1e3 Falling back to file-backed recommendation for ARES after storage read failure.
+2026-05-03 12:37:06,129 INFO app.main request_id=8c83c445-c8b9-4eac-9c88-6483b8e0e1e3 request method=POST path=/api/v1/analysis/ARES/refresh status=200 duration_ms=393.29
+INFO:     127.0.0.1:60706 - "POST /api/v1/analysis/ARES/refresh HTTP/1.1" 200 OK
+2026-05-03 12:37:06,150 WARNING app.storage.service request_id=1300a5d6-70d1-4299-a079-51f338b4ae73 Falling back to file-backed recommendation for ARES after storage read failure.
+2026-05-03 12:37:06,154 INFO app.main request_id=e3d0eff1-d58e-4ab2-85ee-82521c2381dc request method=GET path=/api/v1/system/status status=200 duration_ms=18.79
+INFO:     127.0.0.1:60704 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:37:06,155 WARNING app.storage.service request_id=3b65447d-7ffe-4c1d-8a63-cc194c1627a2 Falling back to file-backed price data for ARES after storage read failure.
+2026-05-03 12:37:06,156 WARNING app.storage.service request_id=3ec4e56e-f765-4039-9f20-d4a30baa1545 Falling back to file-backed signals for ARES after storage read failure.
+2026-05-03 12:37:06,157 WARNING app.storage.service request_id=adb11af9-9b1c-4a32-8d8f-0b12927cfd64 Falling back to file-backed recommendation history for ARES after storage read failure.
+2026-05-03 12:37:06,158 INFO app.main request_id=1300a5d6-70d1-4299-a079-51f338b4ae73 request method=GET path=/api/v1/recommendation/ARES status=200 duration_ms=22.84
+INFO:     127.0.0.1:60686 - "GET /api/v1/recommendation/ARES HTTP/1.1" 200 OK
+2026-05-03 12:37:06,159 INFO app.main request_id=3b65447d-7ffe-4c1d-8a63-cc194c1627a2 request method=GET path=/api/v1/price/ARES status=200 duration_ms=26.0
+INFO:     127.0.0.1:60706 - "GET /api/v1/price/ARES HTTP/1.1" 200 OK
+2026-05-03 12:37:06,160 INFO app.main request_id=3ec4e56e-f765-4039-9f20-d4a30baa1545 request method=GET path=/api/v1/signals/ARES status=200 duration_ms=25.32
+INFO:     127.0.0.1:60702 - "GET /api/v1/signals/ARES HTTP/1.1" 200 OK
+2026-05-03 12:37:06,162 INFO app.main request_id=adb11af9-9b1c-4a32-8d8f-0b12927cfd64 request method=GET path=/api/v1/recommendation/ARES/history status=200 duration_ms=26.49
+INFO:     127.0.0.1:60701 - "GET /api/v1/recommendation/ARES/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:37:06,162 INFO app.main request_id=81a098ac-1eb9-4f2b-a24f-d733fc181958 request method=GET path=/api/v1/tickers status=200 duration_ms=26.55
+INFO:     127.0.0.1:60707 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:38:04,558 WARNING app.storage.service request_id=2cb62535-353e-4bb8-bd85-227c2b58971d Falling back to file-backed price data for ARES after storage read failure.
+2026-05-03 12:38:04,564 WARNING app.storage.service request_id=0928059e-18c2-48e2-a3d0-05b56e01c170 Falling back to file-backed signals for ARES after storage read failure.
+2026-05-03 12:38:04,574 INFO app.main request_id=a4870c05-0103-4835-99c1-c3ec78d60a5f request method=GET path=/api/v1/system/status status=200 duration_ms=32.63
+INFO:     127.0.0.1:60741 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:38:04,579 WARNING app.storage.service request_id=6878640d-4faf-4bab-aebe-812a588e3163 Falling back to file-backed recommendation history for ARES after storage read failure.
+2026-05-03 12:38:04,579 WARNING app.storage.service request_id=3683a158-2134-4651-af54-c42bb6b60ae1 Falling back to file-backed recommendation for ARES after storage read failure.
+2026-05-03 12:38:04,582 INFO app.main request_id=2cb62535-353e-4bb8-bd85-227c2b58971d request method=GET path=/api/v1/price/ARES status=200 duration_ms=42.57
+INFO:     127.0.0.1:60733 - "GET /api/v1/price/ARES HTTP/1.1" 200 OK
+2026-05-03 12:38:04,582 INFO app.main request_id=db225ab2-2311-426f-ae22-c8222af237a6 request method=GET path=/api/v1/tickers status=200 duration_ms=39.66
+INFO:     127.0.0.1:60742 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:38:04,583 INFO app.main request_id=0928059e-18c2-48e2-a3d0-05b56e01c170 request method=GET path=/api/v1/signals/ARES status=200 duration_ms=43.53
+INFO:     127.0.0.1:60734 - "GET /api/v1/signals/ARES HTTP/1.1" 200 OK
+2026-05-03 12:38:04,584 INFO app.main request_id=3683a158-2134-4651-af54-c42bb6b60ae1 request method=GET path=/api/v1/recommendation/ARES status=200 duration_ms=44.0
+INFO:     127.0.0.1:60737 - "GET /api/v1/recommendation/ARES HTTP/1.1" 200 OK
+2026-05-03 12:38:04,585 INFO app.main request_id=6878640d-4faf-4bab-aebe-812a588e3163 request method=GET path=/api/v1/recommendation/ARES/history status=200 duration_ms=44.2
+INFO:     127.0.0.1:60739 - "GET /api/v1/recommendation/ARES/history?limit=6 HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/core/config.py', 'app/runtime/worker.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [28905]
+INFO:     Started server process [29185]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/core/config.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [29185]
+INFO:     Started server process [29192]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'tests/test_runtime_worker.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [29192]
+WARNING:  WatchFiles detected changes in 'app/runtime/worker.py'. Reloading...
+INFO:     Started server process [29361]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Started server process [29363]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'tests/test_runtime_worker.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [29363]
+INFO:     Started server process [29370]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+2026-05-03 12:39:01,122 INFO app.main request_id=6f38c8a2-a19e-4612-a514-96b0871214ea request method=GET path=/api/v1/system/status status=200 duration_ms=9.44
+INFO:     127.0.0.1:60781 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:39:01,127 INFO app.main request_id=e5dfc8e2-f8cd-49c4-b0e8-a66328c8f99a request method=GET path=/api/v1/system/status status=200 duration_ms=2.76
+INFO:     127.0.0.1:60781 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:39:01,128 INFO app.main request_id=54f77271-7ba9-414d-bbbd-0a05a3e1892b request method=GET path=/api/v1/tickers status=200 duration_ms=15.17
+INFO:     127.0.0.1:60782 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:39:01,140 INFO app.main request_id=342fd329-4e82-43af-ae17-e1a85a82dcb0 request method=GET path=/api/v1/tickers status=200 duration_ms=10.88
+INFO:     127.0.0.1:60781 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:39:01,158 INFO app.main request_id=dfc1c332-2c49-4ab3-bce1-f812b73ab47f request method=GET path=/api/v1/tickers status=200 duration_ms=15.44
+INFO:     127.0.0.1:60782 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:39:01,176 INFO app.main request_id=8c0c81e3-c8d4-4329-a04b-9d889d0ee5e3 request method=GET path=/api/v1/tickers status=200 duration_ms=15.59
+INFO:     127.0.0.1:60781 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+2026-05-03 12:39:01,186 INFO app.main request_id=197beb78-c67e-4e56-9b47-07d6f68236ff request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=75.92
+INFO:     127.0.0.1:60776 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:39:01,187 INFO app.main request_id=06bd2282-6916-485c-a449-a439e8045793 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=78.96
+INFO:     127.0.0.1:60774 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:39:01,188 INFO app.main request_id=470970b0-6253-48bf-9a25-7e6ec94756a9 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=77.02
+INFO:     127.0.0.1:60777 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:39:01,190 INFO app.main request_id=054ee151-8106-44ed-b184-e22fba3a01e7 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=79.18
+INFO:     127.0.0.1:60778 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:39:01,192 INFO app.main request_id=82218c36-665e-4db4-b3d3-01a7a62cd41c request method=GET path=/api/v1/price/AAPL status=200 duration_ms=3.09
+INFO:     127.0.0.1:60776 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:39:01,192 INFO app.main request_id=c658476a-1b19-432d-8b47-194f1db44d10 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=3.23
+INFO:     127.0.0.1:60782 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:39:01,193 INFO app.main request_id=664f6d78-077e-4282-b6f2-c548ae45cee6 request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=4.31
+INFO:     127.0.0.1:60781 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:39:01,195 INFO app.main request_id=678dc3cf-3ee8-4e4d-ab1f-cd3dd1f94b38 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=3.31
+INFO:     127.0.0.1:60777 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
