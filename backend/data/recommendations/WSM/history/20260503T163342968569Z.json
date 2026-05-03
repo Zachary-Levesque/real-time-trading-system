@@ -1,0 +1,14 @@
+{
+  "ticker": "WSM",
+  "timestamp": "2026-05-03T16:33:42.968569Z",
+  "recommendation": "HOLD",
+  "confidence": 0.65,
+  "risk": "low",
+  "signals": {
+    "momentum": "neutral",
+    "trend": "neutral",
+    "volatility": "stable",
+    "volume": "above_average"
+  },
+  "reason": "Neutral momentum with a neutral trend, stable volatility, and above-average volume suggests waiting for clearer confirmation."
+}
