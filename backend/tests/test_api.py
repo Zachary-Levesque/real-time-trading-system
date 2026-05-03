@@ -3,11 +3,13 @@ from pathlib import Path
 
 from fastapi.testclient import TestClient
 
-from app.api.dependencies import get_storage_read_service
+from app.api.dependencies import get_storage_read_service, get_update_pipeline_service
+from app.ingestion.exceptions import MarketDataNotFoundError
 from app.main import app
 from app.models.market_data import MarketDataPayload, MarketDataPoint, NormalizedMarketData
 from app.models.recommendation import RecommendationResult, RecommendationSignals
 from app.models.signal import SignalData, SignalPayload, SignalResult
+from app.runtime.worker import UpdatePipelineResult
 from app.processing.storage import LocalMarketDataReader
 from app.recommendation.storage import LocalRecommendationReader, LocalSignalReader
 from app.storage.local_queries import PriceSnapshotService
@@ -161,6 +163,69 @@ def test_api_returns_404_for_missing_ticker(tmp_path: Path) -> None:
     app.dependency_overrides.clear()
 
     assert all(response.status_code == 404 for response in responses)
+
+
+def test_analysis_refresh_endpoint_returns_latest_objects(tmp_path: Path) -> None:
+    class StubPipelineService:
+        def __init__(self) -> None:
+            self.calls = []
+
+        def run_once_for_ticker(self, ticker: str) -> UpdatePipelineResult:
+            self.calls.append(ticker)
+            return UpdatePipelineResult(
+                ticker=ticker,
+                storage_synced=True,
+                storage_result=type(
+                    "StorageResult",
+                    (),
+                    {
+                        "persisted_market_data": True,
+                        "persisted_signal": True,
+                        "persisted_recommendation": True,
+                    },
+                )(),
+            )
+
+    seed_local_data(tmp_path)
+    pipeline_service = StubPipelineService()
+    app.dependency_overrides[get_update_pipeline_service] = lambda: pipeline_service
+    app.dependency_overrides[get_storage_read_service] = lambda: StorageBackedReadService(
+        repository=PostgresStorageRepository.__new__(PostgresStorageRepository),
+        cache=None,
+        file_price_service=PriceSnapshotService(LocalMarketDataReader(tmp_path / "market")),
+        file_signal_reader=LocalSignalReader(tmp_path / "signals"),
+        file_recommendation_reader=LocalRecommendationReader(tmp_path / "recommendations"),
+        storage_mode="file",
+    )
+
+    client = TestClient(app)
+    response = client.post("/api/v1/analysis/aapl/refresh")
+
+    app.dependency_overrides.clear()
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["ticker"] == "AAPL"
+    assert payload["data"]["price_snapshot"]["data"]["current_price"] == 101.7
+    assert payload["data"]["signal"]["data"]["values"]["trend"] == "bullish"
+    assert payload["data"]["recommendation"]["recommendation"] == "BUY"
+    assert payload["data"]["storage_synced"] is True
+    assert pipeline_service.calls == ["AAPL"]
+
+
+def test_analysis_refresh_endpoint_returns_404_when_market_data_is_missing() -> None:
+    class MissingTickerPipelineService:
+        def run_once_for_ticker(self, ticker: str) -> UpdatePipelineResult:
+            raise MarketDataNotFoundError(f"No market data returned for ticker '{ticker}'.")
+
+    app.dependency_overrides[get_update_pipeline_service] = lambda: MissingTickerPipelineService()
+    client = TestClient(app)
+
+    response = client.post("/api/v1/analysis/INVALID/refresh")
+
+    app.dependency_overrides.clear()
+
+    assert response.status_code == 404
 
 
 def test_api_allows_cors_preflight() -> None:
