@@ -60,19 +60,6 @@ So this project connects:
 - a one-command local launcher for normal users
 - automated backend tests and frontend build validation
 
-## Why The Product Is Valuable
-
-This project is valuable because it demonstrates more than code correctness.
-
-It shows:
-
-- a real end-to-end data flow
-- a product surface someone can actually interact with
-- explainable outputs instead of black-box results
-- design choices that make the project easy to demo, extend, and discuss
-
-For interviews and portfolio use, that matters. It gives a stronger story than “I trained a model” because it shows how software systems are built, not just how formulas are run.
-
 ## Main Folders
 
 - `backend`: API, ingestion, processing, recommendation, storage, runtime worker
