@@ -14,13 +14,14 @@ import {
   getRecommendation,
   getRecommendationHistory,
   getSignals,
+  getTickerCatalog,
   refreshAnalysis,
   getSystemStatus,
 } from "../api/client";
 import { SectionHeading } from "../components/SectionHeading";
 
 const defaultTicker = "AAPL";
-const quickTickers = ["AAPL", "MSFT", "NVDA", "SPY"];
+const fallbackQuickTickers = ["AAPL", "MSFT", "NVDA", "SPY"];
 const refreshIntervalMs = 60000;
 
 function formatCurrency(value, currency = "USD") {
@@ -105,10 +106,12 @@ export function DashboardPage() {
   const [recommendationResult, setRecommendationResult] = useState(null);
   const [recommendationHistory, setRecommendationHistory] = useState(null);
   const [systemStatus, setSystemStatus] = useState(null);
+  const [tickerCatalog, setTickerCatalog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
   const [warning, setWarning] = useState("");
+  const [refreshSummary, setRefreshSummary] = useState(null);
   const refreshOnNextLoadRef = useRef(false);
 
   async function loadDashboard(normalizedTicker, { triggerRefresh = false } = {}) {
@@ -116,13 +119,19 @@ export function DashboardPage() {
     setError("");
     setWarning("");
     let refreshError = null;
+    let refreshPayload = null;
 
     if (triggerRefresh) {
       setRefreshing(true);
       try {
-        await refreshAnalysis(normalizedTicker);
+        refreshPayload = await refreshAnalysis(normalizedTicker);
+        setPriceSnapshot(refreshPayload.data.price_snapshot);
+        setSignalResult(refreshPayload.data.signal);
+        setRecommendationResult(refreshPayload.data.recommendation);
+        setRefreshSummary(refreshPayload.data);
       } catch (error) {
         refreshError = error;
+        setRefreshSummary(null);
       } finally {
         setRefreshing(false);
       }
@@ -134,12 +143,14 @@ export function DashboardPage() {
       recommendationResultResponse,
       recommendationHistoryResponse,
       systemStatusResponse,
+      tickerCatalogResponse,
     ] = await Promise.allSettled([
       getPriceSnapshot(normalizedTicker),
       getSignals(normalizedTicker),
       getRecommendation(normalizedTicker),
       getRecommendationHistory(normalizedTicker),
       getSystemStatus(),
+      getTickerCatalog(),
     ]);
 
     const failures = [];
@@ -178,6 +189,10 @@ export function DashboardPage() {
     } else {
       setSystemStatus(null);
       auxiliaryFailures.push("system status");
+    }
+
+    if (tickerCatalogResponse.status === "fulfilled") {
+      setTickerCatalog(tickerCatalogResponse.value);
     }
 
     if (failures.length === 3) {
@@ -242,6 +257,29 @@ export function DashboardPage() {
     };
   }, [activeTicker]);
 
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadTickerCatalog() {
+      try {
+        const catalog = await getTickerCatalog();
+        if (!cancelled) {
+          setTickerCatalog(catalog);
+        }
+      } catch {
+        if (!cancelled) {
+          setTickerCatalog(null);
+        }
+      }
+    }
+
+    void loadTickerCatalog();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const chartData =
     priceSnapshot?.data.points.map((point) => ({
       timestamp: point.timestamp,
@@ -251,6 +289,9 @@ export function DashboardPage() {
     })) ?? [];
 
   const signalValues = signalResult?.data.values;
+  const quickTickers = tickerCatalog?.data.available_tickers?.slice(0, 8) ?? fallbackQuickTickers;
+  const configuredTickers = tickerCatalog?.data.configured_tickers ?? [];
+  const savedRecommendationTickers = tickerCatalog?.data.saved_recommendation_tickers ?? [];
   const priceFreshness = freshnessStatus(priceSnapshot?.timestamp);
   const signalFreshness = freshnessStatus(signalResult?.timestamp);
   const recommendationFreshness = freshnessStatus(recommendationResult?.timestamp);
@@ -369,6 +410,21 @@ export function DashboardPage() {
                   {ticker}
                 </button>
               ))}
+            </div>
+
+            <div className="mt-4 grid gap-3 rounded-[1.25rem] border border-white/10 bg-slate-950/50 p-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Configured worker tickers</p>
+                <p className="mt-2 text-sm text-slate-300">
+                  {configuredTickers.length > 0 ? configuredTickers.join(", ") : "Unavailable"}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Tickers with saved recommendations</p>
+                <p className="mt-2 text-sm text-slate-300">
+                  {savedRecommendationTickers.length > 0 ? savedRecommendationTickers.join(", ") : "None saved yet"}
+                </p>
+              </div>
             </div>
 
             {error ? (
@@ -512,6 +568,22 @@ export function DashboardPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Points loaded</p>
               <p className="mt-3 text-sm text-white">{signalResult?.data.data_points_used ?? "--"}</p>
             </div>
+          </div>
+
+          <div className="mt-8 rounded-[1.3rem] border border-white/10 bg-white/[0.04] p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Latest live refresh</p>
+            <p className="mt-3 text-sm text-white">
+              {refreshSummary === null
+                ? "No manual refresh has been run in this session."
+                : refreshSummary.storage_synced
+                  ? "The latest refresh completed and persisted through the storage sync path."
+                  : "The latest refresh completed, but storage sync did not finish successfully."}
+            </p>
+            <p className="mt-2 text-xs text-slate-400">
+              {refreshSummary === null
+                ? "Use Analyze to run the full ingestion, signal, and recommendation pipeline."
+                : `Persisted market=${String(refreshSummary.persisted_market_data)} signal=${String(refreshSummary.persisted_signal)} recommendation=${String(refreshSummary.persisted_recommendation)}`}
+            </p>
           </div>
 
           <div className="mt-8 rounded-[1.3rem] border border-white/10 bg-white/[0.04] p-4">
