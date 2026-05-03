@@ -1,0 +1,14 @@
+{
+  "ticker": "ARES",
+  "timestamp": "2026-05-03T16:37:05.116393Z",
+  "recommendation": "BUY",
+  "confidence": 0.6,
+  "risk": "medium",
+  "signals": {
+    "momentum": "positive",
+    "trend": "bullish",
+    "volatility": "low",
+    "volume": "high"
+  },
+  "reason": "Positive momentum with a bullish trend, low volatility, and high volume supports a buy bias."
+}
