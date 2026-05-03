@@ -303,6 +303,7 @@ With the backend running, the current API now exposes:
 - `GET /api/v1/recommendation/{ticker}`
 - `GET /api/v1/recommendation/{ticker}/history`
 - `GET /api/v1/system/status`
+- `GET /api/v1/tickers`
 - `POST /api/v1/analysis/{ticker}/refresh`
 
 Examples:
@@ -311,6 +312,7 @@ Examples:
 curl http://localhost:8000/api/v1/price/AAPL
 curl http://localhost:8000/api/v1/signals/AAPL
 curl http://localhost:8000/api/v1/recommendation/AAPL
+curl http://localhost:8000/api/v1/tickers
 curl -X POST http://localhost:8000/api/v1/analysis/AAPL/refresh
 ```
 
@@ -321,6 +323,7 @@ The API behavior now prefers storage when available:
 - `/recommendation/{ticker}` checks Redis, then PostgreSQL, then local recommendation files in `hybrid` mode
 - `/recommendation/{ticker}/history` reads PostgreSQL first, then local recommendation history in `hybrid` mode
 - `/system/status` reports worker cadence, last run metadata, and error state
+- `/tickers` reports configured worker tickers plus discovered saved tickers across market, signal, and recommendation storage
 - `/analysis/{ticker}/refresh` runs ingestion, signal processing, recommendation generation, and storage sync on demand
 - missing tickers return `404`
 - request responses include `X-Request-ID` for traceability
@@ -344,18 +347,25 @@ The dashboard now:
 
 - can trigger a live backend analysis for a searched ticker
 - fetches price, signal, and recommendation data from the backend API
+- shows which tickers are configured for background refresh and which already have saved recommendation data
+- reports whether the latest live refresh was fully persisted through the storage sync path
 - supports ticker search
 - displays loading and error states
 - renders a price chart using Recharts
 - shows recommendation, confidence, risk, signal breakdown, explanation, worker status, and recommendation history
 
-### Manual check
+### Manual UI Check
 
 1. Start the backend and frontend.
 2. Open `http://localhost:5173/`.
 3. Verify the welcome page renders.
 4. Open the dashboard page.
-5. Verify `http://localhost:8000/api/v1/health` returns a healthy response.
+5. Confirm the quick-pick tickers and the configured/saved ticker lists render.
+6. Search `AAPL` and click `Analyze`. Verify the price chart, signal cards, recommendation, history, and live refresh status populate.
+7. Search `MSFT`, `NVDA`, or `SPY` and verify the dashboard updates.
+8. Search a ticker that is not already saved, such as `AMD`, and click `Analyze`. If market data is available from `yfinance`, verify the dashboard still fills with a new analysis.
+9. Confirm `http://localhost:8000/api/v1/health`, `http://localhost:8000/api/v1/system/status`, and `http://localhost:8000/api/v1/tickers` return JSON responses.
+10. Optionally stop PostgreSQL or Redis and confirm the dashboard still surfaces useful warnings rather than failing silently when persistence cannot complete.
 
 ## Current Data Contract
 
