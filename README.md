@@ -323,10 +323,27 @@ The API behavior now prefers storage when available:
 - `/recommendation/{ticker}` checks Redis, then PostgreSQL, then local recommendation files in `hybrid` mode
 - `/recommendation/{ticker}/history` reads PostgreSQL first, then local recommendation history in `hybrid` mode
 - `/system/status` reports worker cadence, last run metadata, and error state
-- `/tickers` reports configured worker tickers plus discovered saved tickers across market, signal, and recommendation storage
+- `/tickers` reports the built-in search universe, featured tickers, configured worker tickers, and discovered saved tickers
 - `/analysis/{ticker}/refresh` runs ingestion, signal processing, recommendation generation, and storage sync on demand
 - missing tickers return `404`
 - request responses include `X-Request-ID` for traceability
+
+## Ticker Universe
+
+As of May 3, 2026, the app now ships with a built-in `sp500_top100` ticker universe for discovery and autocomplete. This is based on a current S&P 500 market-cap style ranking and is intended to give the UI a much broader, but still usable, stock set without forcing the background worker to refresh hundreds of tickers by default.
+
+Important distinction:
+
+- on-demand analysis can still be run for any valid ticker symbol the ingestion provider can fetch
+- the built-in search and quick-pick experience now covers a top-100 S&P 500 universe
+- the background worker remains separately configurable so you do not accidentally schedule 100 tickers every cycle unless you explicitly want that
+
+Environment controls:
+
+- `TICKER_UNIVERSE=sp500_top100` uses the built-in top-100 universe for search suggestions and featured tickers
+- `FEATURED_TICKER_COUNT=12` controls how many of those appear as quick-pick chips in the UI
+- `BACKGROUND_WORKER_UNIVERSE=manual` keeps the worker on the explicit `BACKGROUND_WORKER_TICKERS` list
+- `BACKGROUND_WORKER_UNIVERSE=sp500_top100` expands scheduled background refresh to the full built-in top-100 universe
 
 ## Frontend Welcome Page
 
@@ -347,6 +364,7 @@ The dashboard now:
 
 - can trigger a live backend analysis for a searched ticker
 - fetches price, signal, and recommendation data from the backend API
+- offers built-in ticker suggestions across a top-100 S&P 500 universe
 - shows which tickers are configured for background refresh and which already have saved recommendation data
 - reports whether the latest live refresh was fully persisted through the storage sync path
 - supports ticker search
