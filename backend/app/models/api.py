@@ -4,6 +4,8 @@ from pydantic import BaseModel
 
 from app.models.market_data import MarketDataPoint
 from app.models.recommendation import RecommendationLabel, RiskLabel
+from app.models.recommendation import RecommendationResult
+from app.models.signal import SignalResult
 
 
 class PriceSnapshotData(BaseModel):
@@ -35,6 +37,22 @@ class RecommendationHistoryResponse(BaseModel):
     ticker: str
     timestamp: datetime
     data: list[RecommendationHistoryEntry]
+
+
+class AnalysisRefreshData(BaseModel):
+    price_snapshot: PriceSnapshotResponse
+    signal: SignalResult
+    recommendation: RecommendationResult
+    storage_synced: bool
+    persisted_market_data: bool | None = None
+    persisted_signal: bool | None = None
+    persisted_recommendation: bool | None = None
+
+
+class AnalysisRefreshResponse(BaseModel):
+    ticker: str
+    timestamp: datetime
+    data: AnalysisRefreshData
 
 
 class ErrorResponse(BaseModel):
