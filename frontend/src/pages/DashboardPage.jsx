@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Area,
   AreaChart,
@@ -14,6 +14,7 @@ import {
   getRecommendation,
   getRecommendationHistory,
   getSignals,
+  refreshAnalysis,
   getSystemStatus,
 } from "../api/client";
 import { SectionHeading } from "../components/SectionHeading";
@@ -105,13 +106,27 @@ export function DashboardPage() {
   const [recommendationHistory, setRecommendationHistory] = useState(null);
   const [systemStatus, setSystemStatus] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
   const [warning, setWarning] = useState("");
+  const refreshOnNextLoadRef = useRef(false);
 
-  async function loadDashboard(normalizedTicker) {
+  async function loadDashboard(normalizedTicker, { triggerRefresh = false } = {}) {
     setLoading(true);
     setError("");
     setWarning("");
+    let refreshError = null;
+
+    if (triggerRefresh) {
+      setRefreshing(true);
+      try {
+        await refreshAnalysis(normalizedTicker);
+      } catch (error) {
+        refreshError = error;
+      } finally {
+        setRefreshing(false);
+      }
+    }
 
     const [
       priceResult,
@@ -176,13 +191,20 @@ export function DashboardPage() {
               : null;
 
       throw new Error(
+        refreshError?.message ??
         firstFailure?.message ??
-          `No saved analysis is available for ${normalizedTicker} yet. Try AAPL, MSFT, NVDA, or SPY after refreshing data.`,
+          `No analysis is available for ${normalizedTicker} yet. Run a live refresh or try AAPL, MSFT, NVDA, or SPY.`,
       );
     }
 
     const unavailableSections = [...failures, ...auxiliaryFailures];
-    if (unavailableSections.length > 0) {
+    if (refreshError && unavailableSections.length > 0) {
+      setWarning(
+        `Live refresh failed: ${refreshError.message} Showing the latest saved data instead, and some sections are unavailable: ${unavailableSections.join(", ")}.`,
+      );
+    } else if (refreshError) {
+      setWarning(`Live refresh failed: ${refreshError.message} Showing the latest saved analysis instead.`);
+    } else if (unavailableSections.length > 0) {
       setWarning(`Some data is unavailable right now: ${unavailableSections.join(", ")}.`);
     }
 
@@ -195,7 +217,9 @@ export function DashboardPage() {
     async function executeLoad() {
       try {
         const normalizedTicker = activeTicker.trim().toUpperCase();
-        await loadDashboard(normalizedTicker);
+        const triggerRefresh = refreshOnNextLoadRef.current;
+        refreshOnNextLoadRef.current = false;
+        await loadDashboard(normalizedTicker, { triggerRefresh });
       } catch (loadError) {
         if (cancelled) {
           return;
@@ -266,6 +290,19 @@ export function DashboardPage() {
       return;
     }
 
+    if (normalizedTicker === activeTicker) {
+      void loadDashboard(normalizedTicker, { triggerRefresh: true }).catch((loadError) => {
+        setPriceSnapshot(null);
+        setSignalResult(null);
+        setRecommendationResult(null);
+        setRecommendationHistory(null);
+        setError(loadError.message);
+        setLoading(false);
+      });
+      return;
+    }
+
+    refreshOnNextLoadRef.current = true;
     setActiveTicker(normalizedTicker);
   }
 
@@ -274,15 +311,15 @@ export function DashboardPage() {
       <SectionHeading
         eyebrow="Dashboard"
         title="Search a ticker to see recent price action, market signals, and a recommendation."
-        description="Use the dashboard to review the latest saved analysis for supported tickers and see how the recommendation has changed over time."
+        description="Run a live analysis for a ticker, then review the latest price action, signal breakdown, and recommendation history."
       />
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">
         <div className="rounded-[2rem] border border-white/10 bg-slate-900/70 p-6">
           <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">Saved market analysis</p>
-              <p className="mt-2 text-sm text-slate-300">Quick picks currently work best for tickers with refreshed data.</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">Live market analysis</p>
+              <p className="mt-2 text-sm text-slate-300">Analyze can run the full pipeline on demand, then the dashboard keeps polling the saved result every minute.</p>
             </div>
             <p className="rounded-full border border-white/10 bg-slate-950 px-4 py-2 text-xs text-emerald-200">
               Auto-refreshes every minute
@@ -302,7 +339,7 @@ export function DashboardPage() {
                 type="submit"
                 className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-200"
               >
-                {loading ? "Loading..." : "Analyze"}
+                {refreshing ? "Running live refresh..." : loading ? "Loading..." : "Analyze"}
               </button>
             </form>
 
@@ -313,6 +350,18 @@ export function DashboardPage() {
                   type="button"
                   onClick={() => {
                     setTickerInput(ticker);
+                    if (ticker === activeTicker) {
+                      void loadDashboard(ticker, { triggerRefresh: true }).catch((loadError) => {
+                        setPriceSnapshot(null);
+                        setSignalResult(null);
+                        setRecommendationResult(null);
+                        setRecommendationHistory(null);
+                        setError(loadError.message);
+                        setLoading(false);
+                      });
+                      return;
+                    }
+                    refreshOnNextLoadRef.current = true;
                     setActiveTicker(ticker);
                   }}
                   className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-200 transition hover:border-cyan-300/40 hover:text-white"
@@ -446,10 +495,9 @@ export function DashboardPage() {
             </div>
           </div>
 
-              <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300">
-                {recommendationResult?.reason ??
-              `No saved recommendation is available for ${activeTicker} yet.`}
-              </p>
+          <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300">
+            {recommendationResult?.reason ?? `No saved recommendation is available for ${activeTicker} yet.`}
+          </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             <div className="rounded-[1.3rem] border border-white/10 bg-white/[0.04] p-4">
