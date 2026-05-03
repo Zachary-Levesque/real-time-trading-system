@@ -84,6 +84,8 @@ class Settings(BaseSettings):
 
     @property
     def featured_tickers(self) -> list[str]:
+        if self.ticker_universe == "sp500_all":
+            return SP500_TOP_100_TICKERS[: self.featured_ticker_count]
         return self.searchable_ticker_universe[: self.featured_ticker_count]
 
     @property
