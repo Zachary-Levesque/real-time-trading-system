@@ -4,6 +4,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from app.api.dependencies import get_storage_read_service, get_update_pipeline_service
+from app.core.config import get_settings
 from app.ingestion.exceptions import MarketDataNotFoundError
 from app.main import app
 from app.models.market_data import MarketDataPayload, MarketDataPoint, NormalizedMarketData
@@ -165,6 +166,36 @@ def test_api_returns_404_for_missing_ticker(tmp_path: Path) -> None:
     assert all(response.status_code == 404 for response in responses)
 
 
+def test_ticker_catalog_endpoint_lists_saved_and_configured_tickers(tmp_path: Path) -> None:
+    seed_local_data(tmp_path)
+    settings = get_settings()
+    original_market_dir = settings.market_data_dir
+    original_signal_dir = settings.signal_data_dir
+    original_recommendation_dir = settings.recommendation_data_dir
+    original_background_worker_tickers = settings.background_worker_tickers
+
+    settings.market_data_dir = tmp_path / "market"
+    settings.signal_data_dir = tmp_path / "signals"
+    settings.recommendation_data_dir = tmp_path / "recommendations"
+    settings.background_worker_tickers = ["AAPL", "MSFT", "NVDA"]
+
+    client = TestClient(app)
+    response = client.get("/api/v1/tickers")
+
+    settings.market_data_dir = original_market_dir
+    settings.signal_data_dir = original_signal_dir
+    settings.recommendation_data_dir = original_recommendation_dir
+    settings.background_worker_tickers = original_background_worker_tickers
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["data"]["configured_tickers"] == ["AAPL", "MSFT", "NVDA"]
+    assert payload["data"]["saved_market_tickers"] == ["AAPL"]
+    assert payload["data"]["saved_signal_tickers"] == ["AAPL"]
+    assert payload["data"]["saved_recommendation_tickers"] == ["AAPL"]
+    assert payload["data"]["available_tickers"] == ["AAPL", "MSFT", "NVDA"]
+
+
 def test_analysis_refresh_endpoint_returns_latest_objects(tmp_path: Path) -> None:
     class StubPipelineService:
         def __init__(self) -> None:
@@ -211,6 +242,14 @@ def test_analysis_refresh_endpoint_returns_latest_objects(tmp_path: Path) -> Non
     assert payload["data"]["recommendation"]["recommendation"] == "BUY"
     assert payload["data"]["storage_synced"] is True
     assert pipeline_service.calls == ["AAPL"]
+
+
+def test_analysis_refresh_endpoint_rejects_invalid_ticker() -> None:
+    client = TestClient(app)
+
+    response = client.post("/api/v1/analysis/INVALID_SYMBOL_TOO_LONG/refresh")
+
+    assert response.status_code == 422
 
 
 def test_analysis_refresh_endpoint_returns_404_when_market_data_is_missing() -> None:
