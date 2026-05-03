@@ -27,12 +27,15 @@ def list_saved_tickers(base_dir: Path) -> list[str]:
 def get_ticker_catalog() -> TickerCatalogResponse:
     settings = get_settings()
 
-    configured_tickers = sorted({ticker.upper() for ticker in settings.background_worker_tickers})
+    configured_tickers = sorted({ticker.upper() for ticker in settings.resolved_background_worker_tickers})
+    searchable_tickers = settings.searchable_ticker_universe
+    featured_tickers = settings.featured_tickers
     saved_market_tickers = list_saved_tickers(Path(settings.market_data_dir))
     saved_signal_tickers = list_saved_tickers(Path(settings.signal_data_dir))
     saved_recommendation_tickers = list_saved_tickers(Path(settings.recommendation_data_dir))
     available_tickers = sorted(
-        set(configured_tickers)
+        set(searchable_tickers)
+        | set(configured_tickers)
         | set(saved_market_tickers)
         | set(saved_signal_tickers)
         | set(saved_recommendation_tickers)
@@ -41,6 +44,9 @@ def get_ticker_catalog() -> TickerCatalogResponse:
     return TickerCatalogResponse(
         timestamp=datetime.now(UTC),
         data=TickerCatalogData(
+            universe_name=settings.ticker_universe,
+            featured_tickers=featured_tickers,
+            searchable_tickers=searchable_tickers,
             configured_tickers=configured_tickers,
             saved_market_tickers=saved_market_tickers,
             saved_signal_tickers=saved_signal_tickers,

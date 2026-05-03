@@ -28,7 +28,7 @@ async def lifespan(_: FastAPI):
         try:
             worker = BackgroundUpdateWorker(
                 pipeline_service=UpdatePipelineService(),
-                tickers=settings.background_worker_tickers,
+                tickers=settings.resolved_background_worker_tickers,
                 interval_seconds=settings.background_worker_interval_seconds,
                 run_immediately=settings.background_worker_run_immediately,
             )
