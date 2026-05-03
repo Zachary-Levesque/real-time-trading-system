@@ -37,7 +37,6 @@ This project matters because it shows how to build a real software system around
 - how recommendations are served through an API
 - how a frontend turns system output into a usable product
 - how local files, PostgreSQL, and Redis fit into one architecture
-- how engineering tradeoffs change between local development and richer infrastructure modes
 
 So this project connects:
 
