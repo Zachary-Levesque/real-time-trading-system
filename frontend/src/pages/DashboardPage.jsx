@@ -315,6 +315,7 @@ export function DashboardPage() {
   const tickerUniverseName = tickerCatalog?.data.universe_name ?? "manual";
   const configuredTickers = tickerCatalog?.data.configured_tickers ?? [];
   const savedRecommendationTickers = tickerCatalog?.data.saved_recommendation_tickers ?? [];
+  const selectedCompanyInUniverse = companies.some((company) => company.ticker === activeTicker);
   const priceFreshness = freshnessStatus(priceSnapshot?.timestamp);
   const signalFreshness = freshnessStatus(signalResult?.timestamp);
   const recommendationFreshness = freshnessStatus(recommendationResult?.timestamp);
@@ -414,7 +415,7 @@ export function DashboardPage() {
                 onChange={(event) => triggerTickerSelection(event.target.value)}
                 className="h-12 w-full rounded-2xl border border-white/10 bg-slate-900 px-4 text-sm text-white outline-none transition focus:border-cyan-300/40"
               >
-                {companies.length === 0 ? <option value={activeTicker}>{activeTicker}</option> : null}
+                {!selectedCompanyInUniverse ? <option value={activeTicker}>{activeTicker}</option> : null}
                 {companies.map((company) => (
                   <option key={company.ticker} value={company.ticker}>
                     {company.ticker} - {company.name}
