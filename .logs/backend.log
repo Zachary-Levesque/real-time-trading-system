@@ -332,3 +332,11 @@ INFO:     127.0.0.1:60796 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTT
 INFO:     127.0.0.1:60790 - "GET /api/v1/tickers HTTP/1.1" 200 OK
 2026-05-03 12:39:16,127 INFO app.main request_id=7f407ae7-2ac8-4f62-be82-616b8f671e61 request method=GET path=/api/v1/tickers status=200 duration_ms=9.14
 INFO:     127.0.0.1:60796 - "GET /api/v1/tickers HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'tests/test_runtime_worker.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [29370]
+INFO:     Started server process [30448]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
