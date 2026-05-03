@@ -303,6 +303,7 @@ With the backend running, the current API now exposes:
 - `GET /api/v1/recommendation/{ticker}`
 - `GET /api/v1/recommendation/{ticker}/history`
 - `GET /api/v1/system/status`
+- `POST /api/v1/analysis/{ticker}/refresh`
 
 Examples:
 
@@ -310,6 +311,7 @@ Examples:
 curl http://localhost:8000/api/v1/price/AAPL
 curl http://localhost:8000/api/v1/signals/AAPL
 curl http://localhost:8000/api/v1/recommendation/AAPL
+curl -X POST http://localhost:8000/api/v1/analysis/AAPL/refresh
 ```
 
 The API behavior now prefers storage when available:
@@ -319,6 +321,7 @@ The API behavior now prefers storage when available:
 - `/recommendation/{ticker}` checks Redis, then PostgreSQL, then local recommendation files in `hybrid` mode
 - `/recommendation/{ticker}/history` reads PostgreSQL first, then local recommendation history in `hybrid` mode
 - `/system/status` reports worker cadence, last run metadata, and error state
+- `/analysis/{ticker}/refresh` runs ingestion, signal processing, recommendation generation, and storage sync on demand
 - missing tickers return `404`
 - request responses include `X-Request-ID` for traceability
 
@@ -339,6 +342,7 @@ Phase 7 turns the dashboard into a working product surface.
 
 The dashboard now:
 
+- can trigger a live backend analysis for a searched ticker
 - fetches price, signal, and recommendation data from the backend API
 - supports ticker search
 - displays loading and error states
