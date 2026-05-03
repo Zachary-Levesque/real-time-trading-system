@@ -340,3 +340,11 @@ INFO:     Finished server process [29370]
 INFO:     Started server process [30448]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'tests/test_runtime_worker.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [30448]
+INFO:     Started server process [30650]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
