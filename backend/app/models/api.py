@@ -39,10 +39,16 @@ class RecommendationHistoryResponse(BaseModel):
     data: list[RecommendationHistoryEntry]
 
 
+class CompanyOption(BaseModel):
+    ticker: str
+    name: str
+
+
 class TickerCatalogData(BaseModel):
     universe_name: str
     featured_tickers: list[str]
     searchable_tickers: list[str]
+    companies: list[CompanyOption]
     configured_tickers: list[str]
     saved_market_tickers: list[str]
     saved_signal_tickers: list[str]
