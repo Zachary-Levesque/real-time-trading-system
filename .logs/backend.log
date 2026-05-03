@@ -290,3 +290,15 @@ INFO:     127.0.0.1:61081 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
 INFO:     127.0.0.1:61087 - "GET /api/v1/tickers HTTP/1.1" 200 OK
 2026-05-03 12:51:09,793 INFO app.main request_id=59d60107-c0c2-419c-8165-96fbc7ab07e1 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=26.86
 INFO:     127.0.0.1:61084 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:52:56,789 INFO app.main request_id=643a7f2c-6c76-4eea-951d-b041378b3bdc request method=GET path=/api/v1/system/status status=200 duration_ms=17.01
+INFO:     127.0.0.1:61127 - "GET /api/v1/system/status HTTP/1.1" 200 OK
+2026-05-03 12:52:56,792 INFO app.main request_id=1b5b2b08-1dd1-45a6-8e8c-ca00b0f982fd request method=GET path=/api/v1/signals/AAPL status=200 duration_ms=24.22
+INFO:     127.0.0.1:61121 - "GET /api/v1/signals/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:52:56,792 INFO app.main request_id=7d303447-973c-4637-9300-16d2448f9f58 request method=GET path=/api/v1/price/AAPL status=200 duration_ms=27.55
+INFO:     127.0.0.1:61119 - "GET /api/v1/price/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:52:56,793 INFO app.main request_id=4560d011-1ef5-4a2f-83dd-df624c8273e1 request method=GET path=/api/v1/recommendation/AAPL status=200 duration_ms=24.15
+INFO:     127.0.0.1:61123 - "GET /api/v1/recommendation/AAPL HTTP/1.1" 200 OK
+2026-05-03 12:52:56,796 INFO app.main request_id=d9c945d3-c1df-47fd-b571-703e0fcf4042 request method=GET path=/api/v1/recommendation/AAPL/history status=200 duration_ms=26.58
+INFO:     127.0.0.1:61124 - "GET /api/v1/recommendation/AAPL/history?limit=6 HTTP/1.1" 200 OK
+2026-05-03 12:52:56,797 INFO app.main request_id=cef49e00-4650-4504-b938-27749ca1824b request method=GET path=/api/v1/tickers status=200 duration_ms=23.13
+INFO:     127.0.0.1:61128 - "GET /api/v1/tickers HTTP/1.1" 200 OK
