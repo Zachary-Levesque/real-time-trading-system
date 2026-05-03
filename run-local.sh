@@ -38,6 +38,7 @@ trap cleanup EXIT INT TERM
 
 (
   cd "$BACKEND_DIR"
+  export STORAGE_MODE=file
   exec ./.venv/bin/python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ) >"$BACKEND_LOG" 2>&1 &
 BACKEND_PID=$!
