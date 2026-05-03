@@ -2,11 +2,11 @@ const fallbackBaseUrl = "http://localhost:8000/api/v1";
 
 export const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? fallbackBaseUrl;
 
-async function readJson(path) {
+async function readJson(path, options = undefined) {
   let response;
 
   try {
-    response = await fetch(`${apiBaseUrl}${path}`);
+    response = await fetch(`${apiBaseUrl}${path}`, options);
   } catch {
     throw new Error(
       `Cannot reach the backend API at ${apiBaseUrl}. Make sure the backend service is running on port 8000.`,
@@ -44,4 +44,10 @@ export function getRecommendationHistory(ticker, limit = 6) {
 
 export function getSystemStatus() {
   return readJson("/system/status");
+}
+
+export function refreshAnalysis(ticker) {
+  return readJson(`/analysis/${ticker}/refresh`, {
+    method: "POST",
+  });
 }
