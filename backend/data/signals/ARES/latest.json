@@ -1,0 +1,15 @@
+{
+  "ticker": "ARES",
+  "timestamp": "2026-05-03T16:37:06.111939Z",
+  "data": {
+    "source": "signal_processor_v1",
+    "lookback_points": 20,
+    "data_points_used": 35,
+    "values": {
+      "momentum": "positive",
+      "trend": "bullish",
+      "volatility": "low",
+      "volume": "high"
+    }
+  }
+}
