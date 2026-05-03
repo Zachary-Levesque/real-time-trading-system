@@ -30,3 +30,15 @@ def test_settings_reject_non_positive_background_worker_interval(monkeypatch) ->
 
     with pytest.raises(ValueError):
         Settings(_env_file=None)
+
+
+def test_settings_resolve_top100_universes(monkeypatch) -> None:
+    monkeypatch.setenv("TICKER_UNIVERSE", "sp500_top100")
+    monkeypatch.setenv("BACKGROUND_WORKER_UNIVERSE", "sp500_top100")
+    monkeypatch.setenv("FEATURED_TICKER_COUNT", "5")
+
+    settings = Settings(_env_file=None)
+
+    assert settings.searchable_ticker_universe[:5] == ["NVDA", "AAPL", "MSFT", "AMZN", "GOOGL"]
+    assert settings.featured_tickers == ["NVDA", "AAPL", "MSFT", "AMZN", "GOOGL"]
+    assert settings.resolved_background_worker_tickers[:5] == ["NVDA", "AAPL", "MSFT", "AMZN", "GOOGL"]
